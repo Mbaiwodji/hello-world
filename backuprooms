@@ -1,0 +1,520 @@
+<mat-card class="cardWithShadow">
+      <mat-card-content class="p-y-24">
+          <mat-card-title>Caractéristiques du logement</mat-card-title>
+          <div class="row p-t-24">
+              <div class="col-lg-6 d-flex align-items-center p-y-16">
+                  <span
+                      class="text-warning bg-light-accent rounded icon-40 d-flex align-items-center justify-content-center">
+                      <i-tabler name="map-pin" class="icon-18 d-flex"></i-tabler>
+                  </span>
+
+                  <div class="m-l-16 m-r-auto">
+                      <h6 class="mat-body-2 f-w-600">{{ adsDetail[0].accomAddress }}</h6>
+                      <span class="mat-body-1">{{ adsDetail[0].city.name }}, {{ adsDetail[0].country.name
+                          }}</span>
+                  </div>
+
+              </div>
+
+              <div class="col-lg-6 d-flex align-items-center p-y-16">
+                  <span
+                      class="text-warning bg-light-accent rounded icon-40 d-flex align-items-center justify-content-center">
+                      <i-tabler name="building-community" class="icon-18 d-flex"></i-tabler>
+                  </span>
+
+                  <div class="m-l-16 m-r-auto">
+                      <h6 class="mat-body-2 f-w-600">{{ adsDetail[0].surface }}m² au total</h6>
+                      <span class="mat-body-1">{{ adsDetail[0].numberOfRoom }} pièces - {{
+                          adsDetail[0].numberOfBathrooms }} salle de bains - {{
+                          adsDetail[0].numberOfBedrooms }} chambres</span>
+                  </div>
+
+              </div>
+
+              <div class="col-lg-6 d-flex align-items-center p-y-16">
+                  <span
+                      class="text-warning bg-light-accent rounded icon-40 d-flex align-items-center justify-content-center">
+                      <i-tabler name="device-desktop-plus" class="icon-18 d-flex"></i-tabler>
+                  </span>
+
+                  <div class="m-l-16 m-r-auto">
+                      <!-- <h6 class="mat-body-2 f-w-600">{{ adsDetail[0].accomAddress }}</h6> -->
+                      <!-- <span *ngFor="let equipmnt of adsDetail[0].equipment">
+                          {{equipmnt.equipment}}
+                       </span> -->
+
+                      <div>
+                          <span
+                              *ngFor="let equipmnt of adsDetail[0]?.equipment?.slice(0, 2); let i = index">
+                              {{equipmnt.equipment}}{{i < 1 ? ', ' : ', ...' }} </span>
+                      </div>
+
+                      <span class="mat-body-1">
+                          {{ adsDetail[0].equipment.length }} équipements inclus <a [routerLink]=""
+                              class="text-primary">voir plus</a>
+                      </span>
+                  </div>
+
+              </div>
+          </div>
+
+      </mat-card-content>
+      <mat-card-content class="p-24">
+          <mat-card-title>Description</mat-card-title>
+          <p class="mat-body-1 m-t-16">
+              But you cannot figure out what it is or what it can do. MTA web directory
+              is the simplest way in which one can bid on a link, or a few links if they
+              wish to do so. The link directory on MTA displays all of the links it
+              currently has, and does so in alphabetical order, which makes it much
+              easier for someone to find what they are looking for if it is something
+              specific and they do not want to go through all the other sites and links
+              as well. It allows you to start your bid at the bottom and slowly work
+              your way to the top of the list.
+          </p>
+
+      </mat-card-content>
+</mat-card>
+
+<mat-card class="cardWithShadow">
+        <mat-card-content class="p-y-24">
+            <mat-card-title>Informations générales</mat-card-title>
+            <div class="row p-t-24">
+                <div class="col-lg-4 d-flex align-items-center">
+                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                        <i-tabler name="building-community" class="icon-18 d-flex"></i-tabler>
+                    </span>
+
+                    <div class="m-l-16 m-r-auto">
+                        <span class="mat-body-1">{{ adsDetail[0].adType.ad_type }}</span>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 d-flex align-items-center">
+                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                        <i-tabler name="building-community" class="icon-18 d-flex"></i-tabler>
+                    </span>
+
+                    <div class="m-l-16 m-r-auto">
+                        <span class="mat-body-1">2ème étage</span>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 d-flex align-items-center">
+                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                        <i-tabler name="bed" class="icon-18 d-flex"></i-tabler>
+                    </span>
+
+                    <div class="m-l-16 m-r-auto">
+                        <span class="mat-body-1">{{ adsDetail[0].numberOfRoom }} pièces - {{
+                            adsDetail[0].numberOfBathrooms }} salle de bains - {{
+                            adsDetail[0].numberOfBedrooms }} chambres</span>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 d-flex align-items-center">
+                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                        <i-tabler name="sofa" class="icon-18 d-flex"></i-tabler>
+                    </span>
+
+                    <div class="m-l-16 m-r-auto">
+                        <span class="mat-body-1">{{ adPost?.isFurnished ? "Meublé" : "Non meublé" }}</span>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 d-flex align-items-center">
+                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                        <i-tabler name="map-pin" class="icon-18 d-flex"></i-tabler>
+                    </span>
+
+                    <div class="m-l-16 m-r-auto">
+                        <span class="mat-body-1">Superficie: {{ adsDetail[0].surface }}m²</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </mat-card-content>
+
+</mat-card>
+
+<mat-card class="cardWithShadow">
+        <mat-card-content class="p-y-24">
+            <mat-card-title>Détails des équipements</mat-card-title>
+            <div class="row p-t-24">
+                <div class="col-lg-4 d-flex align-items-center"
+                    *ngFor="let equipment of adsDetail[0].equipment ">
+                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                        <i-tabler name="{{equipment.icon_name}}" class="icon-18 d-flex"></i-tabler>
+                    </span>
+
+                    <div class="m-l-16 m-r-auto">
+                        <span class="mat-body-1">{{ equipment.equipment }}</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </mat-card-content>
+
+</mat-card>
+____________________________________________________________
+
+
+    <mat-card-content class="p-y-24 b-t-1">
+        <div class="row">
+            <div class="col-lg-8">
+                <mat-card class="cardWithShadow">
+                    <mat-card-content class="p-y-24">
+                        <mat-card-title>Caractéristiques du logement</mat-card-title>
+                        <div class="row p-t-24">
+                            <div class="col-lg-6 d-flex align-items-center p-y-16">
+                                <span
+                                    class="text-warning bg-light-accent rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="map-pin" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <h6 class="mat-body-2 f-w-600">{{ adsDetail[0].accomAddress }}</h6>
+                                    <span class="mat-body-1">{{ adsDetail[0].city.name }}, {{ adsDetail[0].country.name
+                                        }}</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6 d-flex align-items-center p-y-16">
+                                <span
+                                    class="text-warning bg-light-accent rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="building-community" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <h6 class="mat-body-2 f-w-600">{{ adsDetail[0].surface }}m² au total</h6>
+                                    <span class="mat-body-1">{{ adsDetail[0].numberOfRoom }} pièces - {{
+                                        adsDetail[0].numberOfBathrooms }} salle de bains - {{
+                                        adsDetail[0].numberOfBedrooms }} chambres</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6 d-flex align-items-center p-y-16">
+                                <span
+                                    class="text-warning bg-light-accent rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="device-desktop-plus" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <!-- <h6 class="mat-body-2 f-w-600">{{ adsDetail[0].accomAddress }}</h6> -->
+                                    <!-- <span *ngFor="let equipmnt of adsDetail[0].equipment">
+                                        {{equipmnt.equipment}}
+                                     </span> -->
+
+                                    <div>
+                                        <span
+                                            *ngFor="let equipmnt of adsDetail[0]?.equipment?.slice(0, 2); let i = index">
+                                            {{equipmnt.equipment}}{{i < 1 ? ', ' : ', ...' }} </span>
+                                    </div>
+
+                                    <span class="mat-body-1">
+                                        {{ adsDetail[0].equipment.length }} équipements inclus <a [routerLink]=""
+                                            class="text-primary">voir plus</a>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </mat-card-content>
+                    <mat-card-content class="p-24">
+                        <mat-card-title>Description</mat-card-title>
+                        <p class="mat-body-1 m-t-16">
+                            But you cannot figure out what it is or what it can do. MTA web directory
+                            is the simplest way in which one can bid on a link, or a few links if they
+                            wish to do so. The link directory on MTA displays all of the links it
+                            currently has, and does so in alphabetical order, which makes it much
+                            easier for someone to find what they are looking for if it is something
+                            specific and they do not want to go through all the other sites and links
+                            as well. It allows you to start your bid at the bottom and slowly work
+                            your way to the top of the list.
+                        </p>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <!-- <div class="col-lg-4">
+                <mat-card class="cardWithShadow">
+                    
+                </mat-card>
+            </div> -->
+
+            <div class="col-lg-8">
+                <mat-card class="cardWithShadow">
+                    <mat-card-content class="p-y-24">
+                        <mat-card-title>Informations générales</mat-card-title>
+                        <div class="row p-t-24">
+                            <div class="col-lg-4 d-flex align-items-center">
+                                <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="building-community" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <span class="mat-body-1">{{ adsDetail[0].adType.ad_type }}</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-4 d-flex align-items-center">
+                                <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="building-community" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <span class="mat-body-1">2ème étage</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-4 d-flex align-items-center">
+                                <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="bed" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <span class="mat-body-1">{{ adsDetail[0].numberOfRoom }} pièces - {{
+                                        adsDetail[0].numberOfBathrooms }} salle de bains - {{
+                                        adsDetail[0].numberOfBedrooms }} chambres</span>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 d-flex align-items-center">
+                                <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="sofa" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <span class="mat-body-1">{{ adPost?.isFurnished ? "Meublé" : "Non meublé" }}</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-4 d-flex align-items-center">
+                                <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="map-pin" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <span class="mat-body-1">Superficie: {{ adsDetail[0].surface }}m²</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+
+            <!-- Details equipment -->
+            <div class="col-lg-8">
+                <mat-card class="cardWithShadow">
+                    <mat-card-content class="p-y-24">
+                        <mat-card-title>Détails des équipements</mat-card-title>
+                        <div class="row p-t-24">
+                            <div class="col-lg-4 d-flex align-items-center"
+                                *ngFor="let equipment of adsDetail[0].equipment ">
+                                <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="{{equipment.icon_name}}" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <span class="mat-body-1">{{ equipment.equipment }}</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+            <!-- End detail equipment -->
+        </div>
+
+    </mat-card-content>
+
+_______________
+
+<div class="d-flex p-y-24 b-b-1">
+  <div class="d-flex justify-content-between p-t-24">
+      <span>Loyer / mois</span>
+      <span>400€</span>
+  </div>
+  
+  <div class="d-flex justify-content-between p-t-12">
+      <span>Charges</span>
+      <span>50€</span>
+  </div>
+</div>
+
+___________
+
+But you cannot figure out what it is or what it can do. MTA web directory
+is the simplest way in which one can bid on a link, or a few links if they
+wish to do so. The link directory on MTA displays all of the links it
+currently has, and does so in alphabetical order, which makes it much
+easier for someone to find what they are looking for if it is something
+specific and they do not want to go through all the other sites and links
+as well. It allows you to start your bid at the bottom and slowly work
+your way to the top of the list.
+
+
+______________
+
+ <div class="row d-flex justify-content-between p-t-12">
+                            <!-- Charges Present -->
+                            <div class="col-6 bg-light-success m-r-4">
+                                <div *ngFor="let charge of adsDetail[0].charge" class="d-flex align-items-center p-2">
+                                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                        <i-tabler name="circle-check" class="icon-18"></i-tabler>
+                                    </span>
+                                    <div class="m-r-auto pl-2">
+                                        <span class="mat-body-1">{{ charge.charge }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Charges Not Selected -->
+                            <div class="col-6 bg-light-error m-l-4">
+                                <div *ngFor="let charge of unSelectedCharges" class="d-flex align-items-center p-2">
+                                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                        <i-tabler name="circle-x" class="icon-18"></i-tabler>
+                                    </span>
+                                    <div class="m-r-auto pl-2">
+                                        <span class="mat-body-1">{{ charge.data.charge }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+ 
+
+
+________________________________________ anouncement component
+
+
+<div class="col-sm-6 col-lg-4">
+      <mat-card class="cardWithShadow card2 position-relative card-hover cursor-pointer"
+        (click)="selectAd(adPost.id)">
+        <img mat-card-image src="{{ adPost.album[0].path }}" alt="Photo of a Shiba Inu" />
+        <div class="card-overlay h-100 d-flex p-16 p-y-0 align-items-end justify-content-end">
+          <!-- <mat-chip class="f-s-12 m-y-16 f-w-600 bg-white">{{
+            adPost.adType.ad_type
+            }}</mat-chip> -->
+          <mat-chip class="f-s-12 f-w-600 m-y-16 bg-white">{{adPost.rentAmountExcCharges}} € /mois</mat-chip>
+        </div>
+
+        <mat-card-content class="p-y-24">
+          <div class="user-category">
+            <div>
+              <span
+                class="icon-48 bg-warning text-white d-flex align-items-center justify-content-center rounded-circle">
+                <i-tabler name="edit" class="icon-20 d-flex"></i-tabler>
+              </span>
+            </div>
+          </div>
+          <mat-card-title class="mat-headline-6 m-t-15">{{adPost.title.substring(0,30)}}...</mat-card-title>
+
+          <span class=" f-s-14 mat-subtitle-1 d-flex align-items-center m-t-12">
+            {{adPost.surface}}m² - {{adPost.numberOfRoom}} chambres - {{ adPost?.isFurnished ? "Meublé" : "Non meublé" }}
+          </span>
+
+          <span class=" f-s-14 mat-subtitle-1 d-flex align-items-center m-t-12">
+            {{ adPost.description.substring(0, 85) }}...
+          </span>
+          <mat-divider class="m-t-30"></mat-divider>
+          <div class="d-flex align-items-center justify-content-center m-t-24">
+
+            <span class=" f-s-14 mat-subtitle-2 d-flex align-items-center">
+              <i-tabler name="point" class="icon-14 m-r-4"></i-tabler>
+              Dsiponible: {{ formatDate(adPost.availableFrom) }}
+            </span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
+_________________________
+
+
+<div class="col-sm-6 col-lg-4">
+      <mat-card
+        class="cardWithShadow card2 position-relative card-hover cursor-pointer"
+        (click)="!isLoading && selectAd(adPost?.id)"
+      >
+        <!-- Shimmer Effect for Image -->
+        <div *ngIf="isLoading" class="shimmer-image"></div>
+        <img
+          *ngIf="!isLoading"
+          mat-card-image
+          [src]="adPost?.album[0]?.path"
+          alt="Photo of a Shiba Inu"
+        />
+    
+        <div class="card-overlay h-100 d-flex p-16 p-y-0 align-items-end justify-content-end">
+          <!-- Shimmer Effect for Chip -->
+          <div *ngIf="isLoading" class="shimmer-chip"></div>
+          <mat-chip
+            *ngIf="!isLoading"
+            class="f-s-12 f-w-600 m-y-16 bg-white"
+          >
+            {{ adPost?.rentAmountExcCharges }} € /mois
+          </mat-chip>
+        </div>
+    
+        <mat-card-content class="p-y-24">
+          <!-- Shimmer Effect for Title -->
+          <div *ngIf="isLoading" class="shimmer-title"></div>
+          <mat-card-title
+            *ngIf="!isLoading"
+            class="mat-headline-6 m-t-15"
+          >
+            {{ adPost?.title.substring(0, 30) }}...
+          </mat-card-title>
+    
+          <!-- Shimmer Effect for Details -->
+          <div *ngIf="isLoading" class="shimmer-details"></div>
+          <span
+            *ngIf="!isLoading"
+            class="f-s-14 mat-subtitle-1 d-flex align-items-center m-t-12"
+          >
+            {{ adPost?.surface }}m² - {{ adPost?.numberOfRoom }} chambres -
+            {{ adPost?.isFurnished ? "Meublé" : "Non meublé" }}
+          </span>
+    
+          <span
+            *ngIf="!isLoading"
+            class="f-s-14 mat-subtitle-1 d-flex align-items-center m-t-12"
+          >
+            {{ adPost?.description.substring(0, 85) }}...
+          </span>
+    
+          <mat-divider class="m-t-30"></mat-divider>
+          <div class="d-flex align-items-center justify-content-center m-t-24">
+            <!-- Shimmer Effect for Availability -->
+            <div *ngIf="isLoading" class="shimmer-availability"></div>
+            <span
+              *ngIf="!isLoading"
+              class="f-s-14 mat-subtitle-2 d-flex align-items-center"
+            >
+              <i-tabler name="point" class="icon-14 m-r-4"></i-tabler>
+              Disponible: {{ formatDate(adPost?.availableFrom) }}
+            </span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
