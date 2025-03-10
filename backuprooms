@@ -518,3 +518,112 @@ _________________________
       </mat-card>
     </div>
 
+
+______________________________ Etape 1: Modifier les entités JPA
+
+import jakarta.persistence.*;
+
+@Entity
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private Double price;
+
+    @Version
+    private Long version; // Ajout pour la gestion de l'optimistic locking
+
+    // Getters et Setters
+}
+
+
+import jakarta.persistence.*;
+
+@Entity
+public class Contract {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private Date startDate;
+
+    @Version
+    private Long version; // Gestion de la concurrence
+
+    // Getters et Setters
+}
+
+
+import jakarta.persistence.*;
+
+@Entity
+public class Adhesion {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String memberName;
+    private Date subscriptionDate;
+
+    @Version
+    private Long version; // Gestion de la concurrence
+
+    // Getters et Setters
+}
+
+_____________________________________ Créer le fichier de migration Liquibase
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="add-version-columns" author="ton_nom">
+        
+        <addColumn tableName="PRODUCT">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="CONTRACT">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="ADHESION">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+    </changeSet>
+
+</databaseChangeLog>
+
+________________________________ Ajouter cette migration au db.changelog-master.xml
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <include file="db/changelog/changes/add_version_columns.xml"/>
+</databaseChangeLog>
+
+
+________________________________  Exécuter la migration Liquibase
+
+mvn liquibase:update
+
+________________________________ Vérifier la mise à jour dans Oracle
+
+DESC PRODUCT;
+DESC CONTRACT;
+DESC ADHESION;
+
+
+
+
+
+
