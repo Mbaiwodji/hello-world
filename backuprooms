@@ -786,3 +786,135 @@ public class Etude extends AuditorEntity {
 		return Sortie.getFrom(sortie);
 	}
 }
+
+_________ Dto
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class EtudeDto {
+
+	@Serial
+	private static final long serialVersionUID = 2199038778554918251L;
+
+	private Long itEtude;
+
+	private String modeOper;
+
+	private String immat;
+
+	private AgentDto agentDto;
+
+	private boolean agentCpr;
+
+	private boolean agentCs;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private LocalDate dtDebut;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private LocalDate dtDebProl;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private LocalDate dtFin;
+
+	private int origine;
+
+	private String risque;
+
+	private int sortie;
+
+	private int statut;
+
+	private String etat;
+
+	private String commentaire;
+
+	private String demandeur;
+
+	private AdresseArretDto adresseArretDto;
+
+	private String nbArret;
+
+	private LocalDate dtArrivee;
+
+	private String nil;
+
+	private Long version;
+
+	private List<DecisionDto> decisionsDto;
+
+	private String createdBy;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+	private LocalDateTime createdAt;
+
+	private String updatedBy;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+	private LocalDateTime updatedAt;
+}
+___________________ Mapper
+
+@Mapper
+public interface EtudeMapper {
+
+	EtudeMapper INSTANCE = Mappers.getMapper(EtudeMapper.class);
+
+	default String map(Sortie value) {
+		return String.valueOf(value.getCode());
+	}
+
+	default int map(StatutEtude value) {
+		return value.getCode();
+	}
+
+	default String map(OrigineEtude value) {
+		return String.valueOf(value.getCode());
+	}
+
+	default String map(EtatEtude value) {
+		return value.getCode();
+	}
+
+	default String map(Risque value) {
+		return value.getCode();
+	}
+
+	default String map(TypeAdresse value) {
+		return value.getCode();
+	}
+
+	default String map(Region value) {
+		if (value != null)
+			return value.getCode() + " -- " + value.getLibelle();
+		return null;
+	}
+
+	default Region map(String value) {
+		RegionBuilder regionBuilder = Region.builder();
+		regionBuilder.code(value.split(" -- ")[0].trim());
+		regionBuilder.libelle(value.split(" -- ")[1].trim());
+		return regionBuilder.build();
+	}
+
+	EtudeDto mapToEtudeDto(Etude etude);
+
+	@Mapping(target = "decisionsDto", source = "decisions")
+	EtudeDto mapToEtudeAndDecisionsDto(Etude etude);
+
+	@Mapping(target = "decisionsDto", source = "decisions")
+	@Mapping(target = "agentDto", source = "agent")
+	@Mapping(target = "adresseArretDto", source = "etude.adresse")
+	@Mapping(target = "adresseArretDto.regionAdministrative", expression = "java(map(adresseArret.getRegionAdministrative()))")
+	EtudeDto mapToEtudeDetailDto(Etude etude);
+
+	@Mapping(target = "decisions", source = "decisionsDto")
+	@Mapping(target = "adresse", source = "adresseArretDto")
+	@Mapping(target = "agent", source = "agentDto")
+	@Mapping(target = "adresseArretDto.regionAdministrative", expression = "java(map(adresseArretDto.getRegionAdministrative()))")
+	Etude mapToEtude(EtudeDto etudeDto);
+}
+
