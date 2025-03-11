@@ -643,4 +643,146 @@ DESC ADHESION;
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd">
 
+_________________________________________________________________________________________
 
+
+_____Service updateEtude
+
+@Transactional
+	public Etude updateEtude(EtudeDto etudeDto) {
+		Etude oldEtude = this.etudeRepository.getDetailEtude(etudeDto.getItEtude());
+
+		setOldEtude(oldEtude, etudeDto);
+
+		if (oldEtude.getAgent() == null) {
+			Agent agent = this.agentService.findByImmat(etudeDto.getImmat());
+			if (agent == null) {
+				oldEtude.setAgent(AgentMapper.INSTANCE.mapToAgent(etudeDto.getAgentDto()));
+			} else {
+				oldEtude.setAgent(agent);
+			}
+		}
+		if (StatutEtude.INITIER.equals(oldEtude.getStatut())) {
+			this.decisionService.oldDecision(oldEtude);
+			oldEtude.setEtat(EtatEtude.ATTENTE_REPONSE.getCode());
+			oldEtude.setStatut(StatutEtude.EN_COURS.getCode());
+			this.decisionService.newDecision(oldEtude);
+		}
+		return this.etudeRepository.save(oldEtude);
+	}
+
+_______Repository getDetailEtude
+
+@Lock(value = LockModeType.OPTIMISTIC)
+	@Query("""
+		SELECT e 
+		FROM Etude e 
+		LEFT JOIN FETCH e.agent 
+		LEFT JOIN FETCH e.adresse 
+		LEFT JOIN FETCH e.decisions d 
+		WHERE e.itEtude=:itEtude""")
+	Etude getDetailEtude(@Param("itEtude") Long itEtude);
+_______ Enty 
+
+@Entity
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@Table(name = "t_etude", indexes = { @Index(columnList = "immat_cp"), @Index(columnList = "statut"),
+		@Index(columnList = "etat"), @Index(columnList = "agt_cs") })
+public class Etude extends AuditorEntity {
+
+	@Serial
+	private static final long serialVersionUID = 2199038778554918251L;
+
+	@Id
+	@Column(name = "it_etude")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "etude_gen")
+	@SequenceGenerator(name = "etude_gen", sequenceName = "etude_seq")
+	private Long itEtude;
+
+	@Column(name = "mode_oper", length = 1, nullable = false)
+	private String modeOper;
+
+	@Column(name = "immat_cp", length = 8, nullable = false)
+	private String immat;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "it_agent", referencedColumnName = "it_agent")
+	private Agent agent;
+
+	@Column(name = "agt_cpr", nullable = false)
+	private boolean agentCpr;
+
+	@Column(name = "agt_cs", nullable = false)
+	private boolean agentCs;
+
+	@Column(name = "dt_debut", nullable = false)
+	private LocalDate dtDebut;
+
+	@Column(name = "dt_deb_prol")
+	private LocalDate dtDebProl;
+
+	@Column(name = "dt_fin", nullable = false)
+	private LocalDate dtFin;
+
+	@Column(name = "origine", length = 2)
+	private int origine;
+
+	@Column(name = "risque", length = 3)
+	private String risque;
+
+	@Column(name = "sorties", length = 2)
+	private int sortie;
+
+	@Column(name = "statut", nullable = false, length = 2)
+	private int statut;
+
+	@Column(name = "etat", length = 8)
+	private String etat;
+
+	@Column(name = "commentaire")
+	private String commentaire;
+
+	@Column(name = "nom_pre_demand", length = 100)
+	private String demandeur;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "it_adresse", referencedColumnName = "it_adresse")
+	private AdresseArret adresse;
+
+	@Column(name = "nb_arret", nullable = false, length = 2)
+	private String nbArret;
+
+	@Column(name = "dt_arrivee", nullable = false)
+	private LocalDate dtArrivee;
+
+	@Version
+	@Column(name = "version")
+	private Long version; // Ajout pour la gestion de l'optimistic locking
+
+	@OrderBy("createdAt DESC")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "etude")
+	private List<Decision> decisions;
+
+	public StatutEtude getStatut() {
+		return StatutEtude.getFrom(statut);
+	}
+
+	public EtatEtude getEtat() {
+		return EtatEtude.getFrom(etat);
+	}
+
+	public OrigineEtude getOrigine() {
+		return OrigineEtude.getFrom(origine);
+	}
+
+	public Risque getRisque() {
+		return Risque.getFrom(risque);
+	}
+
+	public Sortie getSortie() {
+		return Sortie.getFrom(sortie);
+	}
+}
