@@ -616,6 +616,9 @@ ________________________________  Exécuter la migration Liquibase
 
 mvn liquibase:update
 
+setx PATH "%PATH%;C:\path\to\maven\bin" /M
+
+
 ________________________________ Vérifier la mise à jour dans Oracle
 
 DESC PRODUCT;
