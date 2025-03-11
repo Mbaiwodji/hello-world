@@ -918,3 +918,86 @@ public interface EtudeMapper {
 	Etude mapToEtude(EtudeDto etudeDto);
 }
 
+
+______________ test optimistic lock 
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import javax.persistence.OptimisticLockException;
+
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
+public class EtudeServiceTest {
+
+    @InjectMocks
+    private EtudeService etudeService; // Service under test
+
+    @Mock
+    private EtudeRepository etudeRepository;
+
+    @Mock
+    private AgentService agentService;
+
+    @Mock
+    private DecisionService decisionService;
+
+    private Etude etude; // The Etude entity being tested
+    private EtudeDto etudeDto; // The DTO representing the data to update
+
+    @BeforeEach
+    public void setUp() {
+        // Initialize Etude and EtudeDto for testing
+        etude = new Etude();
+        etude.setItEtude(1L);
+        etude.setVersion(1L); // Initial version
+
+        etudeDto = new EtudeDto();
+        etudeDto.setItEtude(1L);
+        etudeDto.setVersion(1L); // This should match the entity's version initially
+    }
+
+    @Test
+    public void testUpdateEtude_SuccessfulUpdate() {
+        // Mock the repository to return the Etude entity when fetched
+        when(etudeRepository.getDetailEtude(1L)).thenReturn(etude);
+        when(etudeRepository.save(any(Etude.class))).thenReturn(etude);
+
+        // Mock other service methods as needed (e.g., agentService, decisionService)
+        // For example, let's assume we return a mock agent if necessary
+        when(agentService.findByImmat(anyString())).thenReturn(null);
+
+        // Call the updateEtude method
+        Etude result = etudeService.updateEtude(etudeDto);
+
+        // Verify that the save method was called once
+        verify(etudeRepository, times(1)).save(any(Etude.class));
+        assertNotNull(result);
+    }
+
+    @Test
+    public void testUpdateEtude_OptimisticLockingFailure() {
+        // Set up the entity version to simulate an optimistic lock failure
+        etude.setVersion(1L); // Entity version before update
+        etudeDto.setVersion(2L); // The DTO version is out-of-sync
+
+        // Mock the repository to return the Etude entity when fetched
+        when(etudeRepository.getDetailEtude(1L)).thenReturn(etude);
+
+        // Mock other service methods as needed (e.g., agentService, decisionService)
+        when(agentService.findByImmat(anyString())).thenReturn(null);
+
+        // Attempt to update, expecting an OptimisticLockException to be thrown
+        assertThrows(OptimisticLockException.class, () -> {
+            etudeService.updateEtude(etudeDto);
+        });
+
+        // Verify that the repository save method was not called
+        verify(etudeRepository, never()).save(any(Etude.class));
+    }
+}
+
