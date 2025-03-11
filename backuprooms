@@ -618,6 +618,11 @@ mvn liquibase:update
 
 setx PATH "%PATH%;C:\path\to\maven\bin" /M
 
+liquibase --changeLogFile=src/main/resources/db.changelog.xml rollbackCount 1
+liquibase rollbackCount 1
+mvn liquibase:rollback -Dliquibase.rollbackTag=<changeset-id>
+
+
 
 ________________________________ Vérifier la mise à jour dans Oracle
 
