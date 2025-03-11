@@ -622,6 +622,7 @@ liquibase --changeLogFile=src/main/resources/db.changelog.xml rollbackCount 1
 liquibase rollbackCount 1
 mvn liquibase:rollback -Dliquibase.rollbackTag=<changeset-id>
 
+org.hibernate.HibernateException: Unable to perform beforeTransactionCompletion callback: Cannot invoke "Object.equals(Object)" because the return value of "org.hibernate.engine.spi.EntityEntry.getVersion()" is null
 
 
 ________________________________ Vérifier la mise à jour dans Oracle
