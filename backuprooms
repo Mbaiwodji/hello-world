@@ -1036,3 +1036,4 @@ Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.Ch
 			</plugin>
 
 
+Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ChangeLogParseException: classpath:/db/changelog/db.changelog-master.yaml does not exist
