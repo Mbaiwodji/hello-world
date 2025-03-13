@@ -1006,4 +1006,4 @@ Caused by: liquibase.exception.ValidationFailedException: Validation Failed:
      1 changesets check sum
           config/liquibase/changelog/v0.6/add_version_columns.xml::add-version-columns::9775 was: 9:ad197ab8ed3d7c0eb5764aa140e56d22 but is now: 9:71b168557c94a5e305efc89c017a8a89
 
-
+Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ChangeLogParseException: classpath:/db/changelog/db.changelog-master.yaml does not exist 
