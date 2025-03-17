@@ -1191,3 +1191,14 @@ effectDate: string = "2023-12-15"; // Example effect date (YYYY-MM-DD)
 
     return diffDays > 90; // Disable if more than 90 days old
   }
+
+
+function isEffectDatePast(effectDate: string): boolean {
+  const [day, month, year] = effectDate.split("-").map(Number);
+  const effectDateObj = new Date(year, month - 1, day); // Convert to Date object
+
+  const today = new Date();
+  
+  // Compare effectDate with today's date
+  return effectDateObj < today; // Returns true if effectDate is in the past
+}
