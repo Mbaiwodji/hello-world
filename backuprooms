@@ -1039,3 +1039,44 @@ Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.Ch
 Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ChangeLogParseException: classpath:/db/changelog/db.changelog-master.yaml does not exist
 
 Access to XMLHttpRequest at 'http://localhost:8090/agat/api/etude/search' from origin 'http://localhost:4200' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+
+
+
+   
+searchSuivi(immat: string | undefined) {
+    this.suivi = undefined;
+    this.immatSearch = immat;
+    //this.loadService.loadingOn();
+    this.suiviService.searchByImmatWithPagination(immat, this.currentPage, this.pageSize ).subscribe((data: any) => {
+      this.dataSource.data = data.content;
+      this.loadService.loadingOff();
+      if (this.dataSource.data.length > 0) {
+        console.log(data.content)
+        if (immat) {
+          this.dataSource.filter = data.content[0].type.toString();
+          this.suivi = data.content[0];
+          this.typeSuivi =data[0].type.toString()
+        } else {
+          this.dataSource.filter = this.typeSuivi;
+          if (this.dataSource.filteredData.length == 0) {
+            this.typeSuivi = "2";
+            this.dataSource.filter = this.typeSuivi;
+            if (this.dataSource.filteredData.length == 0) {
+              this.typeSuivi = "1";
+              this.dataSource.filter = this.typeSuivi;
+              if (this.dataSource.filteredData.length == 0) {
+                this.typeSuivi = "0";
+                this.dataSource.filter = this.typeSuivi;
+              }
+            }
+          }
+        }
+      } else if (this.immatSearch) {
+        this.suivi = new Suivi();
+        this.suivi.immat = this.immatSearch;
+      }
+      this.dataSource.filter = this.typeSuivi;
+      this.loadService.loadingOff();
+    });
+  }
