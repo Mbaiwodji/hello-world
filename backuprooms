@@ -1125,3 +1125,50 @@ searchSuivi(immat: string | undefined) {
       }
     });
 }
+
+_______________________________________________________
+
+
+@Service
+public class FileService {
+
+    private static final String FILE_DIRECTORY = "/path/to/your/documents"; // Change this to the actual directory
+
+    public Resource getFileAsResource(String fileName) throws Exception {
+        Path filePath = Paths.get(FILE_DIRECTORY).resolve(fileName).normalize();
+        Resource resource = new UrlResource(filePath.toUri());
+
+        if (resource.exists() && resource.isReadable()) {
+            return resource;
+        } else {
+            throw new Exception("File not found: " + fileName);
+        }
+    }
+}
+
+
+@RestController
+@RequestMapping("/api/files")
+public class FileDownloadController {
+
+    private final FileService fileService;
+
+    public FileDownloadController(FileService fileService) {
+        this.fileService = fileService;
+    }
+
+    @GetMapping("/download/{fileName}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
+        try {
+            Resource resource = fileService.getFileAsResource(fileName);
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+                    .header(HttpHeaders.CONTENT_TYPE, "application/msword") // MIME type for .doc files
+                    .body(resource);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+}
