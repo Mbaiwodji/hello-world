@@ -1172,3 +1172,22 @@ public class FileDownloadController {
         }
     }
 }
+
+
+<button [disabled]="isEffectDateInvalid(effectDate)" (click)="downloadFile()">
+  Download
+</button>
+
+effectDate: string = "2023-12-15"; // Example effect date (YYYY-MM-DD)
+
+  isEffectDateInvalid(dateStr: string): boolean {
+    if (!dateStr) return true; // Disable if no date is provided
+
+    const effectDate = new Date(dateStr);
+    const today = new Date();
+
+    const diffTime = today.getTime() - effectDate.getTime();
+    const diffDays = diffTime / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+
+    return diffDays > 90; // Disable if more than 90 days old
+  }
