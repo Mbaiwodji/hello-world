@@ -1080,3 +1080,48 @@ searchSuivi(immat: string | undefined) {
       this.loadService.loadingOff();
     });
   }
+_________________version corrigé 
+
+searchSuivi(immat: string | undefined) {
+  this.suivi = undefined;
+  this.immatSearch = immat;
+  this.loadService.loadingOn(); // Activation du loader avant l'appel
+
+  this.suiviService.searchByImmatWithPagination(immat, this.currentPage, this.pageSize)
+    .subscribe({
+      next: (data: any) => {
+        this.dataSource.data = data.content || []; // Évite undefined
+        this.loadService.loadingOff();
+
+        if (this.dataSource.data.length > 0) {
+          console.log(data.content);
+
+          if (immat) {
+            this.dataSource.filter = data.content[0]?.type?.toString() || "";
+            this.suivi = data.content[0];
+            this.typeSuivi = data.content[0]?.type?.toString() || "0";
+          } else {
+            this.dataSource.filter = this.typeSuivi;
+
+            if (this.dataSource.filteredData.length === 0) {
+              const fallbackTypes = ["2", "1", "0"];
+              for (const type of fallbackTypes) {
+                this.typeSuivi = type;
+                this.dataSource.filter = this.typeSuivi;
+                if (this.dataSource.filteredData.length > 0) break;
+              }
+            }
+          }
+        } else if (this.immatSearch) {
+          this.suivi = new Suivi();
+          this.suivi.immat = this.immatSearch;
+        }
+
+        this.dataSource.filter = this.typeSuivi;
+      },
+      error: (err) => {
+        console.error("Erreur lors de la récupération des données :", err);
+        this.loadService.loadingOff(); // Désactive le loader en cas d'erreur
+      }
+    });
+}
