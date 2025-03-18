@@ -1215,3 +1215,24 @@ downloadBulletinAdhesion(element: BulletinAdhesion) {
       this.loadService.loadingOff();
     });
   }
+
+
+downloadBulletinAdhesion(element: BulletinAdhesion) {
+  this.loadService.loadingOn();
+  
+  this.bulletinAdhesionService.downloadBulletinAdhesion(element).subscribe((response) => {
+    const blob = new Blob([response], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }); 
+    const downloadURL = window.URL.createObjectURL(blob);
+    
+    const link = document.createElement('a');
+    link.href = downloadURL;
+    link.download = `Bulletin adhesion ${element.rum}.docx`;
+
+    // 👇 Open "Save As" dialog
+    link.target = "_blank";  
+    link.click();
+    
+    this.loadService.loadingOff();
+  });
+}
+
