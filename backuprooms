@@ -1202,3 +1202,16 @@ function isEffectDatePast(effectDate: string): boolean {
   // Compare effectDate with today's date
   return effectDateObj < today; // Returns true if effectDate is in the past
 }
+
+downloadBulletinAdhesion(element: BulletinAdhesion) {
+    this.loadService.loadingOn();
+    this.bulletinAdhesionService.downloadBulletinAdhesion(element).subscribe((response) => {
+      console.log(response);
+      var downloadURL = window.URL.createObjectURL(response);
+      var link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = "Bulletin adhesion " + element.rum + ".docx";
+      link.click();
+      this.loadService.loadingOff();
+    });
+  }
