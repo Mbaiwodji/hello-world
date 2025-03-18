@@ -1236,3 +1236,24 @@ downloadBulletinAdhesion(element: BulletinAdhesion) {
   });
 }
 
+________________________
+
+/**
+	 * @param rum
+	 * @return
+	 * @throws Exception
+	 */
+	public Resource getBulAdhesionFile(String rum) {
+		String fileName = rum.concat(".docx");
+		String outFilePath = fileReplaceTextGeneretor.getOutputFilePath().concat(fileName);
+		Path filePath = Paths.get(fileReplaceTextGeneretor.getOutputFilePath()).resolve(fileName).normalize();
+		if (!Files.exists(filePath)) {
+			throw new ServiceException("Le fichier " + fileName + " n'existe pas");
+		}
+		try {
+			return new UrlResource(filePath.toUri());
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
