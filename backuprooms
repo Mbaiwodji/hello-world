@@ -1336,3 +1336,13 @@ public class GlobalExceptionHandler {
     }
 }
 
+downloadBulletinAdhesion(element: BulletinAdhesion) {
+    const httpOptions: Object = {
+      headers: this.getCustomHeaders(),
+      responseType: 'blob'
+    };
+    return this.http.post<Blob>(UrlHelpers.API_BULLETIN_DOWNLOAD, element, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
