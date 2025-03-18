@@ -1257,3 +1257,82 @@ ________________________
 		}
 
 	}
+
+
+
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class BulletinAdhesionService {
+
+    /**
+     * Retrieves the bulletin adhesion file for the given RUM.
+     *
+     * @param rum Unique reference identifier (RUM) of the bulletin.
+     * @return Resource representing the requested file.
+     * @throws FileNotFoundException if the file does not exist.
+     * @throws ServiceException if there is an error processing the file path.
+     */
+    public Resource getBulAdhesionFile(String rum) {
+        String fileName = rum.concat(".docx");
+
+        // Get the full file path
+        Path filePath = Paths.get(fileReplaceTextGeneretor.getOutputFilePath())
+                            .resolve(fileName)
+                            .normalize();
+
+        try {
+            // Check if file exists before returning the resource
+            if (!Files.exists(filePath)) {
+                throw new FileNotFoundException("Le fichier " + fileName + " n'existe pas.");
+            }
+
+            return new UrlResource(filePath.toUri());
+
+        } catch (MalformedURLException e) {
+            throw new ServiceException("Erreur lors de la récupération du fichier : " + fileName, e);
+        }
+    }
+}
+
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.io.FileNotFoundException;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    /**
+     * Handle File Not Found Exception (404).
+     */
+    @ExceptionHandler(FileNotFoundException.class)
+    public ResponseEntity<String> handleFileNotFoundException(FileNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Le fichier demandé n'existe pas.");
+    }
+
+    /**
+     * Handle Service Exceptions (500).
+     */
+    @ExceptionHandler(ServiceException.class)
+    public ResponseEntity<String> handleServiceException(ServiceException ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors du téléchargement du fichier.");
+    }
+
+    /**
+     * Handle Generic Exceptions.
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleGenericException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur inattendue s'est produite.");
+    }
+}
+
