@@ -1900,3 +1900,71 @@ ____________________ my backend service method
 		}
 
 	}
+_________________________________________________
+
+===========> Interceptor
+
+catchError((error: HttpErrorResponse) => {
+  console.error("Error status: ", error.status);
+  console.error("Error body: ", error.error);
+  
+  // Check if the response is a Blob and status is 200, meaning it's not actually an error
+  if (error.status === 200 && error.error instanceof Blob) {
+    return throwError(() => new Blob([error.error], { type: error.headers.get('content-type') }));
+  }
+
+  let errorMessage = 'Service momentanément indisponible';
+
+  if (error instanceof HttpErrorResponse && error.status === 401) {
+    return throwError(() => error.error);
+  }
+
+  if (error instanceof HttpErrorResponse && !req.url.includes('/login') && error.status === 403) {
+    this.storageService.clean();
+    this.storageService.reloadPage();
+  }
+
+  if (error.status === 0) {
+    console.error('An error occurred:', error.error);
+  } else if (error.error instanceof ErrorEvent) {
+    errorMessage = `Error: ${error.error.message}`;
+  } else {
+    errorMessage = `Error Code: ${error.status}\n Message: ${error.message}`;
+  }
+
+  console.error(errorMessage);
+  this.loadService.loadingOff();
+  this._snackBar.open(errorMessage, "ok", {
+    horizontalPosition: 'start',
+    verticalPosition: 'bottom',
+  });
+
+  return throwError(() => errorMessage);
+})
+
+===========>service download method
+downloadEcheancier(itContrat: string) {
+  return this.http.post(UrlHelpers.API_ECHEANCIER_DOWNLOAD + itContrat, {}, {
+    headers: this.getCustomHeadersBlob(),
+    responseType: 'blob' // lowercase
+  });
+}
+
+=========>download method on ts
+downloadEcheancier(itContrat: string) {
+  this.contratService.downloadEcheancier(itContrat).subscribe(response => {
+    const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+    const link = document.createElement('a');
+    const url = window.URL.createObjectURL(blob);
+
+    link.href = url;
+    link.download = "Echeancier_ROUTIER.docx";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  }, error => {
+    console.error("Download error:", error);
+  });
+}
+
