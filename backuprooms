@@ -1703,3 +1703,200 @@ application/vnd.openxmlformats-officedocument.wordprocessingml.document;charset=
 
 
 "Unexpected token 'P', \"PK\u0003\u0004\u0014\u0000\b\b\b\u0000\"... is not valid JSON"
+
+_______________________________________________ Interceptor
+
+import { HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError, window } from 'rxjs/operators';
+import { StorageService } from '../services/storage.service';
+import { LoadingService } from '../services/loading.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+const TOKEN_HEADER_KEY = 'Authorization';       // for Spring Boot back-end
+
+@Injectable()
+export class HttpRequestInterceptor implements HttpInterceptor {
+
+  constructor(private storageService: StorageService, private loadService: LoadingService, protected _snackBar: MatSnackBar) { }
+
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+    let authReq = req;
+    const user = this.storageService.getUser();
+    if (user != null) {
+      // for Spring Boot back-end
+      authReq = req.clone({ withCredentials: true, headers: req.headers.set(TOKEN_HEADER_KEY, user.type + ' ' + user.token) });
+
+      // for Node.js Express back-end
+      // authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, token) });
+    }
+    return next.handle(authReq).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error(error);
+        console.error(req.url);
+
+        console.error("Error status: ",error.status);
+        console.error("Error body: ",error.error);
+        console.error("Error headers: ",error.headers);
+        console.error("Error instance of Blob: ",error.error instanceof Blob);
+        let errorMessage = 'Service momentanément indisponible';
+        // logout when token is expired
+        /*
+                if (
+                  error instanceof HttpErrorResponse &&
+                  !req.url.includes('auth/signin') &&
+                  error.status === 401
+                ) {
+                  return this.handle401Error(req, next);
+                }
+        */
+
+              
+        if (error instanceof HttpErrorResponse && error.status === 401) {
+          return throwError(() => error.error);
+        }
+
+        
+        
+        if (error instanceof HttpErrorResponse && !req.url.includes('/login') && error.status === 403) {
+          this.storageService.clean();
+          this.storageService.reloadPage();
+        }
+
+        if (error.status===200) {
+          return this.handleBlobError(error);
+        }  
+        if (error.status === 0) {
+          // A client-side or network error occurred. Handle it accordingly.
+          console.error('An error occurred:', error.error);
+        } else if (error.error instanceof ErrorEvent) {
+          // Client-side error
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          // Server-side error
+          errorMessage = `Error Code: ${error.error.status}\n Message: ${error.error.message}`;
+        }
+        // Handle the error as desired (e.g., show an alert, log, etc.)
+        console.error(errorMessage);
+        this.loadService.loadingOff();
+        this._snackBar.open(errorMessage, "ok", {
+          horizontalPosition: 'start',
+          verticalPosition: 'bottom',
+        })
+        return throwError(() => errorMessage);
+      })
+    );
+  }
+
+  private handleBlobError(error: HttpErrorResponse): Observable<never> {
+    return new Observable(observer => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        try {
+          const errorText = reader.result as string;
+          console.error('Blob error response:', errorText);
+        } catch (e) {
+          console.error('Error parsing Blob response:', e);
+        }
+        observer.error(error);
+      };
+      reader.readAsText(error.error);
+    });
+  }
+}
+
+
+_________________________ Angular service method
+
+downloadEcheancier(itContrat: string) {
+    return this.http.post<Blob>(UrlHelpers.API_ECHEANCIER_DOWNLOAD + itContrat, {
+      headers: this.getCustomHeadersBlob(),
+      responseType: 'Blob'
+    });
+  }
+
+  getCustomHeadersBlob(): HttpHeaders {
+    const userAuth = sessionStorage.getItem(USER_KEY);
+    let user = new User();
+    if (userAuth) {
+      user = JSON.parse(userAuth);
+    }
+  
+    let headers = new HttpHeaders()
+      // Remove JSON Content-Type because we're dealing with binary data
+      .set('Access-Control-Allow-Headers', 'Content-Type')
+      .set('Access-Control-Allow-Methods', 'GET,PUT,POST')
+      .set('Access-Control-Allow-Credentials', 'true')
+      .set('Access-Control-Allow-Origin', '*')
+      .set('Accept', 'application/octet-stream'); // Expecting a binary file
+
+  
+    return headers;
+  }
+
+_______________________ calling download service from my page typescript
+
+downloadEcheancier(itContrat: string) {
+    this.contratService.downloadEcheancier(itContrat).subscribe((response) => {
+      //const fileName = this.getFileNameFromResponse(response);
+      //let downloadURL = window.URL.createObjectURL(response);
+      let link = document.createElement('a');
+      //link.href = downloadURL;
+      link.download = "Echeancier ROUTIER";
+      link.target = "_blank";
+      link.click();
+    });
+  }
+
+___________________Backend controller method
+
+@PostMapping(value = "/download/{itContrat}")
+	@Operation(summary = "Récupèration d'un bulletin d'adhésion", description = "Retourne le fichier bulletin d'adhésion")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement")})
+	public ResponseEntity<Resource> downloadEcheancier(@PathVariable Long itContrat) throws IOException {
+
+		Resource resourceMap = this.contratService.getEcheancierFile(itContrat);
+		String fileName = "ROUTIER.docx";
+		//Resource resource = resourceMap.get(fileName);
+
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+				.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Content-Disposition") // Ensure frontend can access filename
+				.contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
+				.body(resourceMap);
+
+		/*return ResponseEntity.status(HttpStatus.OK)
+				.header("Content-Disposition", "attachment; filename=\"" + fileName + "\"")
+				.contentLength(resource.contentLength())
+				.contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document")).body(resource);*/
+    }
+
+____________________ my backend service method
+
+/***
+	 * Récupère le fichier bulletin d'adhésion pour le RUM donné
+	 * @param itContrat Identifiant de référence unique du bulletin
+	 * @return Resource représentant le fichier demandé
+	 */
+	public Resource getEcheancierFile(Long itContrat) {
+		Contrat contrat = findById(itContrat);
+		String name = contrat.getBulletinAdhesion().getNom().replace(" ", "_");
+		String fileName = findLatestFileName(name);
+		Path filePath = Paths.get(fileReplaceTextGeneretor.getOutputFilePath()).resolve(fileName).normalize();
+
+		try {
+			if (!Files.exists(filePath)) {
+				throw new FileNotFoundException("Le fichier " + fileName + " n'existe pas.");
+			}
+			Resource resource = new UrlResource(filePath.toUri());
+			Map<String, Resource> fileMap = new HashMap<>();
+			fileMap.put(fileName, resource);
+			return resource;
+
+		} catch (MalformedURLException | FileNotFoundException e) {
+			throw new ServiceException("Une erreur est survenue lors du téléchargement du fichier : " + fileName);
+		}
+
+	}
