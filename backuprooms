@@ -1566,3 +1566,29 @@ public String findLatestFile() {
 return new HashMap<String, Resource>() {{fileName, new UrlResource(filePath.toUri()) }};
 
 
+
+___________________
+
+downloadFile() {
+  this.http.get('http://localhost:8080/download', {
+    responseType: 'blob', // Expecting a binary file
+    observe: 'response' // Get full response, including headers
+  }).subscribe(response => {
+    const fileName = this.getFileNameFromResponse(response);
+    this.saveFile(response.body, fileName);
+  }, error => {
+    console.error('Error downloading file:', error);
+  });
+}
+
+
+getFileNameFromResponse(response: HttpResponse<Blob>): string {
+  const contentDisposition = response.headers.get('Content-Disposition');
+  if (contentDisposition) {
+    const matches = contentDisposition.match(/filename="(.+)"/);
+    return matches ? matches[1] : 'downloaded-file';
+  }
+  return 'downloaded-file';
+}
+
+
