@@ -1698,3 +1698,4 @@ getCustomHeaders(): HttpHeaders {
   return headers;
 }
 
+{message: "Failed to execute 'readAsText' on 'FileReader': parameter 1 is not of type 'Blob'.", stack: "TypeError: parameter 1 is not of type 'Blob'.…
