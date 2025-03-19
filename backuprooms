@@ -1346,3 +1346,207 @@ downloadBulletinAdhesion(element: BulletinAdhesion) {
     );
   }
 
+______________________
+
+
+package com.example.fileservice.service;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+@Service
+public class FileService {
+
+    @Value("${file.directory.path}") // Injected from application.properties
+    private String directoryPath;
+
+    /**
+     * Finds the latest file with a name starting with "Toto_"
+     * @return Optional<String> with the latest file name
+     */
+    public Optional<String> findLatestFile() {
+        try (Stream<Path> files = Files.list(Paths.get(directoryPath))) {
+            return files
+                .filter(path -> path.getFileName().toString().startsWith("Toto_")) // Filter files
+                .max(Comparator.comparingLong(path -> path.toFile().lastModified())) // Get the most recent file
+                .map(path -> path.getFileName().toString());
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading files in directory: " + directoryPath, e);
+        }
+    }
+}
+package com.example.fileservice.controller;
+
+import com.example.fileservice.service.FileService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/files")
+public class FileController {
+
+    private final FileService fileService;
+
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
+
+    @GetMapping("/latest")
+    public ResponseEntity<String> getLatestFile() {
+        Optional<String> latestFile = fileService.findLatestFile();
+        return latestFile.map(ResponseEntity::ok)
+                         .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+}
+
+
+package com.example.fileservice.service;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
+class FileServiceTest {
+
+    @InjectMocks
+    private FileService fileService;
+
+    @Mock
+    private Path mockPath;
+
+    @Mock
+    private Stream<Path> mockStream;
+
+    private final String testDirectory = "/mock/directory";
+
+    @BeforeEach
+    void setUp() {
+        // Set private field value for testing (since @Value cannot be injected in tests)
+        try {
+            var directoryField = FileService.class.getDeclaredField("directoryPath");
+            directoryField.setAccessible(true);
+            directoryField.set(fileService, testDirectory);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to set directoryPath for test", e);
+        }
+    }
+
+    @Test
+    void shouldReturnLatestFile_whenFilesExist() throws IOException {
+        Path file1 = Paths.get("/mock/directory/Toto_20240318_120000.txt");
+        Path file2 = Paths.get("/mock/directory/Toto_20240319_120000.txt"); // Latest file
+
+        when(Files.list(Paths.get(testDirectory))).thenReturn(Stream.of(file1, file2));
+        when(file1.toFile().lastModified()).thenReturn(1710800000000L);
+        when(file2.toFile().lastModified()).thenReturn(1710900000000L);
+
+        Optional<String> latestFile = fileService.findLatestFile();
+
+        assertTrue(latestFile.isPresent());
+        assertEquals("Toto_20240319_120000.txt", latestFile.get());
+
+        verify(Files.list(Paths.get(testDirectory)), times(1));
+    }
+
+    @Test
+    void shouldReturnEmpty_whenNoFilesMatch() throws IOException {
+        when(Files.list(Paths.get(testDirectory))).thenReturn(Stream.empty());
+
+        Optional<String> latestFile = fileService.findLatestFile();
+
+        assertTrue(latestFile.isEmpty());
+
+        verify(Files.list(Paths.get(testDirectory)), times(1));
+    }
+
+    @Test
+    void shouldThrowException_whenIOExceptionOccurs() throws IOException {
+        when(Files.list(Paths.get(testDirectory))).thenThrow(new IOException("I/O Error"));
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> fileService.findLatestFile());
+        assertEquals("Error reading files in directory: /mock/directory", exception.getMessage());
+
+        verify(Files.list(Paths.get(testDirectory)), times(1));
+    }
+}
+
+
+package com.example.fileservice.controller;
+
+import com.example.fileservice.service.FileService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.Optional;
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@ExtendWith(MockitoExtension.class)
+class FileControllerTest {
+
+    @InjectMocks
+    private FileController fileController;
+
+    @Mock
+    private FileService fileService;
+
+    private final MockMvc mockMvc;
+
+    FileControllerTest() {
+        this.mockMvc = MockMvcBuilders.standaloneSetup(fileController).build();
+    }
+
+    @Test
+    void shouldReturnLatestFile_whenFileExists() throws Exception {
+        when(fileService.findLatestFile()).thenReturn(Optional.of("Toto_20240319_120000.txt"));
+
+        mockMvc.perform(get("/api/files/latest"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("\"Toto_20240319_120000.txt\""));
+
+        verify(fileService, times(1)).findLatestFile();
+    }
+
+    @Test
+    void shouldReturn404_whenNoFileFound() throws Exception {
+        when(fileService.findLatestFile()).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/api/files/latest"))
+                .andExpect(status().isNotFound());
+
+        verify(fileService, times(1)).findLatestFile();
+    }
+}
+
+
