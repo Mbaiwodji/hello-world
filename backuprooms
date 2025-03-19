@@ -1699,3 +1699,5 @@ getCustomHeaders(): HttpHeaders {
 }
 
 {message: "Failed to execute 'readAsText' on 'FileReader': parameter 1 is not of type 'Blob'.", stack: "TypeError: parameter 1 is not of type 'Blob'.…
+application/vnd.openxmlformats-officedocument.wordprocessingml.document;charset=UTF-8
+
