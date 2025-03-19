@@ -1592,3 +1592,39 @@ getFileNameFromResponse(response: HttpResponse<Blob>): string {
 }
 
 
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+@Injectable()
+export class MyHttpInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req).pipe(
+      catchError((error: HttpErrorResponse) => {
+        // Check if the response is a Blob and has an error
+        if (error.error instanceof Blob) {
+          return this.handleBlobError(error);
+        }
+        return throwError(() => error);
+      })
+    );
+  }
+
+  private handleBlobError(error: HttpErrorResponse): Observable<never> {
+    return new Observable(observer => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        try {
+          const errorText = reader.result as string;
+          console.error('Blob error response:', errorText);
+        } catch (e) {
+          console.error('Error parsing Blob response:', e);
+        }
+        observer.error(error);
+      };
+      reader.readAsText(error.error);
+    });
+  }
+}
+
