@@ -1562,3 +1562,7 @@ public String findLatestFile() {
         }
     }
 
+
+return new HashMap<String, Resource>() {{fileName, new UrlResource(filePath.toUri()) }};
+
+
