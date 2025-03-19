@@ -1701,3 +1701,5 @@ getCustomHeaders(): HttpHeaders {
 {message: "Failed to execute 'readAsText' on 'FileReader': parameter 1 is not of type 'Blob'.", stack: "TypeError: parameter 1 is not of type 'Blob'.…
 application/vnd.openxmlformats-officedocument.wordprocessingml.document;charset=UTF-8
 
+
+"Unexpected token 'P', \"PK\u0003\u0004\u0014\u0000\b\b\b\u0000\"... is not valid JSON"
