@@ -1628,3 +1628,25 @@ export class MyHttpInterceptor implements HttpInterceptor {
   }
 }
 
+@GetMapping("/download")
+public ResponseEntity<Resource> downloadFile() {
+    try {
+        Path filePath = Paths.get("/path/to/your/file/example.pdf");
+        Resource resource = new UrlResource(filePath.toUri());
+
+        if (!resource.exists() || !resource.isReadable()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        String fileName = "example.pdf";
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+                .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Content-Disposition") // Ensure frontend can access filename
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+
+
