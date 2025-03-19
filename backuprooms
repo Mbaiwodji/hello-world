@@ -1669,3 +1669,32 @@ getCustomHeaders(): HttpHeaders {
       //.set('Authorization', `${user.type} ${user.token}`);
     return headers;
   }
+__________________
+
+
+downloadEcheancier(itContrat: string) {
+  return this.http.post(UrlHelpers.API_ECHEANCIER_DOWNLOAD + itContrat, {}, {
+    headers: this.getCustomHeaders(),
+    responseType: 'blob', // Ensure response is treated as binary data
+    observe: 'response' // Allows access to response headers (for filename)
+  });
+}
+
+getCustomHeaders(): HttpHeaders {
+  const userAuth = sessionStorage.getItem(USER_KEY);
+  let user = new User();
+  if (userAuth) {
+    user = JSON.parse(userAuth);
+  }
+
+  let headers = new HttpHeaders()
+    // Remove JSON Content-Type because we're dealing with binary data
+    .set('Accept', 'application/octet-stream'); // Expecting a binary file
+
+  if (user.token) {
+    headers = headers.set('Authorization', `${user.type} ${user.token}`);
+  }
+
+  return headers;
+}
+
