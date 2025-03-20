@@ -2629,3 +2629,151 @@ ______________________
         // You can add more specific assertions here, like checking the URI
         // assertEquals(expectedResource.getURI(), resource.getURI());
     }
+
+_______________________________
+
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
+class YourServiceNameTest { // Replace YourServiceName with the actual name of your service
+
+    @InjectMocks
+    private YourServiceName yourService; // Assuming this is your service class
+
+    @Mock
+    private FileReplaceTextGeneretor fileReplaceTextGeneretor;
+
+    @Mock
+    private CheckFile checkFile;
+
+    @Mock
+    private ContratRepository contratRepository; // Assuming you have a ContratRepository
+
+    @Test
+    void getEcheancierFile_fileFound_returnsFileMap() throws MalformedURLException {
+        // GIVEN
+        Long itContrat = 123L;
+        String bulletinNom = "Bulletin Adhesion Test";
+        String name = bulletinNom.replace(" ", "_");
+        String fileName = name + "_latest.pdf"; // Assuming findLatestFileName returns this
+        String fileDirectory = "/path/to/files";
+        Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+
+        // Mock the Contrat
+        Contrat contrat = new Contrat();
+        BulletinAdhesion bulletinAdhesion = new BulletinAdhesion();
+        bulletinAdhesion.setNom(bulletinNom);
+        contrat.setBulletinAdhesion(bulletinAdhesion);
+        when(contratRepository.findById(itContrat)).thenReturn(java.util.Optional.of(contrat));
+
+        // Mock findLatestFileName
+        when(yourService.findLatestFileName(name)).thenReturn(fileName);
+
+        // Mock fileReplaceTextGeneretor
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock checkFile
+        when(checkFile.exists(filePath)).thenReturn(true);
+
+        // WHEN
+        Map<String, Resource> result = yourService.getEcheancierFile(itContrat);
+
+        // THEN
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertTrue(result.containsKey(fileName));
+        Resource resource = result.get(fileName);
+        assertNotNull(resource);
+        assertTrue(resource instanceof UrlResource);
+        assertEquals(filePath.toUri(), ((UrlResource) resource).getURI());
+    }
+
+    @Test
+    void getEcheancierFile_fileNotFound_throwsFileNotFoundException() {
+        // GIVEN
+        Long itContrat = 123L;
+        String bulletinNom = "Bulletin Adhesion Test";
+        String name = bulletinNom.replace(" ", "_");
+        String fileName = name + "_latest.pdf";
+        String fileDirectory = "/path/to/files";
+        Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+
+        // Mock the Contrat
+        Contrat contrat = new Contrat();
+        BulletinAdhesion bulletinAdhesion = new BulletinAdhesion();
+        bulletinAdhesion.setNom(bulletinNom);
+        contrat.setBulletinAdhesion(bulletinAdhesion);
+        when(contratRepository.findById(itContrat)).thenReturn(java.util.Optional.of(contrat));
+
+        // Mock findLatestFileName
+        when(yourService.findLatestFileName(name)).thenReturn(fileName);
+
+        // Mock fileReplaceTextGeneretor
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock checkFile to return false (file not found)
+        when(checkFile.exists(filePath)).thenReturn(false);
+
+        // WHEN & THEN
+        assertThrows(FileNotFoundException.class, () -> yourService.getEcheancierFile(itContrat));
+    }
+
+    @Test
+    void getEcheancierFile_malformedURLException_throwsServiceException() throws MalformedURLException {
+        // GIVEN
+        Long itContrat = 123L;
+        String bulletinNom = "Bulletin Adhesion Test";
+        String name = bulletinNom.replace(" ", "_");
+        String fileName = name + "_latest.pdf";
+        String fileDirectory = "invalid:directory"; // Force a MalformedURLException
+        Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+
+        // Mock the Contrat
+        Contrat contrat = new Contrat();
+        BulletinAdhesion bulletinAdhesion = new BulletinAdhesion();
+        bulletinAdhesion.setNom(bulletinNom);
+        contrat.setBulletinAdhesion(bulletinAdhesion);
+        when(contratRepository.findById(itContrat)).thenReturn(java.util.Optional.of(contrat));
+
+        // Mock findLatestFileName
+        when(yourService.findLatestFileName(name)).thenReturn(fileName);
+
+        // Mock fileReplaceTextGeneretor
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock checkFile
+        when(checkFile.exists(filePath)).thenReturn(true);
+
+        // WHEN & THEN
+        assertThrows(ServiceException.class, () -> yourService.getEcheancierFile(itContrat));
+    }
+
+    @Test
+    void getEcheancierFile_contratNotFound_throwsNoSuchElementException() {
+        // GIVEN
+        Long itContrat = 123L;
+
+        // Mock contratRepository to return an empty Optional
+        when(contratRepository.findById(itContrat)).thenReturn(java.util.Optional.empty());
+
+        // WHEN & THEN
+        assertThrows(java.util.NoSuchElementException.class, () -> yourService.getEcheancierFile(itContrat));
+    }
+}
