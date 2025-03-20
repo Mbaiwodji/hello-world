@@ -2422,3 +2422,5 @@ public class YourServiceTest {
         assertTrue(exception.getMessage().contains("Une erreur est survenue lors du téléchargement du fichier : " + fileName));
     }
 }
+
+this.disableAdd = this.dataSource.data.length != 0 && this.dataSource.data.find(i => i.codeStatut != 4) != undefined;
