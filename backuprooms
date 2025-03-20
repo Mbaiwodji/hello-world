@@ -2777,3 +2777,14 @@ class YourServiceNameTest { // Replace YourServiceName with the actual name of y
         assertThrows(java.util.NoSuchElementException.class, () -> yourService.getEcheancierFile(itContrat));
     }
 }
+
+
+try (Stream<Path> files = Files.list(Paths.get(fileDirectory))) {
+			return files
+					.filter(path -> path.getFileName().toString().startsWith(name)) // Filter files
+					.max(Comparator.comparingLong(path -> path.toFile().lastModified())) // Get the most recent file
+					.map(path -> path.getFileName().toString())
+					.orElseThrow(() -> new RuntimeException("Aucun fichier correspondant trouvé dans le répertoire"));
+		} catch (IOException e) {
+			throw new ServiceException("Erreur lors de la lecture des fichiers dans le répertoire: " + fileDirectory);
+		}
