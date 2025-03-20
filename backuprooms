@@ -2092,3 +2092,212 @@ public Resource getBulAdhesionFile(String rum) {
 		}
 
 	}
+____________________________ correct
+
+=>Controller
+
+@RunWith(MockitoJUnitRunner.class)
+public class ControllerTest {
+
+    @InjectMocks
+    private YourController yourController;
+
+    @Mock
+    private BulletinAdhesionService bulletinAdhesionService;
+
+    @Mock
+    private ContratService contratService;
+
+    @Mock
+    private Resource mockResource;
+
+    @Test
+    public void testDownloadBulletinAdhesion_Success() throws IOException {
+        // Given
+        String rum = "123456";
+        BulletinAdhesionDto bulletinAdhesionDto = new BulletinAdhesionDto();
+        bulletinAdhesionDto.setRum(rum);
+
+        // Mock the service method
+        when(bulletinAdhesionService.getBulAdhesionFile(rum)).thenReturn(mockResource);
+        when(mockResource.contentLength()).thenReturn(100L);
+
+        // When
+        ResponseEntity<Resource> response = yourController.downloadBulletinAdhesion(bulletinAdhesionDto);
+
+        // Then
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("attachment; filename=\"123456.docx\"", response.getHeaders().getFirst("Content-Disposition"));
+        assertEquals(100L, response.getBody().contentLength());
+    }
+
+    @Test
+    public void testDownloadBulletinAdhesion_FileNotFound() throws IOException {
+        // Given
+        String rum = "123456";
+        BulletinAdhesionDto bulletinAdhesionDto = new BulletinAdhesionDto();
+        bulletinAdhesionDto.setRum(rum);
+
+        // Mock the service method to throw an exception
+        when(bulletinAdhesionService.getBulAdhesionFile(rum)).thenThrow(new ServiceException("Le fichier 123456.docx n'existe pas."));
+
+        // When & Then
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            yourController.downloadBulletinAdhesion(bulletinAdhesionDto);
+        });
+
+        assertTrue(exception.getMessage().contains("Le fichier 123456.docx n'existe pas."));
+    }
+
+    @Test
+    public void testDownloadEcheancier_Success() {
+        // Given
+        Long itContrat = 1L;
+        Map<String, Resource> resourceMap = new HashMap<>();
+        resourceMap.put("echeancier.docx", mockResource);
+
+        // Mock the service method
+        when(contratService.getEcheancierFile(itContrat)).thenReturn(resourceMap);
+        when(mockResource.contentLength()).thenReturn(100L);
+
+        // When
+        ResponseEntity<Resource> response = yourController.downloadEcheancier(itContrat);
+
+        // Then
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("attachment; filename=\"echeancier.docx\"", response.getHeaders().getFirst(HttpHeaders.CONTENT_DISPOSITION));
+        assertEquals(100L, response.getBody().contentLength());
+    }
+
+    @Test
+    public void testDownloadEcheancier_FileNotFound() {
+        // Given
+        Long itContrat = 1L;
+
+        // Mock the service method to throw an exception
+        when(contratService.getEcheancierFile(itContrat)).thenThrow(new ServiceException("Le fichier echeancier n'existe pas."));
+
+        // When & Then
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            yourController.downloadEcheancier(itContrat);
+        });
+
+        assertTrue(exception.getMessage().contains("Le fichier echeancier n'existe pas."));
+    }
+}
+
+=>Service
+
+@RunWith(MockitoJUnitRunner.class)
+public class ServiceTest {
+
+    @InjectMocks
+    private ContratService contratService;
+
+    @Mock
+    private BulletinAdhesionService bulletinAdhesionService;
+
+    @Mock
+    private FileReplaceTextGeneretor fileReplaceTextGeneretor;
+
+    @Mock
+    private Path mockFilePath;
+
+    @Mock
+    private Resource mockResource;
+
+    @Mock
+    private Contrat contrat;
+
+    @Test
+    public void testGetEcheancierFile_Success() throws IOException {
+        // Given
+        Long itContrat = 1L;
+        String fileName = "echeancier.docx";
+        String name = "echeancier";
+        Map<String, Resource> resourceMap = new HashMap<>();
+        resourceMap.put(fileName, mockResource);
+
+        // Mock the methods
+        when(bulletinAdhesionService.findById(itContrat)).thenReturn(contrat);
+        when(contrat.getBulletinAdhesion().getNom()).thenReturn(name);
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn("/path/to/files");
+        when(mockFilePath.resolve(fileName)).thenReturn(mockFilePath);
+        when(Files.exists(mockFilePath)).thenReturn(true);
+        when(mockResource.contentLength()).thenReturn(100L);
+
+        // When
+        Map<String, Resource> result = contratService.getEcheancierFile(itContrat);
+
+        // Then
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(mockResource, result.get(fileName));
+    }
+
+    @Test
+    public void testGetEcheancierFile_FileNotFound() throws IOException {
+        // Given
+        Long itContrat = 1L;
+        String name = "echeancier";
+        String fileName = "echeancier.docx";
+
+        // Mock the methods
+        when(bulletinAdhesionService.findById(itContrat)).thenReturn(contrat);
+        when(contrat.getBulletinAdhesion().getNom()).thenReturn(name);
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn("/path/to/files");
+        when(mockFilePath.resolve(fileName)).thenReturn(mockFilePath);
+        when(Files.exists(mockFilePath)).thenReturn(false);
+
+        // When & Then
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            contratService.getEcheancierFile(itContrat);
+        });
+
+        assertTrue(exception.getMessage().contains("Le fichier echeancier.docx n'existe pas."));
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_Success() throws IOException {
+        // Given
+        String rum = "123456";
+        String fileName = rum + ".docx";
+        Path filePath = Paths.get("/path/to/files", fileName);
+
+        // Mock the methods
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn("/path/to/files");
+        when(mockFilePath.resolve(fileName)).thenReturn(filePath);
+        when(Files.exists(filePath)).thenReturn(true);
+        when(mockResource.contentLength()).thenReturn(100L);
+
+        // When
+        Resource result = contratService.getBulAdhesionFile(rum);
+
+        // Then
+        assertNotNull(result);
+        assertEquals(100L, result.contentLength());
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_FileNotFound() throws IOException {
+        // Given
+        String rum = "123456";
+        String fileName = rum + ".docx";
+        Path filePath = Paths.get("/path/to/files", fileName);
+
+        // Mock the methods
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn("/path/to/files");
+        when(mockFilePath.resolve(fileName)).thenReturn(filePath);
+        when(Files.exists(filePath)).thenReturn(false);
+
+        // When & Then
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            contratService.getBulAdhesionFile(rum);
+        });
+
+        assertTrue(exception.getMessage().contains("Le fichier 123456.docx n'existe pas."));
+    }
+}
+
