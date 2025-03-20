@@ -2553,3 +2553,51 @@ Also, this error might show up because:
    Those methods *cannot* be stubbed/verified.
    Mocking methods declared on non-public parent classes is not supported.
 2. inside when() you don't call method on mock but on some other object.
+
+@Component
+public class CheckFile {
+    public boolean exists(Path path) {
+        return Files.exists(path);
+    }
+}
+
+public Resource getBulAdhesionFile(String rum) {
+		String fileName = rum.concat(".docx");
+		String fileDirectory = fileReplaceTextGeneretor.getOutputFilePath();
+		Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+		try {
+			if (!checkFile.exists(filePath)) {
+				throw new FileNotFoundException("Le fichier " + fileName + " n'existe pas.");
+			}
+
+			return new UrlResource(filePath.toUri());
+
+		} catch (MalformedURLException | FileNotFoundException e) {
+			throw new ServiceException("Une erreur est survenue lors du téléchargement du fichier : " + fileName);
+		}
+
+	}
+
+@Test
+	@WithMockUser
+	void testGetDownloadBulletinAdhesion_ShouldReturnWord() throws MalformedURLException {
+		// GIVEN
+		String rum = "CSSCPR-3108009W97755077159755";
+		String fileName = rum.concat(".docx");
+		String fileDirectory = "../config/data-output/";
+		Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+
+		//byte[] fakeFile = new byte[]{1, 2, 3, 4};
+		//Resource fakeResource = new ByteArrayResource(fakeFile);
+		//when(fileReplaceTextGeneretor.genererBulletinAdhesion();)
+		//when(mockFilePath.resolve(fileName)).thenReturn(mockFilePath);
+		//when(mockFilePath.normalize()).thenReturn(mockFilePath);
+		when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+		when(checkFile.exists(mockFilePath)).thenReturn(true);
+		Resource expectedresource = new UrlResource(filePath.toUri());
+		//when(bulletinAdhesionService.getBulAdhesionFile(rum)).thenReturn(fakeResource);
+
+		Resource resource = bulletinAdhesionService.getBulAdhesionFile(rum);
+
+		assertNotNull(resource);
+	}
