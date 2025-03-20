@@ -2879,3 +2879,89 @@ class CheckFileTest {
         assertThrows(ServiceException.class, () -> checkFile.findLatestFileName("test_file", "/invalid/directory"));
     }
 }
+
+______________
+
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+class CheckFileTest {
+
+    @Autowired
+    private CheckFile checkFile;
+
+    @TempDir
+    Path tempDir;
+
+    private Path existingFilePath;
+    private Path nonExistingFilePath;
+    private String fileDirectory;
+
+    private Path file1;
+    private Path file2;
+    private Path file3;
+
+    @BeforeEach
+    void setUp() throws IOException {
+        fileDirectory = tempDir.toString();
+        existingFilePath = tempDir.resolve("testFile.txt");
+        nonExistingFilePath = tempDir.resolve("nonExistentFile.txt");
+        Files.createFile(existingFilePath);
+
+        file1 = tempDir.resolve("test_file_1.txt");
+        file2 = tempDir.resolve("test_file_2.txt");
+        file3 = tempDir.resolve("test_file_3.txt");
+    }
+
+    @AfterEach
+    void tearDown() throws IOException {
+        Files.deleteIfExists(existingFilePath);
+        Files.deleteIfExists(file1);
+        Files.deleteIfExists(file2);
+        Files.deleteIfExists(file3);
+    }
+
+    @Test
+    void exists_existingFile_returnsTrue() {
+        assertTrue(checkFile.exists(existingFilePath));
+    }
+
+    @Test
+    void exists_nonExistingFile_returnsFalse() {
+        assertFalse(checkFile.exists(nonExistingFilePath));
+    }
+
+    @Test
+    void findLatestFileName_matchingFilesExist_returnsLatestFileName() throws IOException, InterruptedException {
+        Files.createFile(file1);
+        Thread.sleep(100);
+        Files.createFile(file2);
+        Thread.sleep(100);
+        Files.createFile(file3);
+
+        String latestFileName = checkFile.findLatestFileName("test_file", fileDirectory);
+        assertEquals("test_file_3.txt", latestFileName);
+    }
+
+    @Test
+    void findLatestFileName_noMatchingFiles_throwsRuntimeException() {
+        assertThrows(RuntimeException.class, () -> checkFile.findLatestFileName("non_matching_file", fileDirectory));
+    }
+
+    @Test
+    void findLatestFileName_ioException_throwsServiceException() {
+        assertThrows(ServiceException.class, () -> checkFile.findLatestFileName("test_file", "/invalid/directory"));
+    }
+}
