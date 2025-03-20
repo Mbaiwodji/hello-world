@@ -2517,6 +2517,37 @@ when() requires an argument which has to be 'a method call on a mock'.
 For example:
     when(mock.getArticles()).thenReturn(articles);
 
+
+@Test
+	@WithMockUser
+	void testGetDownloadBulletinAdhesion_ShouldReturnWord() throws Exception {
+		// GIVEN
+		String rum = "CSSCPR-3108009W97755077159755";
+		String fileName = rum.concat(".docx");
+		String fileDirectory = "../config/data-output/";
+		BulletinAdhesionDto inputDto = new BulletinAdhesionDto();
+		inputDto.setRum(rum);
+
+		byte[] fakeFile = new byte[]{1, 2, 3, 4};
+		//Resource fakeResource = new ByteArrayResource(fakeFile);
+		//when(fileReplaceTextGeneretor.genererBulletinAdhesion();)
+		when(mockFilePath.resolve(fileName)).thenReturn(mockFilePath);
+		when(mockFilePath.normalize()).thenReturn(mockFilePath);
+		when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+		when(checkFile.exists(mockFilePath)).thenReturn(true);
+		//when(bulletinAdhesionService.getBulAdhesionFile(rum)).thenReturn(fakeResource);
+
+		Resource resource = bulletinAdhesionService.getBulAdhesionFile(rum);
+
+		// WHEN + THEN
+		Exception exception = assertThrows(ServiceException.class, () -> {
+			bulletinAdhesionService.getBulAdhesionFile(rum);  // This should throw the exception
+		});
+
+		assertNotNull(resource);
+	}
+
+
 Also, this error might show up because:
 1. you stub either of: final/private/equals()/hashCode() methods.
    Those methods *cannot* be stubbed/verified.
