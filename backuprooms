@@ -2305,3 +2305,120 @@ public class ServiceTest {
 when(Paths.get(anyString())).thenReturn(mockFilePath);
         when(mockFilePath.resolve(anyString())).thenReturn(mockFilePath);
         when(mockFilePath.normalize()).thenReturn(mockFilePath);
+
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.*;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import java.nio.file.*;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+
+public class YourServiceTest {
+
+    @Mock
+    private FileReplaceTextGeneretor fileReplaceTextGeneretor;
+
+    @Mock
+    private Path mockPath;
+
+    @Mock
+    private Resource mockResource;
+
+    @Mock
+    private ServiceException serviceException;
+
+    private YourService yourService; // Assuming the method is in this service class
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        yourService = new YourService(fileReplaceTextGeneretor); // Initialize your service
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_Success() throws Exception {
+        // Given
+        String rum = "123456";
+        String fileName = rum.concat(".docx");
+        String filePathString = "C:\\path\\to\\files"; // Example file path
+
+        // Mock the fileReplaceTextGeneretor to return the base path
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(filePathString);
+
+        // Mock the Path and Files.exists() methods
+        when(Paths.get(filePathString)).thenReturn(mockPath);
+        when(mockPath.resolve(fileName)).thenReturn(mockPath);
+        when(mockPath.normalize()).thenReturn(mockPath);
+        when(Files.exists(mockPath)).thenReturn(true);
+
+        // Mock the UrlResource creation
+        when(mockResource.getFilename()).thenReturn(fileName);
+        when(mockResource.getURI()).thenReturn(mockPath.toUri());
+
+        // When
+        Resource result = yourService.getBulAdhesionFile(rum);
+
+        // Then
+        assertNotNull(result);
+        assertEquals(fileName, result.getFilename());
+        verify(fileReplaceTextGeneretor).getOutputFilePath(); // Ensure method is called
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_FileNotFound() throws Exception {
+        // Given
+        String rum = "123456";
+        String fileName = rum.concat(".docx");
+        String filePathString = "C:\\path\\to\\files"; // Example file path
+
+        // Mock the fileReplaceTextGeneretor to return the base path
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(filePathString);
+
+        // Mock the Path and Files.exists() methods
+        when(Paths.get(filePathString)).thenReturn(mockPath);
+        when(mockPath.resolve(fileName)).thenReturn(mockPath);
+        when(mockPath.normalize()).thenReturn(mockPath);
+        when(Files.exists(mockPath)).thenReturn(false);
+
+        // When & Then
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            yourService.getBulAdhesionFile(rum);
+        });
+
+        assertTrue(exception.getMessage().contains("Le fichier " + fileName + " n'existe pas."));
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_MalformedURLException() throws Exception {
+        // Given
+        String rum = "123456";
+        String fileName = rum.concat(".docx");
+        String filePathString = "C:\\path\\to\\files"; // Example file path
+
+        // Mock the fileReplaceTextGeneretor to return the base path
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(filePathString);
+
+        // Mock the Path and Files.exists() methods
+        when(Paths.get(filePathString)).thenReturn(mockPath);
+        when(mockPath.resolve(fileName)).thenReturn(mockPath);
+        when(mockPath.normalize()).thenReturn(mockPath);
+        when(Files.exists(mockPath)).thenReturn(true);
+
+        // Simulate MalformedURLException when creating the UrlResource
+        when(mockResource.getFilename()).thenReturn(fileName);
+        when(mockResource.getURI()).thenThrow(MalformedURLException.class);
+
+        // When & Then
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            yourService.getBulAdhesionFile(rum);
+        });
+
+        assertTrue(exception.getMessage().contains("Une erreur est survenue lors du téléchargement du fichier : " + fileName));
+    }
+}
