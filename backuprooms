@@ -1968,3 +1968,35 @@ downloadEcheancier(itContrat: string) {
   });
 }
 
+
+private extractBlobError(error: HttpErrorResponse): Observable<never> {
+  return new Observable(observer => {
+    const reader = new FileReader();
+    
+    reader.onloadend = () => {
+      try {
+        const errorText = reader.result as string;
+        console.error("Blob error response:", errorText);
+
+        // Try parsing JSON
+        const parsedError = JSON.parse(errorText);
+        console.error("Parsed error:", parsedError);
+
+        let errorMessage = `Error: ${parsedError.message || "Unknown error"}`;
+
+        observer.error({
+          status: error.status,
+          message: errorMessage,
+          error: parsedError
+        });
+      } catch (e) {
+        console.error("Error parsing Blob response:", e);
+        observer.error({ status: error.status, message: "Failed to parse error response" });
+      }
+    };
+
+    reader.readAsText(error.error);
+  });
+}
+
+
