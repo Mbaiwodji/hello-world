@@ -2424,3 +2424,5 @@ public class YourServiceTest {
 }
 
 this.disableAdd = this.dataSource.data.length != 0 && this.dataSource.data.find(i => i.codeStatut != 4) != undefined;
+
+this.fileReplaceTextGeneretor.genererBulletinAdhesion(builder.build(), "E:\\True-ide-Workspace-Css\\config\\data-input\\RUM_CSS.docx");
