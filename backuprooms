@@ -1999,4 +1999,21 @@ private extractBlobError(error: HttpErrorResponse): Observable<never> {
   });
 }
 
-
+if ((moment() < moment(period, 'DD/MM/YYYY'))) {
+      let jrPrelevement = this.contrat.itContrat ? this.contrat.jrPrelevement : this.parameterService.getJrPrelevement();
+      console.log('EDITABLE' + jrPrelevement);
+      if (period) {
+        var dateDebut = period.clone().set('D', jrPrelevement);
+        for (let i = 1; i <= nbEcheance; i++) {
+          this.listEcheance.push({ periode: dateDebut.format("DD/MM/YYYY"), mtMensuel: mtMensuel, codeStatut: 1 });
+          var dateDebut = dateDebut.add(1, 'M').set('D', jrPrelevement);
+        }
+      }
+      return;
+    } else {
+      console.log('NON EDITABLE');
+      this.contrat.echeanceDtos.forEach(echeane => {
+        let date = moment(echeane.periode, 'YYYYMM').set('D', this.contrat.jrPrelevement);
+        this.listEcheance.push({ periode: date.format('DD/MM/YYYY'), mtMensuel: echeane.mtMensuel, codeStatut: echeane.codeStatut })
+      });
+    }
