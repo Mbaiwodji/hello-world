@@ -2601,3 +2601,31 @@ public Resource getBulAdhesionFile(String rum) {
 
 		assertNotNull(resource);
 	}
+______________________
+
+@Test
+    @WithMockUser
+    void testGetDownloadBulletinAdhesion_ShouldReturnWord() throws MalformedURLException {
+        // GIVEN
+        String rum = "CSSCPR-3108009W97755077159755";
+        String fileName = rum.concat(".docx");
+        String fileDirectory = "../config/data-output/";
+        Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+
+        // Mock the behavior of fileReplaceTextGeneretor
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock the behavior of checkFile.exists()
+        when(checkFile.exists(filePath)).thenReturn(true);
+
+        // Create the expected resource
+        Resource expectedResource = new UrlResource(filePath.toUri());
+
+        // WHEN
+        Resource resource = bulletinAdhesionService.getBulAdhesionFile(rum);
+
+        // THEN
+        assertNotNull(resource);
+        // You can add more specific assertions here, like checking the URI
+        // assertEquals(expectedResource.getURI(), resource.getURI());
+    }
