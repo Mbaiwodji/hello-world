@@ -2017,3 +2017,78 @@ if ((moment() < moment(period, 'DD/MM/YYYY'))) {
         this.listEcheance.push({ periode: date.format('DD/MM/YYYY'), mtMensuel: echeane.mtMensuel, codeStatut: echeane.codeStatut })
       });
     }
+
+________________ testing 
+
+====>Controller
+
+@PostMapping(value = "/download")
+	@Operation(summary = "Récupèration d'un bulletin d'adhésion", description = "Retourne le fichier bulletin d'adhésion")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement")})
+	public ResponseEntity<Resource> downloadBulletinAdhesion(@RequestBody BulletinAdhesionDto bulletinAdhesionDto) throws IOException {
+		log.info("Téléchargement du bulletin adhesion ayant pour RUM {}", bulletinAdhesionDto.getRum());
+		String rum = bulletinAdhesionDto.getRum();
+		Resource resource = this.bulletinAdhesionService.getBulAdhesionFile(rum);
+		return ResponseEntity.status(HttpStatus.OK)
+				.header("Content-Disposition", "attachment; filename=\"" + rum + ".docx\"")
+				.contentLength(resource.contentLength())
+				.contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document")).body(resource);
+	}
+
+@PostMapping(value = "/download/{itContrat}")
+	@Operation(summary = "Récupèration d'un bulletin d'adhésion", description = "Retourne le fichier bulletin d'adhésion")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement")})
+	public ResponseEntity<Resource> downloadEcheancier(@PathVariable Long itContrat) {
+
+		Map<String, Resource> resourceMap = this.contratService.getEcheancierFile(itContrat);
+		String fileName = resourceMap.keySet().iterator().next();
+		Resource resource = resourceMap.get(fileName);
+
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+				.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Content-Disposition")
+				.contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
+				.body(resource);
+	}
+
+===>Service
+
+public Map<String, Resource> getEcheancierFile(Long itContrat) {
+		Contrat contrat = findById(itContrat);
+		String name = contrat.getBulletinAdhesion().getNom().replace(" ", "_");
+		String fileName = findLatestFileName(name);
+		Path filePath = Paths.get(fileReplaceTextGeneretor.getOutputFilePath()).resolve(fileName).normalize();
+
+		try {
+			if (!Files.exists(filePath)) {
+				throw new FileNotFoundException("Le fichier " + fileName + " n'existe pas.");
+			}
+			Resource resource = new UrlResource(filePath.toUri());
+			Map<String, Resource> fileMap = new HashMap<>();
+			fileMap.put(fileName, resource);
+			return fileMap;
+
+		} catch (MalformedURLException | FileNotFoundException e) {
+			throw new ServiceException("Une erreur est survenue lors du téléchargement du fichier : " + fileName);
+		}
+
+	}
+
+public Resource getBulAdhesionFile(String rum) {
+		String fileName = rum.concat(".docx");
+		String fileDirectory = fileReplaceTextGeneretor.getOutputFilePath();
+		Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+		try {
+			if (!Files.exists(filePath)) {
+				throw new FileNotFoundException("Le fichier " + fileName + " n'existe pas.");
+			}
+
+			return new UrlResource(filePath.toUri());
+
+		} catch (MalformedURLException | FileNotFoundException e) {
+			throw new ServiceException("Une erreur est survenue lors du téléchargement du fichier : " + fileName);
+		}
+
+	}
