@@ -2301,3 +2301,7 @@ public class ServiceTest {
     }
 }
 
+
+when(Paths.get(anyString())).thenReturn(mockFilePath);
+        when(mockFilePath.resolve(anyString())).thenReturn(mockFilePath);
+        when(mockFilePath.normalize()).thenReturn(mockFilePath);
