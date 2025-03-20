@@ -2965,3 +2965,18 @@ class CheckFileTest {
         assertThrows(ServiceException.class, () -> checkFile.findLatestFileName("test_file", "/invalid/directory"));
     }
 }
+
+
+@Component
+public final class FileReplaceTextGeneretor {
+
+	@Value(value = "${app.path.output.ihm.fichier}")
+	private String outputFilePath;
+
+	private FileReplaceTextGeneretor() {
+	}
+
+public String getOutputFilePath() {
+		return outputFilePath;
+	}
+}
