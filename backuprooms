@@ -2426,3 +2426,89 @@ public class YourServiceTest {
 this.disableAdd = this.dataSource.data.length != 0 && this.dataSource.data.find(i => i.codeStatut != 4) != undefined;
 
 this.fileReplaceTextGeneretor.genererBulletinAdhesion(builder.build(), "E:\\True-ide-Workspace-Css\\config\\data-input\\RUM_CSS.docx");
+
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.*;
+import java.nio.file.*;
+import java.io.*;
+import org.springframework.core.io.UrlResource;
+import org.springframework.core.io.Resource;
+
+public class YourServiceTest {
+
+    @Mock
+    private FileReplaceTextGeneretor fileReplaceTextGeneretor;
+
+    @InjectMocks
+    private YourService yourService;  // replace with the actual service class name
+
+    @Test
+    public void testGetBulAdhesionFile_FileExists() throws Exception {
+        // Arrange
+        String rum = "12345"; // example RUM
+        String fileName = rum.concat(".docx");
+        String fileDirectory = "/mock/path"; // mock path
+
+        // Mock the method that returns the file directory
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock Files.exists to return true (file exists)
+        Path mockFilePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+        when(Files.exists(mockFilePath)).thenReturn(true);
+
+        // Act
+        Resource result = yourService.getBulAdhesionFile(rum);
+
+        // Assert
+        assertNotNull(result);  // Check that a resource was returned
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_FileNotFound() throws Exception {
+        // Arrange
+        String rum = "12345"; // example RUM
+        String fileName = rum.concat(".docx");
+        String fileDirectory = "/mock/path"; // mock path
+
+        // Mock the method that returns the file directory
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock Files.exists to return false (file doesn't exist)
+        Path mockFilePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+        when(Files.exists(mockFilePath)).thenReturn(false);
+
+        // Act & Assert
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            yourService.getBulAdhesionFile(rum);  // This should throw the exception
+        });
+
+        assertTrue(exception.getMessage().contains("Le fichier " + fileName + " n'existe pas."));
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_ExceptionHandling() throws Exception {
+        // Arrange
+        String rum = "12345"; // example RUM
+        String fileName = rum.concat(".docx");
+        String fileDirectory = "/mock/path"; // mock path
+
+        // Mock the method that returns the file directory
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock Files.exists to throw an exception (simulate malformed URL or other error)
+        Path mockFilePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+        when(Files.exists(mockFilePath)).thenThrow(new IOException("Mocked IOException"));
+
+        // Act & Assert
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            yourService.getBulAdhesionFile(rum);  // This should throw the exception
+        });
+
+        assertTrue(exception.getMessage().contains("Une erreur est survenue lors du téléchargement du fichier : " + fileName));
+    }
+}
+
