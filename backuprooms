@@ -2999,3 +2999,51 @@ public String getOutputFilePath() {
         Files.deleteIfExists(file2);
     }
 
+____________________________
+
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class FileUtilsTest {
+
+    @TempDir
+    Path tempDir;  // JUnit will create a temporary test directory
+
+    @AfterEach
+    void cleanUp() throws IOException {
+        Files.list(tempDir).forEach(file -> {
+            try {
+                Files.deleteIfExists(file);
+            } catch (IOException e) {
+                fail("Failed to clean up test files: " + e.getMessage());
+            }
+        });
+    }
+
+    @Test
+    void findLatestFileName_matchingFilesExist_returnsLatestFileName() throws IOException {
+        // GIVEN - Create test files
+        Path file1 = tempDir.resolve("test_20250319T130845.docx");
+        Path file2 = tempDir.resolve("test_20250320T135243.docx"); // Latest file
+
+        Files.createFile(file1);
+        Files.createFile(file2);
+
+        // WHEN - Call the method under test
+        String latestFileName = fileUtils.findLastFileName("test", tempDir.toString());
+
+        // THEN - Verify the latest file is returned
+        assertEquals("test_20250320T135243.docx", latestFileName);
+    }
+}
+
+
