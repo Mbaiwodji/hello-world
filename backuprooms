@@ -3047,3 +3047,14 @@ class FileUtilsTest {
 }
 
 
+String pattern = "yyyyMMdd'T'HHmmss";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime yesterday = now.minusDays(1);
+
+        String file1Name = "test_" + now.format(formatter) + ".docx";
+        String file2Name = "test_" + yesterday.format(formatter) + ".docx";
+
+        file1 = tempDir.resolve(file1Name);
+        file2 = tempDir.resolve(file2Name);
