@@ -3058,3 +3058,32 @@ String pattern = "yyyyMMdd'T'HHmmss";
 
         file1 = tempDir.resolve(file1Name);
         file2 = tempDir.resolve(file2Name);
+
+<changeSet id="add-version-columns" author="9775">
+
+        <addColumn tableName="T_ETUDE">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="T_SUIVI">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="T_DECISION">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="T_ADRESSE_ARRET">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="T_AGENT">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="T_REGION">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+    </changeSet>
+
