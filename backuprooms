@@ -3095,3 +3095,38 @@ ALTER TABLE T_ADRESSE_ARRET ADD VERSION NUMBER(19,0) DEFAULT 0 NOT NULL;
 ALTER TABLE T_AGENT ADD VERSION NUMBER(19,0) DEFAULT 0 NOT NULL;
 ALTER TABLE T_REGION ADD VERSION NUMBER(19,0) DEFAULT 0 NOT NULL;
 
+
+________________
+create sequence adresse_seq start with 1 increment by 50;
+create sequence agent_seq start with 1 increment by 50;
+create sequence decision_seq start with 1 increment by 50;
+create sequence etude_seq start with 1 increment by 50;
+create sequence region_seq start with 1 increment by 50;
+create sequence suivi_seq start with 1 increment by 50;
+
+create table t_adresse_arret (type_adr varchar2(3 char) not null, c_postal varchar2(6 char), immat_cp varchar2(8 char) not null, it_adresse number(19,0) not null, it_region_adm number(19,0), c_etab_sncf varchar2(10 char), tel varchar2(20 char), adresse varchar2(100 char), adresse_compl varchar2(100 char), destinataire varchar2(100 char), lieu_dit varchar2(100 char), nom_etab_sncf varchar2(100 char), raison_sociale varchar2(100 char), ville varchar2(100 char), created_by varchar2(255 char), created_at timestamp(6), updated_by varchar2(255 char),updated_at timestamp(6), version number(19,0) default 0 not null,  primary key (it_adresse));
+create table t_agent (agt_cpr number(1,0) not null check (agt_cpr in (0,1)), agt_cs number(1,0) not null check (agt_cs in (0,1)), civilite varchar2(3 char), dept_naissance varchar2(2 char), dt_naissance date, created_at timestamp(6), immat_cp varchar2(8 char) not null, it_agent number(19,0) not null, updated_at timestamp(6), nir varchar2(15 char) not null, nom varchar2(100 char), prenom varchar2(100 char), created_by varchar2(255 char), updated_by varchar2(255 char), primary key (it_agent), unique (immat_cp));
+create table t_decision (statut_etude number(10,0) not null, created_at timestamp(6), etat_etude varchar2(8 char), immat_cp varchar2(8 char) not null, it_decision number(19,0) not null, it_etude number(19,0), autres_datas varchar2(255 char), commentaire varchar2(255 char), created_by varchar2(255 char), motif varchar2(255 char), primary key (it_decision));
+create table t_etude (agt_cpr number(1,0) not null check (agt_cpr in (0,1)), agt_cs number(1,0) not null check (agt_cs in (0,1)), dt_fin date not null, dt_arrivee date not null, dt_debut date not null, dt_deb_prol date, mode_oper varchar2(1 char) not null, nb_arret varchar2(2 char) not null, origine number(10,0), risque varchar2(3 char), sorties number(10,0), statut number(10,0) not null, created_at timestamp(6), etat varchar2(8 char), immat_cp varchar2(8 char) not null, it_adresse number(19,0), it_agent number(19,0), it_etude number(19,0) not null, updated_at timestamp(6), nom_pre_demand varchar2(100 char), commentaire varchar2(255 char), created_by varchar2(255 char), nil varchar2(255 char), updated_by varchar2(255 char), primary key (it_etude));
+create table t_region (code varchar2(2 char) not null, cp varchar2(5 char), it_region number(19,0) not null, ville varchar2(35 char), libelle varchar2(50 char) not null, primary key (it_region));
+create table t_suivi (suivi number(3,0) not null check (suivi between 0 and 2), created_at timestamp(6), immat_cp varchar2(8 char) not null unique, it_agent number(19,0) unique, it_suivi number(19,0) not null, updated_at timestamp(6), commentaire varchar2(255 char), created_by varchar2(255 char), updated_by varchar2(255 char), primary key (it_suivi));
+
+create index t_agent_index_agt_cs on t_agent (agt_cs);
+create index t_etude_index_immat_cp on t_etude (immat_cp);
+create index t_etude_index_statut on t_etude (statut);
+create index t_etude_index_etat on t_etude (etat);
+create index t_etude_index_agt_cs on t_etude (agt_cs);
+create index t_etude_index_updated_at on t_etude (updated_at) 
+create index t_decision_index_statut_etude on t_decision (statut_etude);
+create index t_decision_index_etat_etude on t_decision (etat_etude);
+create index t_decision_index_motif on t_decision (motif);
+create index t_decision_index_created_at on t_decision (created_at) 
+
+alter table t_adresse_arret add constraint FK_t_adresse_arret_t_region foreign key (it_region_adm) references t_region;
+alter table t_decision add constraint FK_t_decision_t_etude foreign key (it_etude) references t_etude;
+alter table t_etude add constraint FK_t_etude_t_adresse_arret foreign key (it_adresse) references t_adresse_arret;
+alter table t_etude add constraint FK_t_etude_t_agent foreign key (it_agent) references t_agent;
+alter table t_suivi add constraint FK_t_etude_t_agent foreign key (it_agent) references t_agent;
+
+
+
