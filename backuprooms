@@ -3129,4 +3129,40 @@ alter table t_etude add constraint FK_t_etude_t_agent foreign key (it_agent) ref
 alter table t_suivi add constraint FK_t_etude_t_agent foreign key (it_agent) references t_agent;
 
 
+@Override
+	protected String generateMail() {
 
+		SimpleDateFormat simpleFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String formatedDate = simpleFormat.format(traitementDate);
+
+		StringBuffer buffer = new StringBuffer();
+		if (alisteReprise != null && !alisteReprise.isEmpty()) {
+			buffer
+					.append("<div align='center'>Pour la journ&eacute;e de traitement du "
+							+ formatedDate
+							+ ", voici la liste des d&eacute;comptes en reprise :");
+			buffer.append("<br/><br/>");
+			buffer
+					.append("<table  border='1' cellspacing='0' cellpadding='0'><tr align = 'center' bgcolor='#CCCCCC'><td><b>PJ</b></td><td><b>NIR assur&eacute;</b></td><td><b>IMMAT</b></td><td><b>CAUSE</b><td></tr>");
+			String tdTag = "</td><td>";
+			for (RepriseDO currentReprise : alisteReprise) {
+				buffer.append("<tr align = 'center'><td>"
+						+ currentReprise.getNumpj() + tdTag
+						+ currentReprise.getIddestinataire() + tdTag
+						+ currentReprise.getImmatriculation() + tdTag
+						+ currentReprise.getCauseprobleme() + "</td></tr>");
+			}
+			buffer.append("</table>");
+			buffer.append("<br/>");
+			buffer.append(
+					"Pour vous connecter &agrave; l'application : <a HREF= '")
+					.append(DECOMPTE_IHM).append(
+							"'>Reprise des d&eacute;comptes</a>");
+		} else {
+			buffer.append("Pour la journ&eacute;e de traitement du "
+					+ formatedDate
+					+ ", pas de d&eacute;compte en reprise.");
+			buffer.append("<br/>");
+		}
+		return buffer.toString();
+	}
