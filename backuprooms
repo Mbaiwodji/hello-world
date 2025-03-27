@@ -3166,3 +3166,52 @@ alter table t_suivi add constraint FK_t_etude_t_agent foreign key (it_agent) ref
 		}
 		return buffer.toString();
 	}
+
+
+___________________________________
+
+protected String generateMail() {
+        SimpleDateFormat simpleFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = simpleFormat.format(traitementDate);
+
+        StringBuilder buffer = new StringBuilder();
+
+        if (alisteReprise != null && !alisteReprise.isEmpty()) {
+            buffer.append("<div align='center'>")
+                  .append("Pour la journ&eacute;e de traitement du ")
+                  .append(formattedDate)
+                  .append(", voici la liste des d&eacute;comptes en reprise :")
+                  .append("<br/><br/>")
+                  .append("<table border='1' cellspacing='0' cellpadding='5'>")
+                  .append("<tr align='center' bgcolor='#CCCCCC'>")
+                  .append("<td><b>PJ</b></td>")
+                  .append("<td><b>NIR assur&eacute;</b></td>")
+                  .append("<td><b>IMMAT</b></td>")
+                  .append("<td><b>CAUSE</b></td></tr>");
+
+            for (RepriseDO currentReprise : alisteReprise) {
+                String numpj = StringEscapeUtils.escapeHtml4(currentReprise.getNumpj());
+                String iddestinataire = StringEscapeUtils.escapeHtml4(currentReprise.getIddestinataire());
+                String immatriculation = StringEscapeUtils.escapeHtml4(currentReprise.getImmatriculation());
+                String causeprobleme = StringEscapeUtils.escapeHtml4(currentReprise.getCauseprobleme());
+
+                buffer.append(String.format(
+                    "<tr align='center'><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+                    numpj, iddestinataire, immatriculation, causeprobleme
+                ));
+            }
+
+            buffer.append("</table>")
+                  .append("<br/>")
+                  .append("<a href='").append(DECOMPTE_IHM).append("'>Reprise des d&eacute;comptes</a>")
+                  .append("</div>");
+        } else {
+            buffer.append("<div align='center'>")
+                  .append("Pour la journ&eacute;e de traitement du ")
+                  .append(formattedDate)
+                  .append(", pas de d&eacute;compte en reprise.")
+                  .append("<br/></div>");
+        }
+
+        return buffer.toString();
+    }
