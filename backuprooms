@@ -3215,3 +3215,8 @@ protected String generateMail() {
 
         return buffer.toString();
     }
+
+
+La version actuelle de l’application AGAT développée sous OMNIS est amené à disparaître. AGAT doit donc être revue pour être développée sous une nouvelle technologie.
+
+L’objectif est de repenser l’application sous la technologie choisie pour permettre au service du contrôle des arrêts de travail de continuer à gérer les dossiers d’arrêts de travail des agents SNCF dans le but de procéder à des éventuels contrôles des personnes arrêtées. 
