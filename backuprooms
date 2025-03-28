@@ -3256,3 +3256,22 @@ ____________________________________
 		log.info("Stat par mois de l'année en cours");
 		return ResponseEntity.status(HttpStatus.OK).body(this.statistiqueService.getStatByMonth());
 	}
+
+
+@GetMapping()
+	@Operation(summary = "Récupérer les stats de l'année", description = "Retourne les suivis d'agent")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement") })
+	public ResponseEntity<Map<String, Long>> getStatAnneeEnCOUrs() {
+		log.info("Stat de l'année en cours");
+		return ResponseEntity.status(HttpStatus.OK).body(this.statistiqueService.getStatAnneeEnCours());
+	}
+
+@GetMapping("/byMonth/{month}")
+	@Operation(summary = "Récupérer les stats de l'année", description = "Retourne les suivis d'agent")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement") })
+	public ResponseEntity<StatEtudeDto> getStatByMonth(@PathVariable String month) {
+		log.info("Stat du mois de " + month + " de l'année en cours");
+		return ResponseEntity.status(HttpStatus.OK).body(this.statistiqueService.getStatDecisionByMonth(month));
+	}
