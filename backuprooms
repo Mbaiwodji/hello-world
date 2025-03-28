@@ -3342,3 +3342,20 @@ _____________________
 
 		return result;
 	}
+____________________________
+
+/**
+	 * Retourner les statistiques au cours de l'annee
+	 *
+	 * @return ResponseEntity<List<suviDto>>
+	 */
+	@PostMapping("/byPeriode")
+	@Operation(summary = "Récupérer les stats de l'année", description = "Retourne les suivis d'agent")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement") })
+	public ResponseEntity<Map<String, List<StatComparatifDto>>> getBilanComparatif(
+			@RequestBody StatComparatifDto statComparatifDto) {
+		log.info("Stat by région sur la prériode " + statComparatifDto.getDateDebut().toString() + " à "
+				+ statComparatifDto.getDateFin().toString());
+		return ResponseEntity.status(HttpStatus.OK).body(this.statistiqueService.getBilanComparatif(statComparatifDto));
+	}
