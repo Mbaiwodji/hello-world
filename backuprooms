@@ -3359,3 +3359,28 @@ ____________________________
 				+ statComparatifDto.getDateFin().toString());
 		return ResponseEntity.status(HttpStatus.OK).body(this.statistiqueService.getBilanComparatif(statComparatifDto));
 	}
+_______________________
+
+/**
+	 * Retourner les statistiques au cours de l'annee
+	 *
+	 * @return ResponseEntity<List<suviDto>>
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
+	@PostMapping(value = "/byRegion/download")
+	@Operation(summary = "Récupérer les stats de l'année", description = "Retourne les suivis d'agent")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement") })
+	public ResponseEntity<Resource> getDownloadStatEtablissementByPeriode(@RequestBody StatRegionDto statRegionDto)
+			throws IOException {
+		log.info("generate file stat by région " + statRegionDto.getLibelle() + " sur la prériode "
+				+ statRegionDto.getDateDebut().toString() + " à " + statRegionDto.getDateFin().toString());
+
+		Resource resource = new ByteArrayResource(
+				this.statistiqueService.generatedFileStatByRegionAndEtablissement(statRegionDto));
+		return ResponseEntity.status(HttpStatus.OK)
+				.header("Content-Disposition", "attachment; filename=\"Statistique par région.xlsx\"")
+				.contentLength(resource.contentLength())
+				.contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(resource);
+	}
