@@ -3246,3 +3246,13 @@ L’objectif est de repenser l’application sous la technologie choisie pour pe
 				</executions>
 			</plugin>
 
+____________________________________
+
+@GetMapping("/byMonth")
+	@Operation(summary = "Récupérer les stats de l'année", description = "Retourne les suivis d'agent")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement") })
+	public ResponseEntity<Collection<StatEtudeDto>> getStatByMonth() {
+		log.info("Stat par mois de l'année en cours");
+		return ResponseEntity.status(HttpStatus.OK).body(this.statistiqueService.getStatByMonth());
+	}
