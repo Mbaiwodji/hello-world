@@ -3275,3 +3275,70 @@ ____________________________________
 		log.info("Stat du mois de " + month + " de l'année en cours");
 		return ResponseEntity.status(HttpStatus.OK).body(this.statistiqueService.getStatDecisionByMonth(month));
 	}
+_____________________
+
+/**
+	 * Retourne bilan camparatif des études entre deux périodes.
+	 * 
+	 * @param StatComparatifDto
+	 * 
+	 * @return Map<String, List<StatComparatifDto>>
+	 */
+	public Map<String, List<StatComparatifDto>> getBilanComparatif(StatComparatifDto statComparatifDto) {
+		Map<String, StatComparatifDto> map = new TreeMap<>(Comparable::compareTo);
+
+		List<Object[]> list = this.decisionRepository.getBilanComparatif(
+				statComparatifDto.getDateDebut().minusYears(1).atTime(LocalTime.MAX),
+				statComparatifDto.getDateFin().minusYears(1).atTime(LocalTime.MAX),
+				statComparatifDto.getDateDebut().atTime(LocalTime.MAX),
+				statComparatifDto.getDateFin().atTime(LocalTime.MAX));
+
+		for (Object[] obj : list) {
+			StatComparatifDto etatDto = map.getOrDefault(obj[0].toString().concat(obj[1].toString()),
+					new StatComparatifDto());
+			etatDto.setAnnee(obj[0].toString());
+			etatDto.setEtat(obj[1].toString());
+			etatDto.setGroup(0);
+			if (obj[3].toString().equals("1")) {
+				etatDto.setInitCpr(etatDto.getInitCpr() + Integer.parseInt(obj[4].toString()));
+			}
+			if (obj[3].toString().equals("4")) {
+				etatDto.setInitRh(etatDto.getInitRh() + Integer.parseInt(obj[4].toString()));
+			}
+			map.put(obj[0].toString().concat(obj[1].toString()), etatDto);
+
+			StatComparatifDto motifDto = map.getOrDefault(
+					obj[0].toString().concat(obj[1].toString()).concat(obj[2].toString()), new StatComparatifDto());
+			motifDto.setAnnee(obj[0].toString());
+			motifDto.setEtat(obj[1].toString().concat("-").concat(obj[2].toString()));
+
+			String group1 = obj[2].toString().startsWith("JUS") ? "JUS" : "AAAA";
+			StatComparatifDto decisionDto = map.getOrDefault(obj[0].toString().concat(obj[1].toString()).concat(group1),
+					new StatComparatifDto());
+			decisionDto.setAnnee(obj[0].toString());
+			decisionDto.setEtat(obj[1].toString().concat("-").concat(group1));
+
+			if (obj[3].toString().equals("1")) {
+				motifDto.setInitCpr(motifDto.getInitCpr() + Integer.parseInt(obj[4].toString()));
+				decisionDto.setInitCpr(decisionDto.getInitCpr() + motifDto.getInitCpr());
+			}
+			if (obj[3].toString().equals("4")) {
+				motifDto.setInitRh(motifDto.getInitRh() + Integer.parseInt(obj[4].toString()));
+				decisionDto.setInitRh(decisionDto.getInitRh() + motifDto.getInitRh());
+			}
+			if (Motif.NON_JUSTIFIE_MEDICALEMENT.getCode().equals(obj[2].toString())) {
+				motifDto.setGroup(1);
+			} else {
+				motifDto.setGroup(2);
+				decisionDto.setGroup(1);
+				map.put(obj[0].toString().concat(obj[1].toString()).concat(group1), decisionDto);
+			}
+			map.put(obj[0].toString().concat(obj[1].toString()).concat(obj[2].toString()), motifDto);
+		}
+
+		Map<String, List<StatComparatifDto>> result = new TreeMap<>(Comparable::compareTo);
+		result.putAll(map.values().stream().collect(Collectors.groupingBy(
+				stat -> stat.getEtat().concat("-").concat(String.valueOf(stat.getGroup())), Collectors.toList())));
+
+		return result;
+	}
