@@ -3384,3 +3384,43 @@ _______________________
 				.contentLength(resource.contentLength())
 				.contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(resource);
 	}
+
+_____amélioré
+
+/**
+ * Génère et télécharge un fichier Excel contenant les statistiques des établissements 
+ * par région pour une période donnée.
+ *
+ * Cette API permet d'obtenir un rapport statistique sous forme de fichier Excel 
+ * en fonction des critères fournis dans l'objet {@link StatRegionDto}. 
+ *
+ * @param statRegionDto Objet contenant les informations de la région et la période concernée.
+ * @return ResponseEntity contenant le fichier Excel en tant que ressource téléchargeable.
+ * @throws IOException En cas d'erreur lors de la génération du fichier.
+ */
+@PostMapping(value = "/byRegion/download")
+@Operation(summary = "Télécharger les statistiques par région",
+           description = "Génère un fichier Excel contenant les suivis des agents par région pour une période donnée.")
+@ApiResponses(value = { 
+    @ApiResponse(responseCode = "200", description = "Fichier généré et disponible au téléchargement."),
+    @ApiResponse(responseCode = "400", description = "Requête invalide - Vérifiez les paramètres fournis."),
+    @ApiResponse(responseCode = "500", description = "Erreur interne du serveur - Une exception est levée lors du traitement.") 
+})
+public ResponseEntity<Resource> getDownloadStatEtablissementByPeriode(
+        @RequestBody StatRegionDto statRegionDto) throws IOException {
+    
+    log.info("Génération du fichier des statistiques pour la région {} sur la période du {} au {}", 
+             statRegionDto.getLibelle(), statRegionDto.getDateDebut(), statRegionDto.getDateFin());
+
+    // Génération du fichier en mémoire
+    Resource resource = new ByteArrayResource(
+            this.statistiqueService.generatedFileStatByRegionAndEtablissement(statRegionDto));
+
+    // Construction de la réponse HTTP avec en-têtes appropriés pour le téléchargement
+    return ResponseEntity.status(HttpStatus.OK)
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Statistiques_Region.xlsx\"")
+            .contentLength(resource.contentLength())
+            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .body(resource);
+}
+
