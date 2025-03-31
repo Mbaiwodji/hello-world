@@ -3471,3 +3471,31 @@ public ResponseEntity<Page<EtudeDto>> getEtudesPaginated(
             .body(this.etudeService.searchEtudesWithPagination(searcheDto, new ArrayList<>(details.getAuthorities())));
 }
 
+_____________to documente
+
+/**
+	 *
+	 * Retourner les détails d'étude d'un agent à partir de itEtude ou de immat
+	 * @param itEtude identifiant technique de l'étude
+	 * @param immat identifiant matricule d'un agent
+	 * @param details Objet contenant les informations sur l'utilisateur actuellement authentifié, incluant ses rôles et permissions.
+	 * @return ResponseEntity<EtudeDto>
+	 */
+	@GetMapping("/detail")
+	@Operation(summary = "Récupérer les details d'une étude", description = "Retourne le detail d'une étude")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement")})
+	public ResponseEntity<EtudeDto> getDetailEtude(@RequestParam(name = "itEtude", required = false) Long itEtude,
+												   @RequestParam(name = "immat", required = false) String immat,
+												   @AuthenticationPrincipal UserDetails details) {
+		if (itEtude != null) {
+			log.info("Récupération des détails d'étude d'un agent ayant pour itEtude = {}", itEtude);
+			EtudeDto byIt = this.etudeService.findByIt(itEtude);
+			return ResponseEntity.status(HttpStatus.OK).body(byIt);
+		} else {
+			log.info("Récupération des détails d'étude d'un agent ayant pour immat = {}", immat);
+			EtudeDto byImmat = this.etudeService.findByImmat(new ArrayList<>(details.getAuthorities()), immat);
+			return ResponseEntity.status(HttpStatus.OK).body(byImmat);
+		}
+	}
+
