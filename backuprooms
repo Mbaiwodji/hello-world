@@ -3440,4 +3440,34 @@ public ResponseEntity<Resource> getDownloadStatEtablissementByPeriode(
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(this.etudeService.searchEtudesWithPagination(searcheDto, new ArrayList<>(details.getAuthorities())));
 	}
+_____________ Améliorée 
+
+/**
+ * Recherche et retourne une liste paginée des études correspondant aux critères spécifiés.
+ *
+ * @param searcheDto Objet contenant les critères de recherche (période, région, état, etc.).
+ * @param details Informations sur l'utilisateur actuellement authentifié, incluant ses rôles et permissions.
+ * @return ResponseEntity contenant une page de {@link EtudeDto} correspondant aux critères de recherche.
+ */
+@PostMapping("/search")
+@Operation(
+    summary = "Recherche des suivis d'agent",
+    description = "Retourne une liste paginée des suivis d'agent correspondant aux critères de recherche spécifiés."
+)
+@ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Succès - Retourne la liste paginée des suivis d'agent"),
+    @ApiResponse(responseCode = "400", description = "Requête invalide - Paramètres incorrects"),
+    @ApiResponse(responseCode = "401", description = "Non autorisé - L'utilisateur n'est pas authentifié"),
+    @ApiResponse(responseCode = "403", description = "Accès interdit - L'utilisateur ne dispose pas des permissions nécessaires"),
+    @ApiResponse(responseCode = "500", description = "Erreur interne du serveur - Une exception s'est produite lors du traitement")
+})
+public ResponseEntity<Page<EtudeDto>> getEtudesPaginated(
+        @RequestBody SearcheDto searcheDto,
+        @AuthenticationPrincipal UserDetails details) {
+    
+    log.info("Recherche des suivis d'agent avec critères : {}", searcheDto);
+    
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(this.etudeService.searchEtudesWithPagination(searcheDto, new ArrayList<>(details.getAuthorities())));
+}
 
