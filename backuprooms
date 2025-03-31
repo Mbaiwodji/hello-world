@@ -3498,4 +3498,48 @@ _____________to documente
 			return ResponseEntity.status(HttpStatus.OK).body(byImmat);
 		}
 	}
+________ Améliorée 
+
+/**
+ * Récupère les détails d'une étude d'un agent en fonction de son identifiant technique (itEtude) ou de son matricule (immat).
+ * Si les deux paramètres sont fournis, itEtude est prioritaire.
+ *
+ * @param itEtude Identifiant technique de l'étude (optionnel).
+ * @param immat Matricule de l'agent pour récupérer l'étude (optionnel).
+ * @param details Objet contenant les informations de l'utilisateur actuellement authentifié, 
+ *               incluant ses rôles et permissions.
+ * @return ResponseEntity contenant un objet {@link EtudeDto} représentant les détails de l'étude.
+ *         Retourne un statut HTTP 200 si l'opération réussit.
+ * @throws IllegalArgumentException si les deux paramètres sont null.
+ * @throws RuntimeException en cas d'erreur interne lors du traitement de la requête.
+ */
+@GetMapping("/detail")
+@Operation(
+    summary = "Récupérer les détails d'une étude",
+    description = "Retourne les détails d'une étude en fonction de l'identifiant technique (itEtude) ou du matricule de l'agent (immat)."
+)
+@ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Détails de l'étude récupérés avec succès."),
+    @ApiResponse(responseCode = "400", description = "Requête invalide, aucun paramètre fourni."),
+    @ApiResponse(responseCode = "500", description = "Erreur interne du serveur lors du traitement de la demande.")
+})
+public ResponseEntity<EtudeDto> getDetailEtude(
+        @RequestParam(name = "itEtude", required = false) Long itEtude,
+        @RequestParam(name = "immat", required = false) String immat,
+        @AuthenticationPrincipal UserDetails details) {
+
+    if (itEtude != null) {
+        log.info("Récupération des détails de l'étude pour itEtude = {}", itEtude);
+        EtudeDto byIt = this.etudeService.findByIt(itEtude);
+        return ResponseEntity.ok(byIt);
+    } else if (immat != null) {
+        log.info("Récupération des détails de l'étude pour immat = {}", immat);
+        EtudeDto byImmat = this.etudeService.findByImmat(
+                new ArrayList<>(details.getAuthorities()), immat);
+        return ResponseEntity.ok(byImmat);
+    } else {
+        log.warn("Aucun paramètre fourni pour récupérer les détails d'une étude.");
+        throw new IllegalArgumentException("Au moins un des paramètres 'itEtude' ou 'immat' doit être fourni.");
+    }
+}
 
