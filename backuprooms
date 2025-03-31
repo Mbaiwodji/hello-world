@@ -3424,3 +3424,20 @@ public ResponseEntity<Resource> getDownloadStatEtablissementByPeriode(
             .body(resource);
 }
 
+/**
+	 * 
+	 * @param searcheDto Objet contenant les critères de recherche
+	 * @param details Objet contenant les détails utilisateur de l'utilisateur actuellement authentifié
+	 * @return ResponseEntity<Page<EtudeDto>>
+	 */
+	@PostMapping("/search")
+	@Operation(summary = "Récupérer les suivis d'agent", description = "Retourne les suivis d'agent")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement")})
+	public ResponseEntity<Page<EtudeDto>> getEtudesPaginated(@RequestBody() SearcheDto searcheDto,
+															 @AuthenticationPrincipal UserDetails details) {
+		log.info("Get suivis agent");
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(this.etudeService.searchEtudesWithPagination(searcheDto, new ArrayList<>(details.getAuthorities())));
+	}
+
