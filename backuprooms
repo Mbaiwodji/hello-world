@@ -4641,3 +4641,11 @@ graph TD
   B -->|JWT| C[storage.service]
   D[suivi-agent.component] -->|getAgents()| E[agent.service]
   E -->|HTTP| F[Backend]
+
+
+
+ Pourquoi utiliser des composants ?
+✅ Réutilisabilité : Un composant peut être utilisé plusieurs fois dans l’application.
+✅ Modularité : L’application est divisée en plusieurs petites parties indépendantes.
+✅ Maintenabilité : Chaque composant est géré indépendamment, ce qui facilite les mises à jour.
+✅ Performance : Angular optimise les rendus des composants pour une meilleure fluidité.
