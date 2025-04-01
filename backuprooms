@@ -3771,3 +3771,26 @@ Bonnes pratiques et guidelines
 🔹 Conclusion
 Ce document doit être clair, concis et bien structuré. Il peut aussi inclure des schémas et captures d'écran pour faciliter la compréhension. 
 
+3 Architecture 
+  3.1	Structure du projet
+   3.1.1 Frontend
+     3.1.1.1	Structure du module
+     3.1.1.2	Version des technologies 
+   3.1.2 Backend
+    3.1.2.1	Structure du module
+    3.1.2.2	Version des technologies
+  3.2	Flux de compilation
+4 Mise en œuvre
+  4.1 Frontend
+  4.2	Backend
+     4.2.1 Implémentation des services
+       4.2.1.1	Client
+	 a)Le service d’authentification
+	 b)Le service d’habilitation MSA
+	 c) Les services du RIT
+     4.2.1.2 Serveur
+       a) Le service d’information générale
+       b)	Les services métiers
+          -	Etude
+          -	Suivi
+          - 	Etc
