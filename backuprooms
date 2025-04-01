@@ -4649,3 +4649,6 @@ graph TD
 ✅ Modularité : L’application est divisée en plusieurs petites parties indépendantes.
 ✅ Maintenabilité : Chaque composant est géré indépendamment, ce qui facilite les mises à jour.
 ✅ Performance : Angular optimise les rendus des composants pour une meilleure fluidité.
+
+
+Les composants Angular sont les briques de base d'une application Angular. Ils servent à structurer, afficher et gérer l’interface utilisateur (UI) de l’application de manière modulaire et réutilisable.
