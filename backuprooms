@@ -4733,3 +4733,8 @@ export class GenericService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }
+
+
+
+<ns1:Document xmlns:ns1="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
+</ns1:Document>
