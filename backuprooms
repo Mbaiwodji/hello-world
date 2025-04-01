@@ -4652,3 +4652,84 @@ graph TD
 
 
 Les composants Angular sont les briques de base d'une application Angular. Ils servent à structurer, afficher et gérer l’interface utilisateur (UI) de l’application de manière modulaire et réutilisable.
+##################
+
+export class AuthentificationService {
+
+  constructor(private http: HttpClient) {
+  }
+
+  getCustomHeaders(): HttpHeaders {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json; charset=UTF-8')
+      .set('Access-Control-Allow-Credentials', 'true')
+      .set('Access-Control-Allow-Origin', '*');
+    return headers;
+  }
+
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(UrlHelpers.LOGIN, { username, password }, { headers: this.getCustomHeaders() });
+  }
+
+  logout(user: User): Observable<any> {
+    return this.http.post(UrlHelpers.LOGOUT, user, { headers: this.getCustomHeaders() });
+  }
+}
+
+export class SuiviService extends GenericService {
+  constructor(private http: HttpClient) {
+    super();
+  }
+
+  public findByImmat(immat: string): Observable<any> {
+    return this.http.get<Suivi>(UrlHelpers.API_SUIVI_DETAIL, { headers: this.getCustomHeaders(), params: new HttpParams().set("immat", immat) });
+  }
+
+  public findByIt(itSuivi: number): Observable<any> {
+    return this.http.get<Suivi>(UrlHelpers.API_SUIVI_DETAIL, { headers: this.getCustomHeaders(), params: new HttpParams().set("itSuivi", itSuivi) });
+  }
+
+  public searchByImmat(immat: string | undefined): Observable<any> {
+    if (immat)
+      return this.http.get<Suivi[]>(UrlHelpers.API_SUIVI, { headers: this.getCustomHeaders(), params: new HttpParams().set("immat", immat) });
+    return this.http.get<Suivi[]>(UrlHelpers.API_SUIVI, { headers: this.getCustomHeaders() });
+  }
+
+  public saveSuivi(suivi: Suivi) {
+    return this.http.post<Suivi>(UrlHelpers.API_SUIVI_SAVE, suivi, { headers: this.getCustomHeaders() });
+  }
+
+  public supprimerSuivi(itSuivi: number) {
+    return this.http.delete<Suivi>(UrlHelpers.API_SUIVI_ABANDONNER + itSuivi, { headers: this.getCustomHeaders() });
+  }
+}
+
+export class GenericService {
+
+  getCustomHeaders(): HttpHeaders {
+
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json; charset=UTF-8')
+      .set('Access-Control-Allow-Headers', 'Content-Type')
+      .set('Access-Control-Allow-Methods', 'GET,PUT,POST')
+      .set('Access-Control-Allow-Credentials', 'true')
+      .set('Access-Control-Allow-Origin', '*');
+    //.set('Authorization', `${user.type} ${user.token}`);
+    return headers;
+  }
+
+
+  handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    // Return an observable with a user-facing error message.
+    return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+}
