@@ -4466,4 +4466,34 @@ Permet d'ajouter des diagrammes (architecture, flux)
 
 💡 Conseil : Utilisez des outils comme Compodoc pour générer automatiquement une partie de cette documentation à partir des commentaires code.
 
+_____________________
+
+Components
+-agent
+-confirmation-dialog
+-gestionnaire
+-search
+-statut-etude
+-type-suivi
+
+pages
+-arrets
+-login
+-statistiques
+-suivi-agent
+
+services
+-agent.service.ts
+-authentification.service.ts
+-etude.service.ts
+-generic.service.ts
+-loading.service.ts
+-loggedin-guard.service.ts
+-parameter.service.ts
+-statistique.sevice.ts
+-storage.service.ts
+-suivi.service.ts
+
+helpers
+url-helpers.ts
 
