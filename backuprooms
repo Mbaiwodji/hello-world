@@ -4000,3 +4000,41 @@ Cette approche permet :
 ✅ Lisibilité : Les développeurs trouvent rapidement la méthode dont ils ont besoin.
 ✅ Maintenabilité : Documentation alignée avec le code (pensez à générer une partie via Compodoc).
 ✅ Exhaustivité : Couvre tous les cas d'usage (params, erreurs, types).
+
+__________________________________________
+
+
+1 Documents de référence
+2 Présentation générale
+   2.1	Introduction
+   2.2	Contexte et enjeu du projet
+   2.3	Contraintes et exigences
+
+
+3 Architecture 
+  3.1	Structure du projet
+   3.1.1 Frontend
+     3.1.1.1	Structure du module
+     3.1.1.2	Version des technologies 
+   3.1.2 Backend
+    3.1.2.1	Structure du module
+    3.1.2.2	Version des technologies
+  3.2	Flux de compilation
+4 Mise en œuvre
+  4.1 Frontend
+  4.2	Backend
+     4.2.1 Implémentation des services
+       4.2.1.1	Client
+	 a)Le service d’authentification
+	 b)Le service d’habilitation MSA
+	 c) Les services du RIT
+     4.2.1.2 Serveur
+       a) Le service d’information générale
+       b) Les services métiers
+          -	Authentification 
+	  -	Statistiques 
+          -	Etude
+          -	Suivi
+5 Annexe
+  5.1	Description des propriétés applicatives
+
