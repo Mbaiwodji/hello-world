@@ -4772,3 +4772,11 @@ getDatas(element: string): string {
     .replace(/,/g, '<br/>'); // Replaces commas with <br/>
 }
 
+
+@XmlSchema(
+    namespace = "urn:iso:std:iso:20022:tech:xsd:pain.008.001.02",
+    elementFormDefault = XmlNsForm.QUALIFIED,
+    xmlns = {
+        @XmlNs(prefix="", namespaceURI="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02")
+    }
+) 
