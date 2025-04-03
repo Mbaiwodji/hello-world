@@ -4763,3 +4763,12 @@ getDatas(element: string) {
     return element ? element.replace('{', '').replace('}', '').replace(/\"/gi, '').replace(/\,/gi, "<br/>") : '';
   }
 
+
+getDatas(element: string): string {
+  if (!element) return '';
+  
+  return element
+    .replace(/[{}"]/g, '')  // Removes { }, and "
+    .replace(/,/g, '<br/>'); // Replaces commas with <br/>
+}
+
