@@ -4759,3 +4759,7 @@ export class LoadingService {
     <mat-icon>save</mat-icon> Enregister
   </button>
 
+getDatas(element: string) {
+    return element ? element.replace('{', '').replace('}', '').replace(/\"/gi, '').replace(/\,/gi, "<br/>") : '';
+  }
+
