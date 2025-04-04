@@ -4817,3 +4817,83 @@ export class StorageService {
     window.location.reload();
   }
 }
+__________________________ section securité
+
+4.1.5 Sécurité et Authentification
+Cette section décrit les mécanismes de sécurité et d’authentification mis en œuvre dans la partie frontend de l’application, développée en Angular. Elle couvre l’identification des utilisateurs, la gestion des sessions, la sécurisation des échanges HTTP, ainsi que les bonnes pratiques appliquées pour garantir la confidentialité et l’intégrité des données.
+
+1. Mécanisme d’authentification
+L’application utilise un système d’authentification basé sur des identifiants classiques (nom d’utilisateur et mot de passe). Lorsqu’un utilisateur soumet ses informations via le formulaire de connexion, le service AuthentificationService envoie une requête POST vers le backend via l’endpoint d’authentification.
+
+En cas de réponse positive, un objet utilisateur est retourné et stocké localement côté client pour maintenir l’état de la session.
+
+2. Gestion de session utilisateur
+Le service StorageService est responsable de la gestion de session côté frontend :
+
+Enregistrement des données utilisateur dans le sessionStorage via la méthode saveUser().
+
+Lecture des données pour vérifier si un utilisateur est connecté avec getUser() et isLoggedIn().
+
+Nettoyage des données de session à la déconnexion à l’aide de la méthode clean().
+
+Actualisation de la page si nécessaire via reloadPage().
+
+Remarque : L’utilisation du sessionStorage limite la persistance de la session à la durée de la session navigateur, réduisant ainsi les risques d’accès prolongé non autorisé.
+
+3. Sécurisation des requêtes HTTP
+Toutes les requêtes HTTP vers le backend sont accompagnées d’en-têtes personnalisés définis dans la méthode getCustomHeaders() des services :
+
+Content-Type: application/json; charset=UTF-8
+
+Access-Control-Allow-Origin: *
+
+Access-Control-Allow-Credentials: true
+
+Ces en-têtes permettent de configurer le comportement CORS et d’assurer un échange sécurisé des données.
+
+4. Prévention des failles XSS et CSRF
+Angular fournit nativement une protection contre les attaques Cross-Site Scripting (XSS) en échappant automatiquement les expressions dans les templates HTML.
+
+Les requêtes HTTP sont gérées avec HttpClient, ce qui limite les attaques de type Cross-Site Request Forgery (CSRF).
+
+Le backend peut, si nécessaire, implémenter des mécanismes complémentaires de protection CSRF à l’aide de tokens envoyés dans les en-têtes HTTP.
+
+5. Sécurité des données stockées
+Les données utilisateur sont temporairement stockées dans le sessionStorage, ce qui limite leur exposition. Toutefois, aucune information sensible (mot de passe, token d’accès non chiffré, etc.) n’est stockée côté client.
+
+Des pistes d’amélioration peuvent inclure :
+
+Le chiffrement local des données avant stockage (optionnel selon les besoins).
+
+Le passage à HttpOnly cookies côté serveur pour renforcer la sécurité.
+
+6. Gestion des accès et habilitations
+Un mécanisme de gestion des habilitations peut être mis en place côté frontend via des guards Angular (AuthGuard, RoleGuard, etc.) afin de restreindre l’accès à certaines routes ou composants en fonction du rôle ou du profil de l’utilisateur.
+
+💡 Conclusion :
+L’ensemble des pratiques mises en place permet de garantir une navigation sécurisée pour l’utilisateur tout en assurant la confidentialité et l’intégrité des échanges avec le backend.
+
+________________
+
+StorageService
+Le service StorageService gère la persistance temporaire des données utilisateur dans le sessionStorage du navigateur. Il est utilisé principalement pour enregistrer, récupérer ou supprimer les informations liées à la session courante de l’utilisateur.
+
+Fonctionnalités :
+saveUser(user: User): void
+Enregistre les informations de l'utilisateur dans le sessionStorage. Si des données utilisateur sont déjà présentes, elles sont supprimées avant l'enregistrement du nouvel objet.
+
+getUser(): User | null
+Récupère les données de l'utilisateur stockées dans le sessionStorage et les désérialise. Retourne null si aucune information n'est présente.
+
+isLoggedIn(): boolean
+Vérifie si un utilisateur est connecté en consultant la présence des données dans le sessionStorage.
+
+clean(): void
+Vide entièrement le sessionStorage. Cette méthode est généralement appelée lors de la déconnexion.
+
+reloadPage(): void
+Rafraîchit la page actuelle du navigateur. Cette fonctionnalité peut être utilisée après des opérations critiques comme la déconnexion ou le changement de profil.
+
+Utilisation :
+Le StorageService est utilisé dans les composants et services liés à l’authentification et à la gestion de session pour assurer une gestion efficace de l'état utilisateur sans avoir recours à des appels serveur fréquents.
+
