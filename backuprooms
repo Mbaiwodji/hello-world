@@ -5085,3 +5085,10 @@ Table des matières
 5.4	Passage en secours	16
 
 Etant donnée cette table de matière porpose une introduction du document (Ex: Ce document a pour objectif de décrire ....)
+
+
+_____ sol
+
+Ce document a pour objectif de décrire l’architecture logicielle de l’application XMP dans le cadre de son développement, de son intégration et de son exploitation. Il constitue une référence technique à destination des équipes de développement, d’intégration, d’exploitation, de sécurité ainsi que des parties prenantes du projet.
+
+Il présente les principes d’architecture applicative et technique, les choix de conception, les composants logiciels utilisés, les flux de données internes et externes, ainsi que les éléments liés à l’exploitation et à la volumétrie du système.
