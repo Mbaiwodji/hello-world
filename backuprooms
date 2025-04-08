@@ -5006,3 +5006,43 @@ Indiquer une estimation du nombre de courriels, de leurs volumétrie (avec ou sa
 
 =>9 Stockage et archivage de fichiers
 Indiquer le(s) vecteur(s) utilisé(s) (archivage, stockage sur le SAN, stockage en local sur tel serveur, …), une estimation du nombre de fichiers et de leurs tailles en précisant la périodicité et la portée temporelle. Tout stockage en interne du serveur à la place du SAN doit obligatoirement être justifié.
+
+______________________
+
+8. Messagerie
+L’application ne génère pas de courriels de manière automatique ou intégrée dans son fonctionnement. Aucune messagerie électronique n’est utilisée dans les flux techniques ou métiers de l’application.
+
+🔐 Chiffrement / sécurité :
+Non applicable, car aucun envoi d'e-mails n'est réalisé, avec ou sans pièce jointe.
+
+Si, à l’avenir, une fonctionnalité de messagerie est ajoutée (ex : notification, alerte utilisateur), elle devra respecter les bonnes pratiques de sécurité :
+
+Chiffrement TLS/SSL pour le transport des messages
+
+Pièces jointes protégées par mot de passe si données sensibles
+
+Authentification forte sur le serveur SMTP
+
+9. Stockage et archivage de fichiers
+L'application n'utilise pas de mécanisme d’archivage de fichiers ni de stockage sur SAN. Aucune pièce jointe ou document utilisateur n'est généré ou stocké dans le cadre de l'utilisation normale.
+
+🗂️ Vecteur de stockage utilisé :
+
+Pas de stockage SAN
+
+Pas de stockage local de fichiers
+
+Les seules données persistées sont stockées dans la base de données relationnelle de l’application.
+
+📊 Estimation de volumétrie :
+
+Nombre de fichiers : Aucun fichier indépendant stocké
+
+Taille moyenne : Non applicable
+
+Périodicité : Non applicable
+
+Durée de conservation : Non applicable
+
+📝 Justification de l’absence de SAN / stockage local :
+L’architecture applicative repose uniquement sur une base de données structurée. Il n’y a donc aucun besoin fonctionnel ou technique de stocker des fichiers au niveau du serveur d’application ou via une solution SAN.
