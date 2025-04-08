@@ -4999,3 +4999,10 @@ Utilisation d’un load balancer pour la répartition du trafic et la détection
 Sauvegardes régulières de la base de données, avec restauration automatisée possible.
 
 Surveillance active (monitoring) et alerting pour permettre un redémarrage automatique ou une bascule manuelle vers une instance de secours.
+
+
+=>8 Messagerie
+Indiquer une estimation du nombre de courriels, de leurs volumétrie (avec ou sans pièce(s) jointe(s)) et de leur fréquence. Indiquer si le(s) courriel(s) est (sont) chiffré(s) et si la ou les pièces jointes sont chiffrées et/ou protégées par mot de passe.
+
+=>9 Stockage et archivage de fichiers
+Indiquer le(s) vecteur(s) utilisé(s) (archivage, stockage sur le SAN, stockage en local sur tel serveur, …), une estimation du nombre de fichiers et de leurs tailles en précisant la périodicité et la portée temporelle. Tout stockage en interne du serveur à la place du SAN doit obligatoirement être justifié.
