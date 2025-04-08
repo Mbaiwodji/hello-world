@@ -5101,3 +5101,14 @@ ___
 	Angular v17.2.0
 	Angular material v17.2.2
 	Angular-charts v1.2.0
+
+
+Node.js v21.1.0 : Environnement d’exécution JavaScript utilisé pour le build, le développement et l’exécution des scripts front-end.
+
+NPM v10.2.0 : Gestionnaire de paquets permettant l’installation, la mise à jour et la gestion des dépendances JavaScript du projet.
+
+Angular v17.2.0 : Framework front-end basé sur TypeScript, utilisé pour le développement d’interfaces utilisateur dynamiques et modulaires.
+
+Angular Material v17.2.2 : Bibliothèque de composants UI respectant les standards Material Design, utilisée pour assurer une cohérence visuelle et une bonne ergonomie.
+
+Angular-Charts v1.2.0 : Bibliothèque de visualisation de données utilisée pour intégrer des graphiques interactifs (barres, lignes, secteurs) dans l’application.
