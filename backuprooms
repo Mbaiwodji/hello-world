@@ -4911,3 +4911,91 @@ La récuperation des information personnel des Agents ou individu se fait via un
 5=> Transferts de fichiers et de messages (detail: Indiquer une liste des échanges en précisant les destinataires et émetteurs, les volumétries estimées et les vecteurs utilisés (EAI, ESB, MQ), ainsi que les éventuelles particularités des fichiers et/ou messages à transférer. Nous utilisons uniquement dans notre app les protocole SOAP et HTTPS / REST)
 6. Base de données (detail: Indiquer une estimation de la volumétrie contenue dans la ou les bases de données. L’utilisation d’options particulières (type LONG/RAW/LOB/XML, partitionnement, …) est à indiquer.
 7. passage en secours (detail: Préciser les mécanismes du passage en secours de l’application.)
+
+_________ response
+
+. Transferts de fichiers et de messages
+L'application utilise des échanges de messages essentiellement via des protocoles HTTPS/REST et SOAP, sans recours à des bus d'intégration de type EAI, ESB, ou MQ.
+
+Émetteur : Application XMP
+
+Destinataire : Service d'authentification LDAP (pour l'identité) et MSA (pour l'autorisation)
+
+Vecteur : HTTPS / REST
+
+Volumétrie estimée : faible, typiquement quelques Ko par requête (dépend de la fréquence d'utilisation)
+
+Particularité : échanges en temps réel, format JSON
+
+Émetteur : Application XMP
+
+Destinataire : Service RIT (service SOAP pour la récupération des informations agents)
+
+Vecteur : SOAP / HTTPS
+
+Volumétrie estimée : faible à moyenne, variable selon les données récupérées (quelques Ko à dizaines de Ko)
+
+Particularité : format XML structuré, messages synchrones
+
+Aucun fichier n'est transféré en dehors de ces échanges de messages. Aucun traitement de masse ou de type batch n'est prévu dans l'architecture.
+
+2. Architecture applicative avec interactions extérieures
+Description textuelle :
+L'utilisateur interagit avec l'application XMP via une interface web ou mobile. Avant toute interaction, l'utilisateur doit être authentifié et autorisé :
+
+L’authentification se fait via une connexion sécurisée au serveur LDAP, qui vérifie l’identité de l’utilisateur.
+
+Une fois authentifié, l’autorisation (droits d’accès, rôles) est gérée via le service MSA.
+
+Lorsque l’utilisateur accède à une fonctionnalité nécessitant des informations personnelles d’un agent ou d’un individu, l’application XMP fait appel à un service externe SOAP appelé Service RIT, qui fournit ces données.
+
+Schéma d’architecture applicative :
+lua
+Copy
+Edit
+[Utilisateur]
+     |
+     v
+ [Interface XMP]
+     |
+     |---> [LDAP] (Authentification)
+     |
+     |---> [MSA] (Autorisation / Rôles)
+     |
+     |---> [Service RIT] (via SOAP) <-- Récupération des infos agents
+3. Service transactionnel
+Le service transactionnel est accessible 24h/24 et 7j/7, sans contraintes spécifiques d’horaires. L’application ne présente aucune restriction quant à l’utilisation de ses fonctionnalités selon l’heure ou le jour.
+
+4. Traitement par lot
+Aucun traitement par lots (batch) n’est prévu dans la solution logicielle. Toutes les interactions sont effectuées en temps réel à la demande de l'utilisateur ou de l'application.
+
+5. Transferts de fichiers et de messages (détail)
+L’application repose uniquement sur des échanges en ligne (temps réel) via les protocoles SOAP et HTTPS/REST. Aucun transfert de fichiers ou d’échange asynchrone (MQ, EAI, etc.) n’est mis en œuvre. Les messages échangés sont principalement de type :
+
+Requêtes REST/JSON : pour l’authentification, autorisation et autres interactions avec services internes.
+
+Messages SOAP/XML : pour la récupération des données agents via le Service RIT.
+
+6. Base de données
+La base de données utilisée dans l’application stocke les données métiers de manière structurée.
+
+Volumétrie estimée : 10 à 50 Go sur une base annuelle, évolutive selon l’utilisation.
+
+Types de données particuliers :
+
+Colonnes de type TEXT/LOB utilisées pour stocker certaines données longues (ex : descriptions, logs applicatifs).
+
+Utilisation du partitionnement possible sur les tables volumineuses pour améliorer les performances de lecture/écriture.
+
+Indexation sur les champs critiques (IDs, timestamps, statuts) pour optimiser les requêtes.
+
+7. Passage en secours
+L’application intègre des mécanismes de haute disponibilité pour assurer la continuité de service en cas de défaillance :
+
+Redondance des instances applicatives via un orchestrateur (ex : Kubernetes, OpenShift).
+
+Utilisation d’un load balancer pour la répartition du trafic et la détection automatique des pannes.
+
+Sauvegardes régulières de la base de données, avec restauration automatisée possible.
+
+Surveillance active (monitoring) et alerting pour permettre un redémarrage automatique ou une bascule manuelle vers une instance de secours.
