@@ -5046,3 +5046,42 @@ Durée de conservation : Non applicable
 
 📝 Justification de l’absence de SAN / stockage local :
 L’architecture applicative repose uniquement sur une base de données structurée. Il n’y a donc aucun besoin fonctionnel ou technique de stocker des fichiers au niveau du serveur d’application ou via une solution SAN.
+________________Intro doc 
+
+Table des matières
+1.	Document de référence	3
+2.	Présentation générale	4
+2.1	Introduction	4
+2.2	Contexte et enjeux du projet	4
+2.3	Contraintes et exigences	4
+3.	Architecture applicative	5
+3.1	Schéma d’architecture applicative	6
+3.1.1	Schéma d’architecture applicative avec interactions extérieurs	6
+3.1.2	Schéma d’architecture applicative avec interaction intérieurs	7
+3.2	Principes directeurs pour les Framework	8
+3.2.1	Backend	8
+3.2.2	Frontend	8
+3.3	Implémentation des services	10
+3.3.1	Client	10
+3.3.2	Server	10
+3.3.3	Modèle physique de donnée	10
+3.3.4	Flux	11
+4.	Architecture technique	12
+4.1	Vue d’ensemble	12
+4.2	Serveurs	12
+4.2.1	Configuration logicielle	12
+4.2.2	Configuration matérielle	12
+4.3	Poste de travail	13
+5.	Exploitation	14
+5.1	Besoin d’exploitation	14
+5.2	Plage de fonctionnement	14
+5.2.1	Service transactionnel	14
+5.2.2	Traitement par lot	14
+5.3	Information de volumétrie	15
+5.3.1	Transferts de fichiers et de messages	15
+5.3.2	Stockage et archivage de fichiers	15
+5.3.3	Base de données	15
+5.3.4	Messagerie	15
+5.4	Passage en secours	16
+
+Etant donnée cette table de matière porpose une introduction du document (Ex: Ce document a pour objectif de décrire ....)
