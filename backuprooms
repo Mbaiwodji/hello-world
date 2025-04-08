@@ -4897,3 +4897,17 @@ Rafraîchit la page actuelle du navigateur. Cette fonctionnalité peut être uti
 Utilisation :
 Le StorageService est utilisé dans les composants et services liés à l’authentification et à la gestion de session pour assurer une gestion efficace de l'état utilisateur sans avoir recours à des appels serveur fréquents.
 
+_______________________________
+
+1=>Transferts de fichiers et de messages
+Indiquer une liste des échanges en précisant les destinataires et émetteurs, les volumétries estimées et les vecteurs utilisés (EAI, ESB, MQ), ainsi que les éventuelles particularités des fichiers et/ou messages à transférer
+
+2=>Expliquer proprement un schema qui montre l'architecture applicative avec interactions extérieurs 
+Utilisateur interagit avec l'app XMP, avant toute interaction l'authentification est necessaire, elle se fait via LDAP et l'autorisation via MSA pour les droits et roles.
+La récuperation des information personnel des Agents ou individu se fait via un service SOAP (service RIT)
+
+3=> Service transactionnel (desc: Indiquer les jours et heures d’ouverture du service transactionnel. Notre App est une app normale, pas d'horaire special d'ouverture de service)
+4=> Traitement par lot (detial: Indiquer les traitements par lots / batch prévus dans la solution logicielle. Il n'y a pas de traitement par lots / batch dans notre application)
+5=> Transferts de fichiers et de messages (detail: Indiquer une liste des échanges en précisant les destinataires et émetteurs, les volumétries estimées et les vecteurs utilisés (EAI, ESB, MQ), ainsi que les éventuelles particularités des fichiers et/ou messages à transférer. Nous utilisons uniquement dans notre app les protocole SOAP et HTTPS / REST)
+6. Base de données (detail: Indiquer une estimation de la volumétrie contenue dans la ou les bases de données. L’utilisation d’options particulières (type LONG/RAW/LOB/XML, partitionnement, …) est à indiquer.
+7. passage en secours (detail: Préciser les mécanismes du passage en secours de l’application.)
