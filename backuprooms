@@ -1,0 +1,5114 @@
+<mat-card class="cardWithShadow">
+      <mat-card-content class="p-y-24">
+          <mat-card-title>Caractéristiques du logement</mat-card-title>
+          <div class="row p-t-24">
+              <div class="col-lg-6 d-flex align-items-center p-y-16">
+                  <span
+                      class="text-warning bg-light-accent rounded icon-40 d-flex align-items-center justify-content-center">
+                      <i-tabler name="map-pin" class="icon-18 d-flex"></i-tabler>
+                  </span>
+
+                  <div class="m-l-16 m-r-auto">
+                      <h6 class="mat-body-2 f-w-600">{{ adsDetail[0].accomAddress }}</h6>
+                      <span class="mat-body-1">{{ adsDetail[0].city.name }}, {{ adsDetail[0].country.name
+                          }}</span>
+                  </div>
+
+              </div>
+
+              <div class="col-lg-6 d-flex align-items-center p-y-16">
+                  <span
+                      class="text-warning bg-light-accent rounded icon-40 d-flex align-items-center justify-content-center">
+                      <i-tabler name="building-community" class="icon-18 d-flex"></i-tabler>
+                  </span>
+
+                  <div class="m-l-16 m-r-auto">
+                      <h6 class="mat-body-2 f-w-600">{{ adsDetail[0].surface }}m² au total</h6>
+                      <span class="mat-body-1">{{ adsDetail[0].numberOfRoom }} pièces - {{
+                          adsDetail[0].numberOfBathrooms }} salle de bains - {{
+                          adsDetail[0].numberOfBedrooms }} chambres</span>
+                  </div>
+
+              </div>
+
+              <div class="col-lg-6 d-flex align-items-center p-y-16">
+                  <span
+                      class="text-warning bg-light-accent rounded icon-40 d-flex align-items-center justify-content-center">
+                      <i-tabler name="device-desktop-plus" class="icon-18 d-flex"></i-tabler>
+                  </span>
+
+                  <div class="m-l-16 m-r-auto">
+                      <!-- <h6 class="mat-body-2 f-w-600">{{ adsDetail[0].accomAddress }}</h6> -->
+                      <!-- <span *ngFor="let equipmnt of adsDetail[0].equipment">
+                          {{equipmnt.equipment}}
+                       </span> -->
+
+                      <div>
+                          <span
+                              *ngFor="let equipmnt of adsDetail[0]?.equipment?.slice(0, 2); let i = index">
+                              {{equipmnt.equipment}}{{i < 1 ? ', ' : ', ...' }} </span>
+                      </div>
+
+                      <span class="mat-body-1">
+                          {{ adsDetail[0].equipment.length }} équipements inclus <a [routerLink]=""
+                              class="text-primary">voir plus</a>
+                      </span>
+                  </div>
+
+              </div>
+          </div>
+
+      </mat-card-content>
+      <mat-card-content class="p-24">
+          <mat-card-title>Description</mat-card-title>
+          <p class="mat-body-1 m-t-16">
+              But you cannot figure out what it is or what it can do. MTA web directory
+              is the simplest way in which one can bid on a link, or a few links if they
+              wish to do so. The link directory on MTA displays all of the links it
+              currently has, and does so in alphabetical order, which makes it much
+              easier for someone to find what they are looking for if it is something
+              specific and they do not want to go through all the other sites and links
+              as well. It allows you to start your bid at the bottom and slowly work
+              your way to the top of the list.
+          </p>
+
+      </mat-card-content>
+</mat-card>
+
+<mat-card class="cardWithShadow">
+        <mat-card-content class="p-y-24">
+            <mat-card-title>Informations générales</mat-card-title>
+            <div class="row p-t-24">
+                <div class="col-lg-4 d-flex align-items-center">
+                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                        <i-tabler name="building-community" class="icon-18 d-flex"></i-tabler>
+                    </span>
+
+                    <div class="m-l-16 m-r-auto">
+                        <span class="mat-body-1">{{ adsDetail[0].adType.ad_type }}</span>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 d-flex align-items-center">
+                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                        <i-tabler name="building-community" class="icon-18 d-flex"></i-tabler>
+                    </span>
+
+                    <div class="m-l-16 m-r-auto">
+                        <span class="mat-body-1">2ème étage</span>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 d-flex align-items-center">
+                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                        <i-tabler name="bed" class="icon-18 d-flex"></i-tabler>
+                    </span>
+
+                    <div class="m-l-16 m-r-auto">
+                        <span class="mat-body-1">{{ adsDetail[0].numberOfRoom }} pièces - {{
+                            adsDetail[0].numberOfBathrooms }} salle de bains - {{
+                            adsDetail[0].numberOfBedrooms }} chambres</span>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 d-flex align-items-center">
+                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                        <i-tabler name="sofa" class="icon-18 d-flex"></i-tabler>
+                    </span>
+
+                    <div class="m-l-16 m-r-auto">
+                        <span class="mat-body-1">{{ adPost?.isFurnished ? "Meublé" : "Non meublé" }}</span>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 d-flex align-items-center">
+                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                        <i-tabler name="map-pin" class="icon-18 d-flex"></i-tabler>
+                    </span>
+
+                    <div class="m-l-16 m-r-auto">
+                        <span class="mat-body-1">Superficie: {{ adsDetail[0].surface }}m²</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </mat-card-content>
+
+</mat-card>
+
+<mat-card class="cardWithShadow">
+        <mat-card-content class="p-y-24">
+            <mat-card-title>Détails des équipements</mat-card-title>
+            <div class="row p-t-24">
+                <div class="col-lg-4 d-flex align-items-center"
+                    *ngFor="let equipment of adsDetail[0].equipment ">
+                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                        <i-tabler name="{{equipment.icon_name}}" class="icon-18 d-flex"></i-tabler>
+                    </span>
+
+                    <div class="m-l-16 m-r-auto">
+                        <span class="mat-body-1">{{ equipment.equipment }}</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </mat-card-content>
+
+</mat-card>
+____________________________________________________________
+
+
+    <mat-card-content class="p-y-24 b-t-1">
+        <div class="row">
+            <div class="col-lg-8">
+                <mat-card class="cardWithShadow">
+                    <mat-card-content class="p-y-24">
+                        <mat-card-title>Caractéristiques du logement</mat-card-title>
+                        <div class="row p-t-24">
+                            <div class="col-lg-6 d-flex align-items-center p-y-16">
+                                <span
+                                    class="text-warning bg-light-accent rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="map-pin" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <h6 class="mat-body-2 f-w-600">{{ adsDetail[0].accomAddress }}</h6>
+                                    <span class="mat-body-1">{{ adsDetail[0].city.name }}, {{ adsDetail[0].country.name
+                                        }}</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6 d-flex align-items-center p-y-16">
+                                <span
+                                    class="text-warning bg-light-accent rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="building-community" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <h6 class="mat-body-2 f-w-600">{{ adsDetail[0].surface }}m² au total</h6>
+                                    <span class="mat-body-1">{{ adsDetail[0].numberOfRoom }} pièces - {{
+                                        adsDetail[0].numberOfBathrooms }} salle de bains - {{
+                                        adsDetail[0].numberOfBedrooms }} chambres</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6 d-flex align-items-center p-y-16">
+                                <span
+                                    class="text-warning bg-light-accent rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="device-desktop-plus" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <!-- <h6 class="mat-body-2 f-w-600">{{ adsDetail[0].accomAddress }}</h6> -->
+                                    <!-- <span *ngFor="let equipmnt of adsDetail[0].equipment">
+                                        {{equipmnt.equipment}}
+                                     </span> -->
+
+                                    <div>
+                                        <span
+                                            *ngFor="let equipmnt of adsDetail[0]?.equipment?.slice(0, 2); let i = index">
+                                            {{equipmnt.equipment}}{{i < 1 ? ', ' : ', ...' }} </span>
+                                    </div>
+
+                                    <span class="mat-body-1">
+                                        {{ adsDetail[0].equipment.length }} équipements inclus <a [routerLink]=""
+                                            class="text-primary">voir plus</a>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </mat-card-content>
+                    <mat-card-content class="p-24">
+                        <mat-card-title>Description</mat-card-title>
+                        <p class="mat-body-1 m-t-16">
+                            But you cannot figure out what it is or what it can do. MTA web directory
+                            is the simplest way in which one can bid on a link, or a few links if they
+                            wish to do so. The link directory on MTA displays all of the links it
+                            currently has, and does so in alphabetical order, which makes it much
+                            easier for someone to find what they are looking for if it is something
+                            specific and they do not want to go through all the other sites and links
+                            as well. It allows you to start your bid at the bottom and slowly work
+                            your way to the top of the list.
+                        </p>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <!-- <div class="col-lg-4">
+                <mat-card class="cardWithShadow">
+                    
+                </mat-card>
+            </div> -->
+
+            <div class="col-lg-8">
+                <mat-card class="cardWithShadow">
+                    <mat-card-content class="p-y-24">
+                        <mat-card-title>Informations générales</mat-card-title>
+                        <div class="row p-t-24">
+                            <div class="col-lg-4 d-flex align-items-center">
+                                <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="building-community" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <span class="mat-body-1">{{ adsDetail[0].adType.ad_type }}</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-4 d-flex align-items-center">
+                                <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="building-community" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <span class="mat-body-1">2ème étage</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-4 d-flex align-items-center">
+                                <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="bed" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <span class="mat-body-1">{{ adsDetail[0].numberOfRoom }} pièces - {{
+                                        adsDetail[0].numberOfBathrooms }} salle de bains - {{
+                                        adsDetail[0].numberOfBedrooms }} chambres</span>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 d-flex align-items-center">
+                                <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="sofa" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <span class="mat-body-1">{{ adPost?.isFurnished ? "Meublé" : "Non meublé" }}</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-4 d-flex align-items-center">
+                                <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="map-pin" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <span class="mat-body-1">Superficie: {{ adsDetail[0].surface }}m²</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+
+            <!-- Details equipment -->
+            <div class="col-lg-8">
+                <mat-card class="cardWithShadow">
+                    <mat-card-content class="p-y-24">
+                        <mat-card-title>Détails des équipements</mat-card-title>
+                        <div class="row p-t-24">
+                            <div class="col-lg-4 d-flex align-items-center"
+                                *ngFor="let equipment of adsDetail[0].equipment ">
+                                <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                    <i-tabler name="{{equipment.icon_name}}" class="icon-18 d-flex"></i-tabler>
+                                </span>
+
+                                <div class="m-l-16 m-r-auto">
+                                    <span class="mat-body-1">{{ equipment.equipment }}</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+            <!-- End detail equipment -->
+        </div>
+
+    </mat-card-content>
+
+_______________
+
+<div class="d-flex p-y-24 b-b-1">
+  <div class="d-flex justify-content-between p-t-24">
+      <span>Loyer / mois</span>
+      <span>400€</span>
+  </div>
+  
+  <div class="d-flex justify-content-between p-t-12">
+      <span>Charges</span>
+      <span>50€</span>
+  </div>
+</div>
+
+___________
+
+But you cannot figure out what it is or what it can do. MTA web directory
+is the simplest way in which one can bid on a link, or a few links if they
+wish to do so. The link directory on MTA displays all of the links it
+currently has, and does so in alphabetical order, which makes it much
+easier for someone to find what they are looking for if it is something
+specific and they do not want to go through all the other sites and links
+as well. It allows you to start your bid at the bottom and slowly work
+your way to the top of the list.
+
+
+______________
+
+ <div class="row d-flex justify-content-between p-t-12">
+                            <!-- Charges Present -->
+                            <div class="col-6 bg-light-success m-r-4">
+                                <div *ngFor="let charge of adsDetail[0].charge" class="d-flex align-items-center p-2">
+                                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                        <i-tabler name="circle-check" class="icon-18"></i-tabler>
+                                    </span>
+                                    <div class="m-r-auto pl-2">
+                                        <span class="mat-body-1">{{ charge.charge }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Charges Not Selected -->
+                            <div class="col-6 bg-light-error m-l-4">
+                                <div *ngFor="let charge of unSelectedCharges" class="d-flex align-items-center p-2">
+                                    <span class="rounded icon-40 d-flex align-items-center justify-content-center">
+                                        <i-tabler name="circle-x" class="icon-18"></i-tabler>
+                                    </span>
+                                    <div class="m-r-auto pl-2">
+                                        <span class="mat-body-1">{{ charge.data.charge }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+ 
+
+
+________________________________________ anouncement component
+
+
+<div class="col-sm-6 col-lg-4">
+      <mat-card class="cardWithShadow card2 position-relative card-hover cursor-pointer"
+        (click)="selectAd(adPost.id)">
+        <img mat-card-image src="{{ adPost.album[0].path }}" alt="Photo of a Shiba Inu" />
+        <div class="card-overlay h-100 d-flex p-16 p-y-0 align-items-end justify-content-end">
+          <!-- <mat-chip class="f-s-12 m-y-16 f-w-600 bg-white">{{
+            adPost.adType.ad_type
+            }}</mat-chip> -->
+          <mat-chip class="f-s-12 f-w-600 m-y-16 bg-white">{{adPost.rentAmountExcCharges}} € /mois</mat-chip>
+        </div>
+
+        <mat-card-content class="p-y-24">
+          <div class="user-category">
+            <div>
+              <span
+                class="icon-48 bg-warning text-white d-flex align-items-center justify-content-center rounded-circle">
+                <i-tabler name="edit" class="icon-20 d-flex"></i-tabler>
+              </span>
+            </div>
+          </div>
+          <mat-card-title class="mat-headline-6 m-t-15">{{adPost.title.substring(0,30)}}...</mat-card-title>
+
+          <span class=" f-s-14 mat-subtitle-1 d-flex align-items-center m-t-12">
+            {{adPost.surface}}m² - {{adPost.numberOfRoom}} chambres - {{ adPost?.isFurnished ? "Meublé" : "Non meublé" }}
+          </span>
+
+          <span class=" f-s-14 mat-subtitle-1 d-flex align-items-center m-t-12">
+            {{ adPost.description.substring(0, 85) }}...
+          </span>
+          <mat-divider class="m-t-30"></mat-divider>
+          <div class="d-flex align-items-center justify-content-center m-t-24">
+
+            <span class=" f-s-14 mat-subtitle-2 d-flex align-items-center">
+              <i-tabler name="point" class="icon-14 m-r-4"></i-tabler>
+              Dsiponible: {{ formatDate(adPost.availableFrom) }}
+            </span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
+_________________________
+
+
+<div class="col-sm-6 col-lg-4">
+      <mat-card
+        class="cardWithShadow card2 position-relative card-hover cursor-pointer"
+        (click)="!isLoading && selectAd(adPost?.id)"
+      >
+        <!-- Shimmer Effect for Image -->
+        <div *ngIf="isLoading" class="shimmer-image"></div>
+        <img
+          *ngIf="!isLoading"
+          mat-card-image
+          [src]="adPost?.album[0]?.path"
+          alt="Photo of a Shiba Inu"
+        />
+    
+        <div class="card-overlay h-100 d-flex p-16 p-y-0 align-items-end justify-content-end">
+          <!-- Shimmer Effect for Chip -->
+          <div *ngIf="isLoading" class="shimmer-chip"></div>
+          <mat-chip
+            *ngIf="!isLoading"
+            class="f-s-12 f-w-600 m-y-16 bg-white"
+          >
+            {{ adPost?.rentAmountExcCharges }} € /mois
+          </mat-chip>
+        </div>
+    
+        <mat-card-content class="p-y-24">
+          <!-- Shimmer Effect for Title -->
+          <div *ngIf="isLoading" class="shimmer-title"></div>
+          <mat-card-title
+            *ngIf="!isLoading"
+            class="mat-headline-6 m-t-15"
+          >
+            {{ adPost?.title.substring(0, 30) }}...
+          </mat-card-title>
+    
+          <!-- Shimmer Effect for Details -->
+          <div *ngIf="isLoading" class="shimmer-details"></div>
+          <span
+            *ngIf="!isLoading"
+            class="f-s-14 mat-subtitle-1 d-flex align-items-center m-t-12"
+          >
+            {{ adPost?.surface }}m² - {{ adPost?.numberOfRoom }} chambres -
+            {{ adPost?.isFurnished ? "Meublé" : "Non meublé" }}
+          </span>
+    
+          <span
+            *ngIf="!isLoading"
+            class="f-s-14 mat-subtitle-1 d-flex align-items-center m-t-12"
+          >
+            {{ adPost?.description.substring(0, 85) }}...
+          </span>
+    
+          <mat-divider class="m-t-30"></mat-divider>
+          <div class="d-flex align-items-center justify-content-center m-t-24">
+            <!-- Shimmer Effect for Availability -->
+            <div *ngIf="isLoading" class="shimmer-availability"></div>
+            <span
+              *ngIf="!isLoading"
+              class="f-s-14 mat-subtitle-2 d-flex align-items-center"
+            >
+              <i-tabler name="point" class="icon-14 m-r-4"></i-tabler>
+              Disponible: {{ formatDate(adPost?.availableFrom) }}
+            </span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
+______________________________ Etape 1: Modifier les entités JPA
+
+import jakarta.persistence.*;
+
+@Entity
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private Double price;
+
+    @Version
+    private Long version; // Ajout pour la gestion de l'optimistic locking
+
+    // Getters et Setters
+}
+
+
+import jakarta.persistence.*;
+
+@Entity
+public class Contract {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private Date startDate;
+
+    @Version
+    private Long version; // Gestion de la concurrence
+
+    // Getters et Setters
+}
+
+
+import jakarta.persistence.*;
+
+@Entity
+public class Adhesion {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String memberName;
+    private Date subscriptionDate;
+
+    @Version
+    private Long version; // Gestion de la concurrence
+
+    // Getters et Setters
+}
+
+_____________________________________ Créer le fichier de migration Liquibase
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="add-version-columns" author="ton_nom">
+        
+        <addColumn tableName="PRODUCT">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="CONTRACT">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="ADHESION">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+    </changeSet>
+
+</databaseChangeLog>
+
+________________________________ Ajouter cette migration au db.changelog-master.xml
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <include file="db/changelog/changes/add_version_columns.xml"/>
+</databaseChangeLog>
+
+
+________________________________  Exécuter la migration Liquibase
+
+mvn liquibase:update
+
+setx PATH "%PATH%;C:\path\to\maven\bin" /M
+
+liquibase --changeLogFile=src/main/resources/db.changelog.xml rollbackCount 1
+liquibase rollbackCount 1
+mvn liquibase:rollback -Dliquibase.rollbackTag=<changeset-id>
+
+org.hibernate.HibernateException: Unable to perform beforeTransactionCompletion callback: Cannot invoke "Object.equals(Object)" because the return value of "org.hibernate.engine.spi.EntityEntry.getVersion()" is null
+
+
+________________________________ Vérifier la mise à jour dans Oracle
+
+DESC PRODUCT;
+DESC CONTRACT;
+DESC ADHESION;
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd">
+
+_________________________________________________________________________________________
+
+
+_____Service updateEtude
+
+@Transactional
+	public Etude updateEtude(EtudeDto etudeDto) {
+		Etude oldEtude = this.etudeRepository.getDetailEtude(etudeDto.getItEtude());
+
+		setOldEtude(oldEtude, etudeDto);
+
+		if (oldEtude.getAgent() == null) {
+			Agent agent = this.agentService.findByImmat(etudeDto.getImmat());
+			if (agent == null) {
+				oldEtude.setAgent(AgentMapper.INSTANCE.mapToAgent(etudeDto.getAgentDto()));
+			} else {
+				oldEtude.setAgent(agent);
+			}
+		}
+		if (StatutEtude.INITIER.equals(oldEtude.getStatut())) {
+			this.decisionService.oldDecision(oldEtude);
+			oldEtude.setEtat(EtatEtude.ATTENTE_REPONSE.getCode());
+			oldEtude.setStatut(StatutEtude.EN_COURS.getCode());
+			this.decisionService.newDecision(oldEtude);
+		}
+		return this.etudeRepository.save(oldEtude);
+	}
+
+_______Repository getDetailEtude
+
+@Lock(value = LockModeType.OPTIMISTIC)
+	@Query("""
+		SELECT e 
+		FROM Etude e 
+		LEFT JOIN FETCH e.agent 
+		LEFT JOIN FETCH e.adresse 
+		LEFT JOIN FETCH e.decisions d 
+		WHERE e.itEtude=:itEtude""")
+	Etude getDetailEtude(@Param("itEtude") Long itEtude);
+_______ Enty 
+
+@Entity
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@Table(name = "t_etude", indexes = { @Index(columnList = "immat_cp"), @Index(columnList = "statut"),
+		@Index(columnList = "etat"), @Index(columnList = "agt_cs") })
+public class Etude extends AuditorEntity {
+
+	@Serial
+	private static final long serialVersionUID = 2199038778554918251L;
+
+	@Id
+	@Column(name = "it_etude")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "etude_gen")
+	@SequenceGenerator(name = "etude_gen", sequenceName = "etude_seq")
+	private Long itEtude;
+
+	@Column(name = "mode_oper", length = 1, nullable = false)
+	private String modeOper;
+
+	@Column(name = "immat_cp", length = 8, nullable = false)
+	private String immat;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "it_agent", referencedColumnName = "it_agent")
+	private Agent agent;
+
+	@Column(name = "agt_cpr", nullable = false)
+	private boolean agentCpr;
+
+	@Column(name = "agt_cs", nullable = false)
+	private boolean agentCs;
+
+	@Column(name = "dt_debut", nullable = false)
+	private LocalDate dtDebut;
+
+	@Column(name = "dt_deb_prol")
+	private LocalDate dtDebProl;
+
+	@Column(name = "dt_fin", nullable = false)
+	private LocalDate dtFin;
+
+	@Column(name = "origine", length = 2)
+	private int origine;
+
+	@Column(name = "risque", length = 3)
+	private String risque;
+
+	@Column(name = "sorties", length = 2)
+	private int sortie;
+
+	@Column(name = "statut", nullable = false, length = 2)
+	private int statut;
+
+	@Column(name = "etat", length = 8)
+	private String etat;
+
+	@Column(name = "commentaire")
+	private String commentaire;
+
+	@Column(name = "nom_pre_demand", length = 100)
+	private String demandeur;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "it_adresse", referencedColumnName = "it_adresse")
+	private AdresseArret adresse;
+
+	@Column(name = "nb_arret", nullable = false, length = 2)
+	private String nbArret;
+
+	@Column(name = "dt_arrivee", nullable = false)
+	private LocalDate dtArrivee;
+
+	@Version
+	@Column(name = "version")
+	private Long version; // Ajout pour la gestion de l'optimistic locking
+
+	@OrderBy("createdAt DESC")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "etude")
+	private List<Decision> decisions;
+
+	public StatutEtude getStatut() {
+		return StatutEtude.getFrom(statut);
+	}
+
+	public EtatEtude getEtat() {
+		return EtatEtude.getFrom(etat);
+	}
+
+	public OrigineEtude getOrigine() {
+		return OrigineEtude.getFrom(origine);
+	}
+
+	public Risque getRisque() {
+		return Risque.getFrom(risque);
+	}
+
+	public Sortie getSortie() {
+		return Sortie.getFrom(sortie);
+	}
+}
+
+_________ Dto
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class EtudeDto {
+
+	@Serial
+	private static final long serialVersionUID = 2199038778554918251L;
+
+	private Long itEtude;
+
+	private String modeOper;
+
+	private String immat;
+
+	private AgentDto agentDto;
+
+	private boolean agentCpr;
+
+	private boolean agentCs;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private LocalDate dtDebut;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private LocalDate dtDebProl;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private LocalDate dtFin;
+
+	private int origine;
+
+	private String risque;
+
+	private int sortie;
+
+	private int statut;
+
+	private String etat;
+
+	private String commentaire;
+
+	private String demandeur;
+
+	private AdresseArretDto adresseArretDto;
+
+	private String nbArret;
+
+	private LocalDate dtArrivee;
+
+	private String nil;
+
+	private Long version;
+
+	private List<DecisionDto> decisionsDto;
+
+	private String createdBy;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+	private LocalDateTime createdAt;
+
+	private String updatedBy;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+	private LocalDateTime updatedAt;
+}
+___________________ Mapper
+
+@Mapper
+public interface EtudeMapper {
+
+	EtudeMapper INSTANCE = Mappers.getMapper(EtudeMapper.class);
+
+	default String map(Sortie value) {
+		return String.valueOf(value.getCode());
+	}
+
+	default int map(StatutEtude value) {
+		return value.getCode();
+	}
+
+	default String map(OrigineEtude value) {
+		return String.valueOf(value.getCode());
+	}
+
+	default String map(EtatEtude value) {
+		return value.getCode();
+	}
+
+	default String map(Risque value) {
+		return value.getCode();
+	}
+
+	default String map(TypeAdresse value) {
+		return value.getCode();
+	}
+
+	default String map(Region value) {
+		if (value != null)
+			return value.getCode() + " -- " + value.getLibelle();
+		return null;
+	}
+
+	default Region map(String value) {
+		RegionBuilder regionBuilder = Region.builder();
+		regionBuilder.code(value.split(" -- ")[0].trim());
+		regionBuilder.libelle(value.split(" -- ")[1].trim());
+		return regionBuilder.build();
+	}
+
+	EtudeDto mapToEtudeDto(Etude etude);
+
+	@Mapping(target = "decisionsDto", source = "decisions")
+	EtudeDto mapToEtudeAndDecisionsDto(Etude etude);
+
+	@Mapping(target = "decisionsDto", source = "decisions")
+	@Mapping(target = "agentDto", source = "agent")
+	@Mapping(target = "adresseArretDto", source = "etude.adresse")
+	@Mapping(target = "adresseArretDto.regionAdministrative", expression = "java(map(adresseArret.getRegionAdministrative()))")
+	EtudeDto mapToEtudeDetailDto(Etude etude);
+
+	@Mapping(target = "decisions", source = "decisionsDto")
+	@Mapping(target = "adresse", source = "adresseArretDto")
+	@Mapping(target = "agent", source = "agentDto")
+	@Mapping(target = "adresseArretDto.regionAdministrative", expression = "java(map(adresseArretDto.getRegionAdministrative()))")
+	Etude mapToEtude(EtudeDto etudeDto);
+}
+
+
+______________ test optimistic lock 
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import javax.persistence.OptimisticLockException;
+
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
+public class EtudeServiceTest {
+
+    @InjectMocks
+    private EtudeService etudeService; // Service under test
+
+    @Mock
+    private EtudeRepository etudeRepository;
+
+    @Mock
+    private AgentService agentService;
+
+    @Mock
+    private DecisionService decisionService;
+
+    private Etude etude; // The Etude entity being tested
+    private EtudeDto etudeDto; // The DTO representing the data to update
+
+    @BeforeEach
+    public void setUp() {
+        // Initialize Etude and EtudeDto for testing
+        etude = new Etude();
+        etude.setItEtude(1L);
+        etude.setVersion(1L); // Initial version
+
+        etudeDto = new EtudeDto();
+        etudeDto.setItEtude(1L);
+        etudeDto.setVersion(1L); // This should match the entity's version initially
+    }
+
+    @Test
+    public void testUpdateEtude_SuccessfulUpdate() {
+        // Mock the repository to return the Etude entity when fetched
+        when(etudeRepository.getDetailEtude(1L)).thenReturn(etude);
+        when(etudeRepository.save(any(Etude.class))).thenReturn(etude);
+
+        // Mock other service methods as needed (e.g., agentService, decisionService)
+        // For example, let's assume we return a mock agent if necessary
+        when(agentService.findByImmat(anyString())).thenReturn(null);
+
+        // Call the updateEtude method
+        Etude result = etudeService.updateEtude(etudeDto);
+
+        // Verify that the save method was called once
+        verify(etudeRepository, times(1)).save(any(Etude.class));
+        assertNotNull(result);
+    }
+
+    @Test
+    public void testUpdateEtude_OptimisticLockingFailure() {
+        // Set up the entity version to simulate an optimistic lock failure
+        etude.setVersion(1L); // Entity version before update
+        etudeDto.setVersion(2L); // The DTO version is out-of-sync
+
+        // Mock the repository to return the Etude entity when fetched
+        when(etudeRepository.getDetailEtude(1L)).thenReturn(etude);
+
+        // Mock other service methods as needed (e.g., agentService, decisionService)
+        when(agentService.findByImmat(anyString())).thenReturn(null);
+
+        // Attempt to update, expecting an OptimisticLockException to be thrown
+        assertThrows(OptimisticLockException.class, () -> {
+            etudeService.updateEtude(etudeDto);
+        });
+
+        // Verify that the repository save method was not called
+        verify(etudeRepository, never()).save(any(Etude.class));
+    }
+}
+
+
+Caused by: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          config/liquibase/changelog/v0.6/add_version_columns.xml::add-version-columns::9775 was: 9:ad197ab8ed3d7c0eb5764aa140e56d22 but is now: 9:71b168557c94a5e305efc89c017a8a89
+
+Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ChangeLogParseException: classpath:/db/changelog/db.changelog-master.yaml does not exist 
+
+
+
+<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.liquibase.ext</groupId>
+						<artifactId>liquibase-hibernate6</artifactId>
+						<version>4.27.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-data-jpa</artifactId>
+						<version>3.2.4</version>
+					</dependency>
+					<dependency>
+						<groupId>jakarta.validation</groupId>
+						<artifactId>jakarta.validation-api</artifactId>
+						<version>3.0.2</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<propertyFile>src/main/resources/liquibase.properties</propertyFile>
+				</configuration>
+			</plugin>
+
+
+Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ChangeLogParseException: classpath:/db/changelog/db.changelog-master.yaml does not exist
+
+Access to XMLHttpRequest at 'http://localhost:8090/agat/api/etude/search' from origin 'http://localhost:4200' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+
+
+
+   
+searchSuivi(immat: string | undefined) {
+    this.suivi = undefined;
+    this.immatSearch = immat;
+    //this.loadService.loadingOn();
+    this.suiviService.searchByImmatWithPagination(immat, this.currentPage, this.pageSize ).subscribe((data: any) => {
+      this.dataSource.data = data.content;
+      this.loadService.loadingOff();
+      if (this.dataSource.data.length > 0) {
+        console.log(data.content)
+        if (immat) {
+          this.dataSource.filter = data.content[0].type.toString();
+          this.suivi = data.content[0];
+          this.typeSuivi =data[0].type.toString()
+        } else {
+          this.dataSource.filter = this.typeSuivi;
+          if (this.dataSource.filteredData.length == 0) {
+            this.typeSuivi = "2";
+            this.dataSource.filter = this.typeSuivi;
+            if (this.dataSource.filteredData.length == 0) {
+              this.typeSuivi = "1";
+              this.dataSource.filter = this.typeSuivi;
+              if (this.dataSource.filteredData.length == 0) {
+                this.typeSuivi = "0";
+                this.dataSource.filter = this.typeSuivi;
+              }
+            }
+          }
+        }
+      } else if (this.immatSearch) {
+        this.suivi = new Suivi();
+        this.suivi.immat = this.immatSearch;
+      }
+      this.dataSource.filter = this.typeSuivi;
+      this.loadService.loadingOff();
+    });
+  }
+_________________version corrigé 
+
+searchSuivi(immat: string | undefined) {
+  this.suivi = undefined;
+  this.immatSearch = immat;
+  this.loadService.loadingOn(); // Activation du loader avant l'appel
+
+  this.suiviService.searchByImmatWithPagination(immat, this.currentPage, this.pageSize)
+    .subscribe({
+      next: (data: any) => {
+        this.dataSource.data = data.content || []; // Évite undefined
+        this.loadService.loadingOff();
+
+        if (this.dataSource.data.length > 0) {
+          console.log(data.content);
+
+          if (immat) {
+            this.dataSource.filter = data.content[0]?.type?.toString() || "";
+            this.suivi = data.content[0];
+            this.typeSuivi = data.content[0]?.type?.toString() || "0";
+          } else {
+            this.dataSource.filter = this.typeSuivi;
+
+            if (this.dataSource.filteredData.length === 0) {
+              const fallbackTypes = ["2", "1", "0"];
+              for (const type of fallbackTypes) {
+                this.typeSuivi = type;
+                this.dataSource.filter = this.typeSuivi;
+                if (this.dataSource.filteredData.length > 0) break;
+              }
+            }
+          }
+        } else if (this.immatSearch) {
+          this.suivi = new Suivi();
+          this.suivi.immat = this.immatSearch;
+        }
+
+        this.dataSource.filter = this.typeSuivi;
+      },
+      error: (err) => {
+        console.error("Erreur lors de la récupération des données :", err);
+        this.loadService.loadingOff(); // Désactive le loader en cas d'erreur
+      }
+    });
+}
+
+_______________________________________________________
+
+
+@Service
+public class FileService {
+
+    private static final String FILE_DIRECTORY = "/path/to/your/documents"; // Change this to the actual directory
+
+    public Resource getFileAsResource(String fileName) throws Exception {
+        Path filePath = Paths.get(FILE_DIRECTORY).resolve(fileName).normalize();
+        Resource resource = new UrlResource(filePath.toUri());
+
+        if (resource.exists() && resource.isReadable()) {
+            return resource;
+        } else {
+            throw new Exception("File not found: " + fileName);
+        }
+    }
+}
+
+
+@RestController
+@RequestMapping("/api/files")
+public class FileDownloadController {
+
+    private final FileService fileService;
+
+    public FileDownloadController(FileService fileService) {
+        this.fileService = fileService;
+    }
+
+    @GetMapping("/download/{fileName}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
+        try {
+            Resource resource = fileService.getFileAsResource(fileName);
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+                    .header(HttpHeaders.CONTENT_TYPE, "application/msword") // MIME type for .doc files
+                    .body(resource);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+}
+
+
+<button [disabled]="isEffectDateInvalid(effectDate)" (click)="downloadFile()">
+  Download
+</button>
+
+effectDate: string = "2023-12-15"; // Example effect date (YYYY-MM-DD)
+
+  isEffectDateInvalid(dateStr: string): boolean {
+    if (!dateStr) return true; // Disable if no date is provided
+
+    const effectDate = new Date(dateStr);
+    const today = new Date();
+
+    const diffTime = today.getTime() - effectDate.getTime();
+    const diffDays = diffTime / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+
+    return diffDays > 90; // Disable if more than 90 days old
+  }
+
+
+function isEffectDatePast(effectDate: string): boolean {
+  const [day, month, year] = effectDate.split("-").map(Number);
+  const effectDateObj = new Date(year, month - 1, day); // Convert to Date object
+
+  const today = new Date();
+  
+  // Compare effectDate with today's date
+  return effectDateObj < today; // Returns true if effectDate is in the past
+}
+
+downloadBulletinAdhesion(element: BulletinAdhesion) {
+    this.loadService.loadingOn();
+    this.bulletinAdhesionService.downloadBulletinAdhesion(element).subscribe((response) => {
+      console.log(response);
+      var downloadURL = window.URL.createObjectURL(response);
+      var link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = "Bulletin adhesion " + element.rum + ".docx";
+      link.click();
+      this.loadService.loadingOff();
+    });
+  }
+
+
+downloadBulletinAdhesion(element: BulletinAdhesion) {
+  this.loadService.loadingOn();
+  
+  this.bulletinAdhesionService.downloadBulletinAdhesion(element).subscribe((response) => {
+    const blob = new Blob([response], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }); 
+    const downloadURL = window.URL.createObjectURL(blob);
+    
+    const link = document.createElement('a');
+    link.href = downloadURL;
+    link.download = `Bulletin adhesion ${element.rum}.docx`;
+
+    // 👇 Open "Save As" dialog
+    link.target = "_blank";  
+    link.click();
+    
+    this.loadService.loadingOff();
+  });
+}
+
+________________________
+
+/**
+	 * @param rum
+	 * @return
+	 * @throws Exception
+	 */
+	public Resource getBulAdhesionFile(String rum) {
+		String fileName = rum.concat(".docx");
+		String outFilePath = fileReplaceTextGeneretor.getOutputFilePath().concat(fileName);
+		Path filePath = Paths.get(fileReplaceTextGeneretor.getOutputFilePath()).resolve(fileName).normalize();
+		if (!Files.exists(filePath)) {
+			throw new ServiceException("Le fichier " + fileName + " n'existe pas");
+		}
+		try {
+			return new UrlResource(filePath.toUri());
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
+
+
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class BulletinAdhesionService {
+
+    /**
+     * Retrieves the bulletin adhesion file for the given RUM.
+     *
+     * @param rum Unique reference identifier (RUM) of the bulletin.
+     * @return Resource representing the requested file.
+     * @throws FileNotFoundException if the file does not exist.
+     * @throws ServiceException if there is an error processing the file path.
+     */
+    public Resource getBulAdhesionFile(String rum) {
+        String fileName = rum.concat(".docx");
+
+        // Get the full file path
+        Path filePath = Paths.get(fileReplaceTextGeneretor.getOutputFilePath())
+                            .resolve(fileName)
+                            .normalize();
+
+        try {
+            // Check if file exists before returning the resource
+            if (!Files.exists(filePath)) {
+                throw new FileNotFoundException("Le fichier " + fileName + " n'existe pas.");
+            }
+
+            return new UrlResource(filePath.toUri());
+
+        } catch (MalformedURLException e) {
+            throw new ServiceException("Erreur lors de la récupération du fichier : " + fileName, e);
+        }
+    }
+}
+
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.io.FileNotFoundException;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    /**
+     * Handle File Not Found Exception (404).
+     */
+    @ExceptionHandler(FileNotFoundException.class)
+    public ResponseEntity<String> handleFileNotFoundException(FileNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Le fichier demandé n'existe pas.");
+    }
+
+    /**
+     * Handle Service Exceptions (500).
+     */
+    @ExceptionHandler(ServiceException.class)
+    public ResponseEntity<String> handleServiceException(ServiceException ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors du téléchargement du fichier.");
+    }
+
+    /**
+     * Handle Generic Exceptions.
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleGenericException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur inattendue s'est produite.");
+    }
+}
+
+downloadBulletinAdhesion(element: BulletinAdhesion) {
+    const httpOptions: Object = {
+      headers: this.getCustomHeaders(),
+      responseType: 'blob'
+    };
+    return this.http.post<Blob>(UrlHelpers.API_BULLETIN_DOWNLOAD, element, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+______________________
+
+
+package com.example.fileservice.service;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+@Service
+public class FileService {
+
+    @Value("${file.directory.path}") // Injected from application.properties
+    private String directoryPath;
+
+    /**
+     * Finds the latest file with a name starting with "Toto_"
+     * @return Optional<String> with the latest file name
+     */
+    public Optional<String> findLatestFile() {
+        try (Stream<Path> files = Files.list(Paths.get(directoryPath))) {
+            return files
+                .filter(path -> path.getFileName().toString().startsWith("Toto_")) // Filter files
+                .max(Comparator.comparingLong(path -> path.toFile().lastModified())) // Get the most recent file
+                .map(path -> path.getFileName().toString());
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading files in directory: " + directoryPath, e);
+        }
+    }
+}
+package com.example.fileservice.controller;
+
+import com.example.fileservice.service.FileService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/files")
+public class FileController {
+
+    private final FileService fileService;
+
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
+
+    @GetMapping("/latest")
+    public ResponseEntity<String> getLatestFile() {
+        Optional<String> latestFile = fileService.findLatestFile();
+        return latestFile.map(ResponseEntity::ok)
+                         .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+}
+
+
+package com.example.fileservice.service;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
+class FileServiceTest {
+
+    @InjectMocks
+    private FileService fileService;
+
+    @Mock
+    private Path mockPath;
+
+    @Mock
+    private Stream<Path> mockStream;
+
+    private final String testDirectory = "/mock/directory";
+
+    @BeforeEach
+    void setUp() {
+        // Set private field value for testing (since @Value cannot be injected in tests)
+        try {
+            var directoryField = FileService.class.getDeclaredField("directoryPath");
+            directoryField.setAccessible(true);
+            directoryField.set(fileService, testDirectory);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to set directoryPath for test", e);
+        }
+    }
+
+    @Test
+    void shouldReturnLatestFile_whenFilesExist() throws IOException {
+        Path file1 = Paths.get("/mock/directory/Toto_20240318_120000.txt");
+        Path file2 = Paths.get("/mock/directory/Toto_20240319_120000.txt"); // Latest file
+
+        when(Files.list(Paths.get(testDirectory))).thenReturn(Stream.of(file1, file2));
+        when(file1.toFile().lastModified()).thenReturn(1710800000000L);
+        when(file2.toFile().lastModified()).thenReturn(1710900000000L);
+
+        Optional<String> latestFile = fileService.findLatestFile();
+
+        assertTrue(latestFile.isPresent());
+        assertEquals("Toto_20240319_120000.txt", latestFile.get());
+
+        verify(Files.list(Paths.get(testDirectory)), times(1));
+    }
+
+    @Test
+    void shouldReturnEmpty_whenNoFilesMatch() throws IOException {
+        when(Files.list(Paths.get(testDirectory))).thenReturn(Stream.empty());
+
+        Optional<String> latestFile = fileService.findLatestFile();
+
+        assertTrue(latestFile.isEmpty());
+
+        verify(Files.list(Paths.get(testDirectory)), times(1));
+    }
+
+    @Test
+    void shouldThrowException_whenIOExceptionOccurs() throws IOException {
+        when(Files.list(Paths.get(testDirectory))).thenThrow(new IOException("I/O Error"));
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> fileService.findLatestFile());
+        assertEquals("Error reading files in directory: /mock/directory", exception.getMessage());
+
+        verify(Files.list(Paths.get(testDirectory)), times(1));
+    }
+}
+
+
+package com.example.fileservice.controller;
+
+import com.example.fileservice.service.FileService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.Optional;
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@ExtendWith(MockitoExtension.class)
+class FileControllerTest {
+
+    @InjectMocks
+    private FileController fileController;
+
+    @Mock
+    private FileService fileService;
+
+    private final MockMvc mockMvc;
+
+    FileControllerTest() {
+        this.mockMvc = MockMvcBuilders.standaloneSetup(fileController).build();
+    }
+
+    @Test
+    void shouldReturnLatestFile_whenFileExists() throws Exception {
+        when(fileService.findLatestFile()).thenReturn(Optional.of("Toto_20240319_120000.txt"));
+
+        mockMvc.perform(get("/api/files/latest"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("\"Toto_20240319_120000.txt\""));
+
+        verify(fileService, times(1)).findLatestFile();
+    }
+
+    @Test
+    void shouldReturn404_whenNoFileFound() throws Exception {
+        when(fileService.findLatestFile()).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/api/files/latest"))
+                .andExpect(status().isNotFound());
+
+        verify(fileService, times(1)).findLatestFile();
+    }
+}
+
+
+public String findLatestFile() {
+        try (Stream<Path> files = Files.list(Paths.get(directoryPath))) {
+            return files
+                .filter(path -> path.getFileName().toString().startsWith("Toto_")) // Filter files
+                .max(Comparator.comparingLong(path -> path.toFile().lastModified())) // Get the most recent file
+                .map(path -> path.getFileName().toString())
+                .orElseThrow(() -> new RuntimeException("No matching files found in directory: " + directoryPath));
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading files in directory: " + directoryPath, e);
+        }
+    }
+
+
+return new HashMap<String, Resource>() {{fileName, new UrlResource(filePath.toUri()) }};
+
+
+
+___________________
+
+downloadFile() {
+  this.http.get('http://localhost:8080/download', {
+    responseType: 'blob', // Expecting a binary file
+    observe: 'response' // Get full response, including headers
+  }).subscribe(response => {
+    const fileName = this.getFileNameFromResponse(response);
+    this.saveFile(response.body, fileName);
+  }, error => {
+    console.error('Error downloading file:', error);
+  });
+}
+
+
+getFileNameFromResponse(response: HttpResponse<Blob>): string {
+  const contentDisposition = response.headers.get('Content-Disposition');
+  if (contentDisposition) {
+    const matches = contentDisposition.match(/filename="(.+)"/);
+    return matches ? matches[1] : 'downloaded-file';
+  }
+  return 'downloaded-file';
+}
+
+
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+@Injectable()
+export class MyHttpInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req).pipe(
+      catchError((error: HttpErrorResponse) => {
+        // Check if the response is a Blob and has an error
+        if (error.error instanceof Blob) {
+          return this.handleBlobError(error);
+        }
+        return throwError(() => error);
+      })
+    );
+  }
+
+  private handleBlobError(error: HttpErrorResponse): Observable<never> {
+    return new Observable(observer => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        try {
+          const errorText = reader.result as string;
+          console.error('Blob error response:', errorText);
+        } catch (e) {
+          console.error('Error parsing Blob response:', e);
+        }
+        observer.error(error);
+      };
+      reader.readAsText(error.error);
+    });
+  }
+}
+
+@GetMapping("/download")
+public ResponseEntity<Resource> downloadFile() {
+    try {
+        Path filePath = Paths.get("/path/to/your/file/example.pdf");
+        Resource resource = new UrlResource(filePath.toUri());
+
+        if (!resource.exists() || !resource.isReadable()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        String fileName = "example.pdf";
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+                .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Content-Disposition") // Ensure frontend can access filename
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+
+downloadEcheancier(itContrat: string) {
+    return this.http.post<Blob>(UrlHelpers.API_ECHEANCIER_DOWNLOAD + itContrat, { headers: this.getCustomHeaders() });
+  }
+
+getCustomHeaders(): HttpHeaders {
+    const userAuth = sessionStorage.getItem(USER_KEY);
+    let user = new User();
+    if (userAuth)
+      user = JSON.parse(userAuth)
+
+    console.log(user);
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json; charset=UTF-8')
+      .set('Access-Control-Allow-Headers', 'Content-Type')
+      .set('Access-Control-Allow-Methods', 'GET,PUT,POST')
+      .set('Access-Control-Allow-Credentials', 'true')
+      .set('Access-Control-Allow-Origin', '*');
+      //.set('Authorization', `${user.type} ${user.token}`);
+    return headers;
+  }
+__________________
+
+
+downloadEcheancier(itContrat: string) {
+  return this.http.post(UrlHelpers.API_ECHEANCIER_DOWNLOAD + itContrat, {}, {
+    headers: this.getCustomHeaders(),
+    responseType: 'blob', // Ensure response is treated as binary data
+    observe: 'response' // Allows access to response headers (for filename)
+  });
+}
+
+getCustomHeaders(): HttpHeaders {
+  const userAuth = sessionStorage.getItem(USER_KEY);
+  let user = new User();
+  if (userAuth) {
+    user = JSON.parse(userAuth);
+  }
+
+  let headers = new HttpHeaders()
+    // Remove JSON Content-Type because we're dealing with binary data
+    .set('Accept', 'application/octet-stream'); // Expecting a binary file
+
+  if (user.token) {
+    headers = headers.set('Authorization', `${user.type} ${user.token}`);
+  }
+
+  return headers;
+}
+
+{message: "Failed to execute 'readAsText' on 'FileReader': parameter 1 is not of type 'Blob'.", stack: "TypeError: parameter 1 is not of type 'Blob'.…
+application/vnd.openxmlformats-officedocument.wordprocessingml.document;charset=UTF-8
+
+
+"Unexpected token 'P', \"PK\u0003\u0004\u0014\u0000\b\b\b\u0000\"... is not valid JSON"
+
+_______________________________________________ Interceptor
+
+import { HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError, window } from 'rxjs/operators';
+import { StorageService } from '../services/storage.service';
+import { LoadingService } from '../services/loading.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+const TOKEN_HEADER_KEY = 'Authorization';       // for Spring Boot back-end
+
+@Injectable()
+export class HttpRequestInterceptor implements HttpInterceptor {
+
+  constructor(private storageService: StorageService, private loadService: LoadingService, protected _snackBar: MatSnackBar) { }
+
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+    let authReq = req;
+    const user = this.storageService.getUser();
+    if (user != null) {
+      // for Spring Boot back-end
+      authReq = req.clone({ withCredentials: true, headers: req.headers.set(TOKEN_HEADER_KEY, user.type + ' ' + user.token) });
+
+      // for Node.js Express back-end
+      // authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, token) });
+    }
+    return next.handle(authReq).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error(error);
+        console.error(req.url);
+
+        console.error("Error status: ",error.status);
+        console.error("Error body: ",error.error);
+        console.error("Error headers: ",error.headers);
+        console.error("Error instance of Blob: ",error.error instanceof Blob);
+        let errorMessage = 'Service momentanément indisponible';
+        // logout when token is expired
+        /*
+                if (
+                  error instanceof HttpErrorResponse &&
+                  !req.url.includes('auth/signin') &&
+                  error.status === 401
+                ) {
+                  return this.handle401Error(req, next);
+                }
+        */
+
+              
+        if (error instanceof HttpErrorResponse && error.status === 401) {
+          return throwError(() => error.error);
+        }
+
+        
+        
+        if (error instanceof HttpErrorResponse && !req.url.includes('/login') && error.status === 403) {
+          this.storageService.clean();
+          this.storageService.reloadPage();
+        }
+
+        if (error.status===200) {
+          return this.handleBlobError(error);
+        }  
+        if (error.status === 0) {
+          // A client-side or network error occurred. Handle it accordingly.
+          console.error('An error occurred:', error.error);
+        } else if (error.error instanceof ErrorEvent) {
+          // Client-side error
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          // Server-side error
+          errorMessage = `Error Code: ${error.error.status}\n Message: ${error.error.message}`;
+        }
+        // Handle the error as desired (e.g., show an alert, log, etc.)
+        console.error(errorMessage);
+        this.loadService.loadingOff();
+        this._snackBar.open(errorMessage, "ok", {
+          horizontalPosition: 'start',
+          verticalPosition: 'bottom',
+        })
+        return throwError(() => errorMessage);
+      })
+    );
+  }
+
+  private handleBlobError(error: HttpErrorResponse): Observable<never> {
+    return new Observable(observer => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        try {
+          const errorText = reader.result as string;
+          console.error('Blob error response:', errorText);
+        } catch (e) {
+          console.error('Error parsing Blob response:', e);
+        }
+        observer.error(error);
+      };
+      reader.readAsText(error.error);
+    });
+  }
+}
+
+
+_________________________ Angular service method
+
+downloadEcheancier(itContrat: string) {
+    return this.http.post<Blob>(UrlHelpers.API_ECHEANCIER_DOWNLOAD + itContrat, {
+      headers: this.getCustomHeadersBlob(),
+      responseType: 'Blob'
+    });
+  }
+
+  getCustomHeadersBlob(): HttpHeaders {
+    const userAuth = sessionStorage.getItem(USER_KEY);
+    let user = new User();
+    if (userAuth) {
+      user = JSON.parse(userAuth);
+    }
+  
+    let headers = new HttpHeaders()
+      // Remove JSON Content-Type because we're dealing with binary data
+      .set('Access-Control-Allow-Headers', 'Content-Type')
+      .set('Access-Control-Allow-Methods', 'GET,PUT,POST')
+      .set('Access-Control-Allow-Credentials', 'true')
+      .set('Access-Control-Allow-Origin', '*')
+      .set('Accept', 'application/octet-stream'); // Expecting a binary file
+
+  
+    return headers;
+  }
+
+_______________________ calling download service from my page typescript
+
+downloadEcheancier(itContrat: string) {
+    this.contratService.downloadEcheancier(itContrat).subscribe((response) => {
+      //const fileName = this.getFileNameFromResponse(response);
+      //let downloadURL = window.URL.createObjectURL(response);
+      let link = document.createElement('a');
+      //link.href = downloadURL;
+      link.download = "Echeancier ROUTIER";
+      link.target = "_blank";
+      link.click();
+    });
+  }
+
+___________________Backend controller method
+
+@PostMapping(value = "/download/{itContrat}")
+	@Operation(summary = "Récupèration d'un bulletin d'adhésion", description = "Retourne le fichier bulletin d'adhésion")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement")})
+	public ResponseEntity<Resource> downloadEcheancier(@PathVariable Long itContrat) throws IOException {
+
+		Resource resourceMap = this.contratService.getEcheancierFile(itContrat);
+		String fileName = "ROUTIER.docx";
+		//Resource resource = resourceMap.get(fileName);
+
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+				.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Content-Disposition") // Ensure frontend can access filename
+				.contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
+				.body(resourceMap);
+
+		/*return ResponseEntity.status(HttpStatus.OK)
+				.header("Content-Disposition", "attachment; filename=\"" + fileName + "\"")
+				.contentLength(resource.contentLength())
+				.contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document")).body(resource);*/
+    }
+
+____________________ my backend service method
+
+/***
+	 * Récupère le fichier bulletin d'adhésion pour le RUM donné
+	 * @param itContrat Identifiant de référence unique du bulletin
+	 * @return Resource représentant le fichier demandé
+	 */
+	public Resource getEcheancierFile(Long itContrat) {
+		Contrat contrat = findById(itContrat);
+		String name = contrat.getBulletinAdhesion().getNom().replace(" ", "_");
+		String fileName = findLatestFileName(name);
+		Path filePath = Paths.get(fileReplaceTextGeneretor.getOutputFilePath()).resolve(fileName).normalize();
+
+		try {
+			if (!Files.exists(filePath)) {
+				throw new FileNotFoundException("Le fichier " + fileName + " n'existe pas.");
+			}
+			Resource resource = new UrlResource(filePath.toUri());
+			Map<String, Resource> fileMap = new HashMap<>();
+			fileMap.put(fileName, resource);
+			return resource;
+
+		} catch (MalformedURLException | FileNotFoundException e) {
+			throw new ServiceException("Une erreur est survenue lors du téléchargement du fichier : " + fileName);
+		}
+
+	}
+_________________________________________________
+
+===========> Interceptor
+
+catchError((error: HttpErrorResponse) => {
+  console.error("Error status: ", error.status);
+  console.error("Error body: ", error.error);
+  
+  // Check if the response is a Blob and status is 200, meaning it's not actually an error
+  if (error.status === 200 && error.error instanceof Blob) {
+    return throwError(() => new Blob([error.error], { type: error.headers.get('content-type') }));
+  }
+
+  let errorMessage = 'Service momentanément indisponible';
+
+  if (error instanceof HttpErrorResponse && error.status === 401) {
+    return throwError(() => error.error);
+  }
+
+  if (error instanceof HttpErrorResponse && !req.url.includes('/login') && error.status === 403) {
+    this.storageService.clean();
+    this.storageService.reloadPage();
+  }
+
+  if (error.status === 0) {
+    console.error('An error occurred:', error.error);
+  } else if (error.error instanceof ErrorEvent) {
+    errorMessage = `Error: ${error.error.message}`;
+  } else {
+    errorMessage = `Error Code: ${error.status}\n Message: ${error.message}`;
+  }
+
+  console.error(errorMessage);
+  this.loadService.loadingOff();
+  this._snackBar.open(errorMessage, "ok", {
+    horizontalPosition: 'start',
+    verticalPosition: 'bottom',
+  });
+
+  return throwError(() => errorMessage);
+})
+
+===========>service download method
+downloadEcheancier(itContrat: string) {
+  return this.http.post(UrlHelpers.API_ECHEANCIER_DOWNLOAD + itContrat, {}, {
+    headers: this.getCustomHeadersBlob(),
+    responseType: 'blob' // lowercase
+  });
+}
+
+=========>download method on ts
+downloadEcheancier(itContrat: string) {
+  this.contratService.downloadEcheancier(itContrat).subscribe(response => {
+    const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+    const link = document.createElement('a');
+    const url = window.URL.createObjectURL(blob);
+
+    link.href = url;
+    link.download = "Echeancier_ROUTIER.docx";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  }, error => {
+    console.error("Download error:", error);
+  });
+}
+
+
+private extractBlobError(error: HttpErrorResponse): Observable<never> {
+  return new Observable(observer => {
+    const reader = new FileReader();
+    
+    reader.onloadend = () => {
+      try {
+        const errorText = reader.result as string;
+        console.error("Blob error response:", errorText);
+
+        // Try parsing JSON
+        const parsedError = JSON.parse(errorText);
+        console.error("Parsed error:", parsedError);
+
+        let errorMessage = `Error: ${parsedError.message || "Unknown error"}`;
+
+        observer.error({
+          status: error.status,
+          message: errorMessage,
+          error: parsedError
+        });
+      } catch (e) {
+        console.error("Error parsing Blob response:", e);
+        observer.error({ status: error.status, message: "Failed to parse error response" });
+      }
+    };
+
+    reader.readAsText(error.error);
+  });
+}
+
+if ((moment() < moment(period, 'DD/MM/YYYY'))) {
+      let jrPrelevement = this.contrat.itContrat ? this.contrat.jrPrelevement : this.parameterService.getJrPrelevement();
+      console.log('EDITABLE' + jrPrelevement);
+      if (period) {
+        var dateDebut = period.clone().set('D', jrPrelevement);
+        for (let i = 1; i <= nbEcheance; i++) {
+          this.listEcheance.push({ periode: dateDebut.format("DD/MM/YYYY"), mtMensuel: mtMensuel, codeStatut: 1 });
+          var dateDebut = dateDebut.add(1, 'M').set('D', jrPrelevement);
+        }
+      }
+      return;
+    } else {
+      console.log('NON EDITABLE');
+      this.contrat.echeanceDtos.forEach(echeane => {
+        let date = moment(echeane.periode, 'YYYYMM').set('D', this.contrat.jrPrelevement);
+        this.listEcheance.push({ periode: date.format('DD/MM/YYYY'), mtMensuel: echeane.mtMensuel, codeStatut: echeane.codeStatut })
+      });
+    }
+
+________________ testing 
+
+====>Controller
+
+@PostMapping(value = "/download")
+	@Operation(summary = "Récupèration d'un bulletin d'adhésion", description = "Retourne le fichier bulletin d'adhésion")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement")})
+	public ResponseEntity<Resource> downloadBulletinAdhesion(@RequestBody BulletinAdhesionDto bulletinAdhesionDto) throws IOException {
+		log.info("Téléchargement du bulletin adhesion ayant pour RUM {}", bulletinAdhesionDto.getRum());
+		String rum = bulletinAdhesionDto.getRum();
+		Resource resource = this.bulletinAdhesionService.getBulAdhesionFile(rum);
+		return ResponseEntity.status(HttpStatus.OK)
+				.header("Content-Disposition", "attachment; filename=\"" + rum + ".docx\"")
+				.contentLength(resource.contentLength())
+				.contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document")).body(resource);
+	}
+
+@PostMapping(value = "/download/{itContrat}")
+	@Operation(summary = "Récupèration d'un bulletin d'adhésion", description = "Retourne le fichier bulletin d'adhésion")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement")})
+	public ResponseEntity<Resource> downloadEcheancier(@PathVariable Long itContrat) {
+
+		Map<String, Resource> resourceMap = this.contratService.getEcheancierFile(itContrat);
+		String fileName = resourceMap.keySet().iterator().next();
+		Resource resource = resourceMap.get(fileName);
+
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+				.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Content-Disposition")
+				.contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
+				.body(resource);
+	}
+
+===>Service
+
+public Map<String, Resource> getEcheancierFile(Long itContrat) {
+		Contrat contrat = findById(itContrat);
+		String name = contrat.getBulletinAdhesion().getNom().replace(" ", "_");
+		String fileName = findLatestFileName(name);
+		Path filePath = Paths.get(fileReplaceTextGeneretor.getOutputFilePath()).resolve(fileName).normalize();
+
+		try {
+			if (!Files.exists(filePath)) {
+				throw new FileNotFoundException("Le fichier " + fileName + " n'existe pas.");
+			}
+			Resource resource = new UrlResource(filePath.toUri());
+			Map<String, Resource> fileMap = new HashMap<>();
+			fileMap.put(fileName, resource);
+			return fileMap;
+
+		} catch (MalformedURLException | FileNotFoundException e) {
+			throw new ServiceException("Une erreur est survenue lors du téléchargement du fichier : " + fileName);
+		}
+
+	}
+
+public Resource getBulAdhesionFile(String rum) {
+		String fileName = rum.concat(".docx");
+		String fileDirectory = fileReplaceTextGeneretor.getOutputFilePath();
+		Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+		try {
+			if (!Files.exists(filePath)) {
+				throw new FileNotFoundException("Le fichier " + fileName + " n'existe pas.");
+			}
+
+			return new UrlResource(filePath.toUri());
+
+		} catch (MalformedURLException | FileNotFoundException e) {
+			throw new ServiceException("Une erreur est survenue lors du téléchargement du fichier : " + fileName);
+		}
+
+	}
+____________________________ correct
+
+=>Controller
+
+@RunWith(MockitoJUnitRunner.class)
+public class ControllerTest {
+
+    @InjectMocks
+    private YourController yourController;
+
+    @Mock
+    private BulletinAdhesionService bulletinAdhesionService;
+
+    @Mock
+    private ContratService contratService;
+
+    @Mock
+    private Resource mockResource;
+
+    @Test
+    public void testDownloadBulletinAdhesion_Success() throws IOException {
+        // Given
+        String rum = "123456";
+        BulletinAdhesionDto bulletinAdhesionDto = new BulletinAdhesionDto();
+        bulletinAdhesionDto.setRum(rum);
+
+        // Mock the service method
+        when(bulletinAdhesionService.getBulAdhesionFile(rum)).thenReturn(mockResource);
+        when(mockResource.contentLength()).thenReturn(100L);
+
+        // When
+        ResponseEntity<Resource> response = yourController.downloadBulletinAdhesion(bulletinAdhesionDto);
+
+        // Then
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("attachment; filename=\"123456.docx\"", response.getHeaders().getFirst("Content-Disposition"));
+        assertEquals(100L, response.getBody().contentLength());
+    }
+
+    @Test
+    public void testDownloadBulletinAdhesion_FileNotFound() throws IOException {
+        // Given
+        String rum = "123456";
+        BulletinAdhesionDto bulletinAdhesionDto = new BulletinAdhesionDto();
+        bulletinAdhesionDto.setRum(rum);
+
+        // Mock the service method to throw an exception
+        when(bulletinAdhesionService.getBulAdhesionFile(rum)).thenThrow(new ServiceException("Le fichier 123456.docx n'existe pas."));
+
+        // When & Then
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            yourController.downloadBulletinAdhesion(bulletinAdhesionDto);
+        });
+
+        assertTrue(exception.getMessage().contains("Le fichier 123456.docx n'existe pas."));
+    }
+
+    @Test
+    public void testDownloadEcheancier_Success() {
+        // Given
+        Long itContrat = 1L;
+        Map<String, Resource> resourceMap = new HashMap<>();
+        resourceMap.put("echeancier.docx", mockResource);
+
+        // Mock the service method
+        when(contratService.getEcheancierFile(itContrat)).thenReturn(resourceMap);
+        when(mockResource.contentLength()).thenReturn(100L);
+
+        // When
+        ResponseEntity<Resource> response = yourController.downloadEcheancier(itContrat);
+
+        // Then
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("attachment; filename=\"echeancier.docx\"", response.getHeaders().getFirst(HttpHeaders.CONTENT_DISPOSITION));
+        assertEquals(100L, response.getBody().contentLength());
+    }
+
+    @Test
+    public void testDownloadEcheancier_FileNotFound() {
+        // Given
+        Long itContrat = 1L;
+
+        // Mock the service method to throw an exception
+        when(contratService.getEcheancierFile(itContrat)).thenThrow(new ServiceException("Le fichier echeancier n'existe pas."));
+
+        // When & Then
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            yourController.downloadEcheancier(itContrat);
+        });
+
+        assertTrue(exception.getMessage().contains("Le fichier echeancier n'existe pas."));
+    }
+}
+
+=>Service
+
+@RunWith(MockitoJUnitRunner.class)
+public class ServiceTest {
+
+    @InjectMocks
+    private ContratService contratService;
+
+    @Mock
+    private BulletinAdhesionService bulletinAdhesionService;
+
+    @Mock
+    private FileReplaceTextGeneretor fileReplaceTextGeneretor;
+
+    @Mock
+    private Path mockFilePath;
+
+    @Mock
+    private Resource mockResource;
+
+    @Mock
+    private Contrat contrat;
+
+    @Test
+    public void testGetEcheancierFile_Success() throws IOException {
+        // Given
+        Long itContrat = 1L;
+        String fileName = "echeancier.docx";
+        String name = "echeancier";
+        Map<String, Resource> resourceMap = new HashMap<>();
+        resourceMap.put(fileName, mockResource);
+
+        // Mock the methods
+        when(bulletinAdhesionService.findById(itContrat)).thenReturn(contrat);
+        when(contrat.getBulletinAdhesion().getNom()).thenReturn(name);
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn("/path/to/files");
+        when(mockFilePath.resolve(fileName)).thenReturn(mockFilePath);
+        when(Files.exists(mockFilePath)).thenReturn(true);
+        when(mockResource.contentLength()).thenReturn(100L);
+
+        // When
+        Map<String, Resource> result = contratService.getEcheancierFile(itContrat);
+
+        // Then
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(mockResource, result.get(fileName));
+    }
+
+    @Test
+    public void testGetEcheancierFile_FileNotFound() throws IOException {
+        // Given
+        Long itContrat = 1L;
+        String name = "echeancier";
+        String fileName = "echeancier.docx";
+
+        // Mock the methods
+        when(bulletinAdhesionService.findById(itContrat)).thenReturn(contrat);
+        when(contrat.getBulletinAdhesion().getNom()).thenReturn(name);
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn("/path/to/files");
+        when(mockFilePath.resolve(fileName)).thenReturn(mockFilePath);
+        when(Files.exists(mockFilePath)).thenReturn(false);
+
+        // When & Then
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            contratService.getEcheancierFile(itContrat);
+        });
+
+        assertTrue(exception.getMessage().contains("Le fichier echeancier.docx n'existe pas."));
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_Success() throws IOException {
+        // Given
+        String rum = "123456";
+        String fileName = rum + ".docx";
+        Path filePath = Paths.get("/path/to/files", fileName);
+
+        // Mock the methods
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn("/path/to/files");
+        when(mockFilePath.resolve(fileName)).thenReturn(filePath);
+        when(Files.exists(filePath)).thenReturn(true);
+        when(mockResource.contentLength()).thenReturn(100L);
+
+        // When
+        Resource result = contratService.getBulAdhesionFile(rum);
+
+        // Then
+        assertNotNull(result);
+        assertEquals(100L, result.contentLength());
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_FileNotFound() throws IOException {
+        // Given
+        String rum = "123456";
+        String fileName = rum + ".docx";
+        Path filePath = Paths.get("/path/to/files", fileName);
+
+        // Mock the methods
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn("/path/to/files");
+        when(mockFilePath.resolve(fileName)).thenReturn(filePath);
+        when(Files.exists(filePath)).thenReturn(false);
+
+        // When & Then
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            contratService.getBulAdhesionFile(rum);
+        });
+
+        assertTrue(exception.getMessage().contains("Le fichier 123456.docx n'existe pas."));
+    }
+}
+
+
+when(Paths.get(anyString())).thenReturn(mockFilePath);
+        when(mockFilePath.resolve(anyString())).thenReturn(mockFilePath);
+        when(mockFilePath.normalize()).thenReturn(mockFilePath);
+
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.*;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import java.nio.file.*;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+
+public class YourServiceTest {
+
+    @Mock
+    private FileReplaceTextGeneretor fileReplaceTextGeneretor;
+
+    @Mock
+    private Path mockPath;
+
+    @Mock
+    private Resource mockResource;
+
+    @Mock
+    private ServiceException serviceException;
+
+    private YourService yourService; // Assuming the method is in this service class
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        yourService = new YourService(fileReplaceTextGeneretor); // Initialize your service
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_Success() throws Exception {
+        // Given
+        String rum = "123456";
+        String fileName = rum.concat(".docx");
+        String filePathString = "C:\\path\\to\\files"; // Example file path
+
+        // Mock the fileReplaceTextGeneretor to return the base path
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(filePathString);
+
+        // Mock the Path and Files.exists() methods
+        when(Paths.get(filePathString)).thenReturn(mockPath);
+        when(mockPath.resolve(fileName)).thenReturn(mockPath);
+        when(mockPath.normalize()).thenReturn(mockPath);
+        when(Files.exists(mockPath)).thenReturn(true);
+
+        // Mock the UrlResource creation
+        when(mockResource.getFilename()).thenReturn(fileName);
+        when(mockResource.getURI()).thenReturn(mockPath.toUri());
+
+        // When
+        Resource result = yourService.getBulAdhesionFile(rum);
+
+        // Then
+        assertNotNull(result);
+        assertEquals(fileName, result.getFilename());
+        verify(fileReplaceTextGeneretor).getOutputFilePath(); // Ensure method is called
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_FileNotFound() throws Exception {
+        // Given
+        String rum = "123456";
+        String fileName = rum.concat(".docx");
+        String filePathString = "C:\\path\\to\\files"; // Example file path
+
+        // Mock the fileReplaceTextGeneretor to return the base path
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(filePathString);
+
+        // Mock the Path and Files.exists() methods
+        when(Paths.get(filePathString)).thenReturn(mockPath);
+        when(mockPath.resolve(fileName)).thenReturn(mockPath);
+        when(mockPath.normalize()).thenReturn(mockPath);
+        when(Files.exists(mockPath)).thenReturn(false);
+
+        // When & Then
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            yourService.getBulAdhesionFile(rum);
+        });
+
+        assertTrue(exception.getMessage().contains("Le fichier " + fileName + " n'existe pas."));
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_MalformedURLException() throws Exception {
+        // Given
+        String rum = "123456";
+        String fileName = rum.concat(".docx");
+        String filePathString = "C:\\path\\to\\files"; // Example file path
+
+        // Mock the fileReplaceTextGeneretor to return the base path
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(filePathString);
+
+        // Mock the Path and Files.exists() methods
+        when(Paths.get(filePathString)).thenReturn(mockPath);
+        when(mockPath.resolve(fileName)).thenReturn(mockPath);
+        when(mockPath.normalize()).thenReturn(mockPath);
+        when(Files.exists(mockPath)).thenReturn(true);
+
+        // Simulate MalformedURLException when creating the UrlResource
+        when(mockResource.getFilename()).thenReturn(fileName);
+        when(mockResource.getURI()).thenThrow(MalformedURLException.class);
+
+        // When & Then
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            yourService.getBulAdhesionFile(rum);
+        });
+
+        assertTrue(exception.getMessage().contains("Une erreur est survenue lors du téléchargement du fichier : " + fileName));
+    }
+}
+
+this.disableAdd = this.dataSource.data.length != 0 && this.dataSource.data.find(i => i.codeStatut != 4) != undefined;
+
+this.fileReplaceTextGeneretor.genererBulletinAdhesion(builder.build(), "E:\\True-ide-Workspace-Css\\config\\data-input\\RUM_CSS.docx");
+
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.*;
+import java.nio.file.*;
+import java.io.*;
+import org.springframework.core.io.UrlResource;
+import org.springframework.core.io.Resource;
+
+public class YourServiceTest {
+
+    @Mock
+    private FileReplaceTextGeneretor fileReplaceTextGeneretor;
+
+    @InjectMocks
+    private YourService yourService;  // replace with the actual service class name
+
+    @Test
+    public void testGetBulAdhesionFile_FileExists() throws Exception {
+        // Arrange
+        String rum = "12345"; // example RUM
+        String fileName = rum.concat(".docx");
+        String fileDirectory = "/mock/path"; // mock path
+
+        // Mock the method that returns the file directory
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock Files.exists to return true (file exists)
+        Path mockFilePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+        when(Files.exists(mockFilePath)).thenReturn(true);
+
+        // Act
+        Resource result = yourService.getBulAdhesionFile(rum);
+
+        // Assert
+        assertNotNull(result);  // Check that a resource was returned
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_FileNotFound() throws Exception {
+        // Arrange
+        String rum = "12345"; // example RUM
+        String fileName = rum.concat(".docx");
+        String fileDirectory = "/mock/path"; // mock path
+
+        // Mock the method that returns the file directory
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock Files.exists to return false (file doesn't exist)
+        Path mockFilePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+        when(Files.exists(mockFilePath)).thenReturn(false);
+
+        // Act & Assert
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            yourService.getBulAdhesionFile(rum);  // This should throw the exception
+        });
+
+        assertTrue(exception.getMessage().contains("Le fichier " + fileName + " n'existe pas."));
+    }
+
+    @Test
+    public void testGetBulAdhesionFile_ExceptionHandling() throws Exception {
+        // Arrange
+        String rum = "12345"; // example RUM
+        String fileName = rum.concat(".docx");
+        String fileDirectory = "/mock/path"; // mock path
+
+        // Mock the method that returns the file directory
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock Files.exists to throw an exception (simulate malformed URL or other error)
+        Path mockFilePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+        when(Files.exists(mockFilePath)).thenThrow(new IOException("Mocked IOException"));
+
+        // Act & Assert
+        Exception exception = assertThrows(ServiceException.class, () -> {
+            yourService.getBulAdhesionFile(rum);  // This should throw the exception
+        });
+
+        assertTrue(exception.getMessage().contains("Une erreur est survenue lors du téléchargement du fichier : " + fileName));
+    }
+}
+
+org.mockito.exceptions.misusing.MissingMethodInvocationException: 
+when() requires an argument which has to be 'a method call on a mock'.
+For example:
+    when(mock.getArticles()).thenReturn(articles);
+
+
+@Test
+	@WithMockUser
+	void testGetDownloadBulletinAdhesion_ShouldReturnWord() throws Exception {
+		// GIVEN
+		String rum = "CSSCPR-3108009W97755077159755";
+		String fileName = rum.concat(".docx");
+		String fileDirectory = "../config/data-output/";
+		BulletinAdhesionDto inputDto = new BulletinAdhesionDto();
+		inputDto.setRum(rum);
+
+		byte[] fakeFile = new byte[]{1, 2, 3, 4};
+		//Resource fakeResource = new ByteArrayResource(fakeFile);
+		//when(fileReplaceTextGeneretor.genererBulletinAdhesion();)
+		when(mockFilePath.resolve(fileName)).thenReturn(mockFilePath);
+		when(mockFilePath.normalize()).thenReturn(mockFilePath);
+		when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+		when(checkFile.exists(mockFilePath)).thenReturn(true);
+		//when(bulletinAdhesionService.getBulAdhesionFile(rum)).thenReturn(fakeResource);
+
+		Resource resource = bulletinAdhesionService.getBulAdhesionFile(rum);
+
+		// WHEN + THEN
+		Exception exception = assertThrows(ServiceException.class, () -> {
+			bulletinAdhesionService.getBulAdhesionFile(rum);  // This should throw the exception
+		});
+
+		assertNotNull(resource);
+	}
+
+
+Also, this error might show up because:
+1. you stub either of: final/private/equals()/hashCode() methods.
+   Those methods *cannot* be stubbed/verified.
+   Mocking methods declared on non-public parent classes is not supported.
+2. inside when() you don't call method on mock but on some other object.
+
+@Component
+public class CheckFile {
+    public boolean exists(Path path) {
+        return Files.exists(path);
+    }
+}
+
+public Resource getBulAdhesionFile(String rum) {
+		String fileName = rum.concat(".docx");
+		String fileDirectory = fileReplaceTextGeneretor.getOutputFilePath();
+		Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+		try {
+			if (!checkFile.exists(filePath)) {
+				throw new FileNotFoundException("Le fichier " + fileName + " n'existe pas.");
+			}
+
+			return new UrlResource(filePath.toUri());
+
+		} catch (MalformedURLException | FileNotFoundException e) {
+			throw new ServiceException("Une erreur est survenue lors du téléchargement du fichier : " + fileName);
+		}
+
+	}
+
+@Test
+	@WithMockUser
+	void testGetDownloadBulletinAdhesion_ShouldReturnWord() throws MalformedURLException {
+		// GIVEN
+		String rum = "CSSCPR-3108009W97755077159755";
+		String fileName = rum.concat(".docx");
+		String fileDirectory = "../config/data-output/";
+		Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+
+		//byte[] fakeFile = new byte[]{1, 2, 3, 4};
+		//Resource fakeResource = new ByteArrayResource(fakeFile);
+		//when(fileReplaceTextGeneretor.genererBulletinAdhesion();)
+		//when(mockFilePath.resolve(fileName)).thenReturn(mockFilePath);
+		//when(mockFilePath.normalize()).thenReturn(mockFilePath);
+		when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+		when(checkFile.exists(mockFilePath)).thenReturn(true);
+		Resource expectedresource = new UrlResource(filePath.toUri());
+		//when(bulletinAdhesionService.getBulAdhesionFile(rum)).thenReturn(fakeResource);
+
+		Resource resource = bulletinAdhesionService.getBulAdhesionFile(rum);
+
+		assertNotNull(resource);
+	}
+______________________
+
+@Test
+    @WithMockUser
+    void testGetDownloadBulletinAdhesion_ShouldReturnWord() throws MalformedURLException {
+        // GIVEN
+        String rum = "CSSCPR-3108009W97755077159755";
+        String fileName = rum.concat(".docx");
+        String fileDirectory = "../config/data-output/";
+        Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+
+        // Mock the behavior of fileReplaceTextGeneretor
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock the behavior of checkFile.exists()
+        when(checkFile.exists(filePath)).thenReturn(true);
+
+        // Create the expected resource
+        Resource expectedResource = new UrlResource(filePath.toUri());
+
+        // WHEN
+        Resource resource = bulletinAdhesionService.getBulAdhesionFile(rum);
+
+        // THEN
+        assertNotNull(resource);
+        // You can add more specific assertions here, like checking the URI
+        // assertEquals(expectedResource.getURI(), resource.getURI());
+    }
+
+_______________________________
+
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
+class YourServiceNameTest { // Replace YourServiceName with the actual name of your service
+
+    @InjectMocks
+    private YourServiceName yourService; // Assuming this is your service class
+
+    @Mock
+    private FileReplaceTextGeneretor fileReplaceTextGeneretor;
+
+    @Mock
+    private CheckFile checkFile;
+
+    @Mock
+    private ContratRepository contratRepository; // Assuming you have a ContratRepository
+
+    @Test
+    void getEcheancierFile_fileFound_returnsFileMap() throws MalformedURLException {
+        // GIVEN
+        Long itContrat = 123L;
+        String bulletinNom = "Bulletin Adhesion Test";
+        String name = bulletinNom.replace(" ", "_");
+        String fileName = name + "_latest.pdf"; // Assuming findLatestFileName returns this
+        String fileDirectory = "/path/to/files";
+        Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+
+        // Mock the Contrat
+        Contrat contrat = new Contrat();
+        BulletinAdhesion bulletinAdhesion = new BulletinAdhesion();
+        bulletinAdhesion.setNom(bulletinNom);
+        contrat.setBulletinAdhesion(bulletinAdhesion);
+        when(contratRepository.findById(itContrat)).thenReturn(java.util.Optional.of(contrat));
+
+        // Mock findLatestFileName
+        when(yourService.findLatestFileName(name)).thenReturn(fileName);
+
+        // Mock fileReplaceTextGeneretor
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock checkFile
+        when(checkFile.exists(filePath)).thenReturn(true);
+
+        // WHEN
+        Map<String, Resource> result = yourService.getEcheancierFile(itContrat);
+
+        // THEN
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertTrue(result.containsKey(fileName));
+        Resource resource = result.get(fileName);
+        assertNotNull(resource);
+        assertTrue(resource instanceof UrlResource);
+        assertEquals(filePath.toUri(), ((UrlResource) resource).getURI());
+    }
+
+    @Test
+    void getEcheancierFile_fileNotFound_throwsFileNotFoundException() {
+        // GIVEN
+        Long itContrat = 123L;
+        String bulletinNom = "Bulletin Adhesion Test";
+        String name = bulletinNom.replace(" ", "_");
+        String fileName = name + "_latest.pdf";
+        String fileDirectory = "/path/to/files";
+        Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+
+        // Mock the Contrat
+        Contrat contrat = new Contrat();
+        BulletinAdhesion bulletinAdhesion = new BulletinAdhesion();
+        bulletinAdhesion.setNom(bulletinNom);
+        contrat.setBulletinAdhesion(bulletinAdhesion);
+        when(contratRepository.findById(itContrat)).thenReturn(java.util.Optional.of(contrat));
+
+        // Mock findLatestFileName
+        when(yourService.findLatestFileName(name)).thenReturn(fileName);
+
+        // Mock fileReplaceTextGeneretor
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock checkFile to return false (file not found)
+        when(checkFile.exists(filePath)).thenReturn(false);
+
+        // WHEN & THEN
+        assertThrows(FileNotFoundException.class, () -> yourService.getEcheancierFile(itContrat));
+    }
+
+    @Test
+    void getEcheancierFile_malformedURLException_throwsServiceException() throws MalformedURLException {
+        // GIVEN
+        Long itContrat = 123L;
+        String bulletinNom = "Bulletin Adhesion Test";
+        String name = bulletinNom.replace(" ", "_");
+        String fileName = name + "_latest.pdf";
+        String fileDirectory = "invalid:directory"; // Force a MalformedURLException
+        Path filePath = Paths.get(fileDirectory).resolve(fileName).normalize();
+
+        // Mock the Contrat
+        Contrat contrat = new Contrat();
+        BulletinAdhesion bulletinAdhesion = new BulletinAdhesion();
+        bulletinAdhesion.setNom(bulletinNom);
+        contrat.setBulletinAdhesion(bulletinAdhesion);
+        when(contratRepository.findById(itContrat)).thenReturn(java.util.Optional.of(contrat));
+
+        // Mock findLatestFileName
+        when(yourService.findLatestFileName(name)).thenReturn(fileName);
+
+        // Mock fileReplaceTextGeneretor
+        when(fileReplaceTextGeneretor.getOutputFilePath()).thenReturn(fileDirectory);
+
+        // Mock checkFile
+        when(checkFile.exists(filePath)).thenReturn(true);
+
+        // WHEN & THEN
+        assertThrows(ServiceException.class, () -> yourService.getEcheancierFile(itContrat));
+    }
+
+    @Test
+    void getEcheancierFile_contratNotFound_throwsNoSuchElementException() {
+        // GIVEN
+        Long itContrat = 123L;
+
+        // Mock contratRepository to return an empty Optional
+        when(contratRepository.findById(itContrat)).thenReturn(java.util.Optional.empty());
+
+        // WHEN & THEN
+        assertThrows(java.util.NoSuchElementException.class, () -> yourService.getEcheancierFile(itContrat));
+    }
+}
+
+
+try (Stream<Path> files = Files.list(Paths.get(fileDirectory))) {
+			return files
+					.filter(path -> path.getFileName().toString().startsWith(name)) // Filter files
+					.max(Comparator.comparingLong(path -> path.toFile().lastModified())) // Get the most recent file
+					.map(path -> path.getFileName().toString())
+					.orElseThrow(() -> new RuntimeException("Aucun fichier correspondant trouvé dans le répertoire"));
+		} catch (IOException e) {
+			throw new ServiceException("Erreur lors de la lecture des fichiers dans le répertoire: " + fileDirectory);
+		}
+
+public boolean exists(Path path) {
+        return Files.exists(path);
+    }
+
+    public String findLastFileName(String name, String fileDirectory) {
+        try (Stream<Path> files = Files.list(Paths.get(fileDirectory))) {
+            return files
+                    .filter(path -> path.getFileName().toString().startsWith(name)) // Filter files
+                    .max(Comparator.comparingLong(path -> path.toFile().lastModified())) // Get the most recent file
+                    .map(path -> path.getFileName().toString())
+                    .orElseThrow(() -> new RuntimeException("Aucun fichier correspondant trouvé dans le répertoire"));
+        } catch (IOException e) {
+            throw new ServiceException("Erreur lors de la lecture des fichiers dans le répertoire: " + fileDirectory);
+        }
+    }
+__________________________
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+class CheckFileTest {
+
+    @Autowired
+    private CheckFile checkFile;
+
+    @TempDir
+    Path tempDir; // Provides a temporary directory for tests
+
+    private Path existingFilePath;
+    private Path nonExistingFilePath;
+    private String fileDirectory;
+
+    @BeforeEach
+    void setUp() throws IOException {
+        fileDirectory = tempDir.toString();
+        existingFilePath = tempDir.resolve("testFile.txt");
+        nonExistingFilePath = tempDir.resolve("nonExistentFile.txt");
+        Files.createFile(existingFilePath);
+    }
+
+    @Test
+    void exists_existingFile_returnsTrue() {
+        assertTrue(checkFile.exists(existingFilePath));
+    }
+
+    @Test
+    void exists_nonExistingFile_returnsFalse() {
+        assertFalse(checkFile.exists(nonExistingFilePath));
+    }
+
+    @Test
+    void findLatestFileName_matchingFilesExist_returnsLatestFileName() throws IOException, InterruptedException {
+        // Create files with different modification times
+        Path file1 = tempDir.resolve("test_file_1.txt");
+        Path file2 = tempDir.resolve("test_file_2.txt");
+        Path file3 = tempDir.resolve("test_file_3.txt");
+
+        Files.createFile(file1);
+        Thread.sleep(100); // Ensure different modification times
+        Files.createFile(file2);
+        Thread.sleep(100);
+        Files.createFile(file3);
+
+        String latestFileName = checkFile.findLatestFileName("test_file", fileDirectory);
+        assertEquals("test_file_3.txt", latestFileName);
+    }
+
+    @Test
+    void findLatestFileName_noMatchingFiles_throwsRuntimeException() {
+        assertThrows(RuntimeException.class, () -> checkFile.findLatestFileName("non_matching_file", fileDirectory));
+    }
+
+    @Test
+    void findLatestFileName_ioException_throwsServiceException() {
+        // Force an IOException by providing an invalid directory path
+        assertThrows(ServiceException.class, () -> checkFile.findLatestFileName("test_file", "/invalid/directory"));
+    }
+}
+
+______________
+
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+class CheckFileTest {
+
+    @Autowired
+    private CheckFile checkFile;
+
+    @TempDir
+    Path tempDir;
+
+    private Path existingFilePath;
+    private Path nonExistingFilePath;
+    private String fileDirectory;
+
+    private Path file1;
+    private Path file2;
+    private Path file3;
+
+    @BeforeEach
+    void setUp() throws IOException {
+        fileDirectory = tempDir.toString();
+        existingFilePath = tempDir.resolve("testFile.txt");
+        nonExistingFilePath = tempDir.resolve("nonExistentFile.txt");
+        Files.createFile(existingFilePath);
+
+        file1 = tempDir.resolve("test_file_1.txt");
+        file2 = tempDir.resolve("test_file_2.txt");
+        file3 = tempDir.resolve("test_file_3.txt");
+    }
+
+    @AfterEach
+    void tearDown() throws IOException {
+        Files.deleteIfExists(existingFilePath);
+        Files.deleteIfExists(file1);
+        Files.deleteIfExists(file2);
+        Files.deleteIfExists(file3);
+    }
+
+    @Test
+    void exists_existingFile_returnsTrue() {
+        assertTrue(checkFile.exists(existingFilePath));
+    }
+
+    @Test
+    void exists_nonExistingFile_returnsFalse() {
+        assertFalse(checkFile.exists(nonExistingFilePath));
+    }
+
+    @Test
+    void findLatestFileName_matchingFilesExist_returnsLatestFileName() throws IOException, InterruptedException {
+        Files.createFile(file1);
+        Thread.sleep(100);
+        Files.createFile(file2);
+        Thread.sleep(100);
+        Files.createFile(file3);
+
+        String latestFileName = checkFile.findLatestFileName("test_file", fileDirectory);
+        assertEquals("test_file_3.txt", latestFileName);
+    }
+
+    @Test
+    void findLatestFileName_noMatchingFiles_throwsRuntimeException() {
+        assertThrows(RuntimeException.class, () -> checkFile.findLatestFileName("non_matching_file", fileDirectory));
+    }
+
+    @Test
+    void findLatestFileName_ioException_throwsServiceException() {
+        assertThrows(ServiceException.class, () -> checkFile.findLatestFileName("test_file", "/invalid/directory"));
+    }
+}
+
+
+@Component
+public final class FileReplaceTextGeneretor {
+
+	@Value(value = "${app.path.output.ihm.fichier}")
+	private String outputFilePath;
+
+	private FileReplaceTextGeneretor() {
+	}
+
+public String getOutputFilePath() {
+		return outputFilePath;
+	}
+}
+
+
+@Test
+    void findLatestFileName_matchingFilesExist_returnsLatestFileName() throws IOException {
+
+        String fileDirectory = "../config/data-output/";
+        Path file1 = Paths.get(fileDirectory).resolve("test_20250320T135243.docx");
+        Path file2 = Paths.get(fileDirectory).resolve("test_20250319T130845.docx");
+
+        Files.createFile(file1);
+        Files.createFile(file2);
+
+        String latestFileName = fileUtils.findLastFileName("test", fileDirectory);
+        assertEquals("test_20250319T130845.docx", latestFileName);
+
+        Files.deleteIfExists(file1);
+        Files.deleteIfExists(file2);
+    }
+
+____________________________
+
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class FileUtilsTest {
+
+    @TempDir
+    Path tempDir;  // JUnit will create a temporary test directory
+
+    @AfterEach
+    void cleanUp() throws IOException {
+        Files.list(tempDir).forEach(file -> {
+            try {
+                Files.deleteIfExists(file);
+            } catch (IOException e) {
+                fail("Failed to clean up test files: " + e.getMessage());
+            }
+        });
+    }
+
+    @Test
+    void findLatestFileName_matchingFilesExist_returnsLatestFileName() throws IOException {
+        // GIVEN - Create test files
+        Path file1 = tempDir.resolve("test_20250319T130845.docx");
+        Path file2 = tempDir.resolve("test_20250320T135243.docx"); // Latest file
+
+        Files.createFile(file1);
+        Files.createFile(file2);
+
+        // WHEN - Call the method under test
+        String latestFileName = fileUtils.findLastFileName("test", tempDir.toString());
+
+        // THEN - Verify the latest file is returned
+        assertEquals("test_20250320T135243.docx", latestFileName);
+    }
+}
+
+
+String pattern = "yyyyMMdd'T'HHmmss";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime yesterday = now.minusDays(1);
+
+        String file1Name = "test_" + now.format(formatter) + ".docx";
+        String file2Name = "test_" + yesterday.format(formatter) + ".docx";
+
+        file1 = tempDir.resolve(file1Name);
+        file2 = tempDir.resolve(file2Name);
+
+<changeSet id="add-version-columns" author="9775">
+
+        <addColumn tableName="T_ETUDE">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="T_SUIVI">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="T_DECISION">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="T_ADRESSE_ARRET">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="T_AGENT">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+        <addColumn tableName="T_REGION">
+            <column name="VERSION" type="NUMBER(19,0)" defaultValue="0"/>
+        </addColumn>
+
+    </changeSet>
+___________________
+
+ALTER TABLE T_ETUDE ADD VERSION NUMBER(19,0) DEFAULT 0 NOT NULL;
+ALTER TABLE T_SUIVI ADD VERSION NUMBER(19,0) DEFAULT 0 NOT NULL;
+ALTER TABLE T_DECISION ADD VERSION NUMBER(19,0) DEFAULT 0 NOT NULL;
+ALTER TABLE T_ADRESSE_ARRET ADD VERSION NUMBER(19,0) DEFAULT 0 NOT NULL;
+ALTER TABLE T_AGENT ADD VERSION NUMBER(19,0) DEFAULT 0 NOT NULL;
+ALTER TABLE T_REGION ADD VERSION NUMBER(19,0) DEFAULT 0 NOT NULL;
+
+
+________________
+create sequence adresse_seq start with 1 increment by 50;
+create sequence agent_seq start with 1 increment by 50;
+create sequence decision_seq start with 1 increment by 50;
+create sequence etude_seq start with 1 increment by 50;
+create sequence region_seq start with 1 increment by 50;
+create sequence suivi_seq start with 1 increment by 50;
+
+create table t_adresse_arret (type_adr varchar2(3 char) not null, c_postal varchar2(6 char), immat_cp varchar2(8 char) not null, it_adresse number(19,0) not null, it_region_adm number(19,0), c_etab_sncf varchar2(10 char), tel varchar2(20 char), adresse varchar2(100 char), adresse_compl varchar2(100 char), destinataire varchar2(100 char), lieu_dit varchar2(100 char), nom_etab_sncf varchar2(100 char), raison_sociale varchar2(100 char), ville varchar2(100 char), created_by varchar2(255 char), created_at timestamp(6), updated_by varchar2(255 char),updated_at timestamp(6), version number(19,0) default 0 not null,  primary key (it_adresse));
+create table t_agent (agt_cpr number(1,0) not null check (agt_cpr in (0,1)), agt_cs number(1,0) not null check (agt_cs in (0,1)), civilite varchar2(3 char), dept_naissance varchar2(2 char), dt_naissance date, created_at timestamp(6), immat_cp varchar2(8 char) not null, it_agent number(19,0) not null, updated_at timestamp(6), nir varchar2(15 char) not null, nom varchar2(100 char), prenom varchar2(100 char), created_by varchar2(255 char), updated_by varchar2(255 char), primary key (it_agent), unique (immat_cp));
+create table t_decision (statut_etude number(10,0) not null, created_at timestamp(6), etat_etude varchar2(8 char), immat_cp varchar2(8 char) not null, it_decision number(19,0) not null, it_etude number(19,0), autres_datas varchar2(255 char), commentaire varchar2(255 char), created_by varchar2(255 char), motif varchar2(255 char), primary key (it_decision));
+create table t_etude (agt_cpr number(1,0) not null check (agt_cpr in (0,1)), agt_cs number(1,0) not null check (agt_cs in (0,1)), dt_fin date not null, dt_arrivee date not null, dt_debut date not null, dt_deb_prol date, mode_oper varchar2(1 char) not null, nb_arret varchar2(2 char) not null, origine number(10,0), risque varchar2(3 char), sorties number(10,0), statut number(10,0) not null, created_at timestamp(6), etat varchar2(8 char), immat_cp varchar2(8 char) not null, it_adresse number(19,0), it_agent number(19,0), it_etude number(19,0) not null, updated_at timestamp(6), nom_pre_demand varchar2(100 char), commentaire varchar2(255 char), created_by varchar2(255 char), nil varchar2(255 char), updated_by varchar2(255 char), primary key (it_etude));
+create table t_region (code varchar2(2 char) not null, cp varchar2(5 char), it_region number(19,0) not null, ville varchar2(35 char), libelle varchar2(50 char) not null, primary key (it_region));
+create table t_suivi (suivi number(3,0) not null check (suivi between 0 and 2), created_at timestamp(6), immat_cp varchar2(8 char) not null unique, it_agent number(19,0) unique, it_suivi number(19,0) not null, updated_at timestamp(6), commentaire varchar2(255 char), created_by varchar2(255 char), updated_by varchar2(255 char), primary key (it_suivi));
+
+create index t_agent_index_agt_cs on t_agent (agt_cs);
+create index t_etude_index_immat_cp on t_etude (immat_cp);
+create index t_etude_index_statut on t_etude (statut);
+create index t_etude_index_etat on t_etude (etat);
+create index t_etude_index_agt_cs on t_etude (agt_cs);
+create index t_etude_index_updated_at on t_etude (updated_at) 
+create index t_decision_index_statut_etude on t_decision (statut_etude);
+create index t_decision_index_etat_etude on t_decision (etat_etude);
+create index t_decision_index_motif on t_decision (motif);
+create index t_decision_index_created_at on t_decision (created_at) 
+
+alter table t_adresse_arret add constraint FK_t_adresse_arret_t_region foreign key (it_region_adm) references t_region;
+alter table t_decision add constraint FK_t_decision_t_etude foreign key (it_etude) references t_etude;
+alter table t_etude add constraint FK_t_etude_t_adresse_arret foreign key (it_adresse) references t_adresse_arret;
+alter table t_etude add constraint FK_t_etude_t_agent foreign key (it_agent) references t_agent;
+alter table t_suivi add constraint FK_t_etude_t_agent foreign key (it_agent) references t_agent;
+
+
+@Override
+	protected String generateMail() {
+
+		SimpleDateFormat simpleFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String formatedDate = simpleFormat.format(traitementDate);
+
+		StringBuffer buffer = new StringBuffer();
+		if (alisteReprise != null && !alisteReprise.isEmpty()) {
+			buffer
+					.append("<div align='center'>Pour la journ&eacute;e de traitement du "
+							+ formatedDate
+							+ ", voici la liste des d&eacute;comptes en reprise :");
+			buffer.append("<br/><br/>");
+			buffer
+					.append("<table  border='1' cellspacing='0' cellpadding='0'><tr align = 'center' bgcolor='#CCCCCC'><td><b>PJ</b></td><td><b>NIR assur&eacute;</b></td><td><b>IMMAT</b></td><td><b>CAUSE</b><td></tr>");
+			String tdTag = "</td><td>";
+			for (RepriseDO currentReprise : alisteReprise) {
+				buffer.append("<tr align = 'center'><td>"
+						+ currentReprise.getNumpj() + tdTag
+						+ currentReprise.getIddestinataire() + tdTag
+						+ currentReprise.getImmatriculation() + tdTag
+						+ currentReprise.getCauseprobleme() + "</td></tr>");
+			}
+			buffer.append("</table>");
+			buffer.append("<br/>");
+			buffer.append(
+					"Pour vous connecter &agrave; l'application : <a HREF= '")
+					.append(DECOMPTE_IHM).append(
+							"'>Reprise des d&eacute;comptes</a>");
+		} else {
+			buffer.append("Pour la journ&eacute;e de traitement du "
+					+ formatedDate
+					+ ", pas de d&eacute;compte en reprise.");
+			buffer.append("<br/>");
+		}
+		return buffer.toString();
+	}
+
+
+___________________________________
+
+protected String generateMail() {
+        SimpleDateFormat simpleFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = simpleFormat.format(traitementDate);
+
+        StringBuilder buffer = new StringBuilder();
+
+        if (alisteReprise != null && !alisteReprise.isEmpty()) {
+            buffer.append("<div align='center'>")
+                  .append("Pour la journ&eacute;e de traitement du ")
+                  .append(formattedDate)
+                  .append(", voici la liste des d&eacute;comptes en reprise :")
+                  .append("<br/><br/>")
+                  .append("<table border='1' cellspacing='0' cellpadding='5'>")
+                  .append("<tr align='center' bgcolor='#CCCCCC'>")
+                  .append("<td><b>PJ</b></td>")
+                  .append("<td><b>NIR assur&eacute;</b></td>")
+                  .append("<td><b>IMMAT</b></td>")
+                  .append("<td><b>CAUSE</b></td></tr>");
+
+            for (RepriseDO currentReprise : alisteReprise) {
+                String numpj = StringEscapeUtils.escapeHtml4(currentReprise.getNumpj());
+                String iddestinataire = StringEscapeUtils.escapeHtml4(currentReprise.getIddestinataire());
+                String immatriculation = StringEscapeUtils.escapeHtml4(currentReprise.getImmatriculation());
+                String causeprobleme = StringEscapeUtils.escapeHtml4(currentReprise.getCauseprobleme());
+
+                buffer.append(String.format(
+                    "<tr align='center'><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+                    numpj, iddestinataire, immatriculation, causeprobleme
+                ));
+            }
+
+            buffer.append("</table>")
+                  .append("<br/>")
+                  .append("<a href='").append(DECOMPTE_IHM).append("'>Reprise des d&eacute;comptes</a>")
+                  .append("</div>");
+        } else {
+            buffer.append("<div align='center'>")
+                  .append("Pour la journ&eacute;e de traitement du ")
+                  .append(formattedDate)
+                  .append(", pas de d&eacute;compte en reprise.")
+                  .append("<br/></div>");
+        }
+
+        return buffer.toString();
+    }
+
+
+La version actuelle de l’application AGAT développée sous OMNIS est amené à disparaître. AGAT doit donc être revue pour être développée sous une nouvelle technologie.
+
+L’objectif est de repenser l’application sous la technologie choisie pour permettre au service du contrôle des arrêts de travail de continuer à gérer les dossiers d’arrêts de travail des agents SNCF dans le but de procéder à des éventuels contrôles des personnes arrêtées. 
+
+
+<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+								${project.build.directory}/classes/static/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>
+										${project.parent.basedir}/frontend/dist/frontend/
+									</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+____________________________________
+
+@GetMapping("/byMonth")
+	@Operation(summary = "Récupérer les stats de l'année", description = "Retourne les suivis d'agent")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement") })
+	public ResponseEntity<Collection<StatEtudeDto>> getStatByMonth() {
+		log.info("Stat par mois de l'année en cours");
+		return ResponseEntity.status(HttpStatus.OK).body(this.statistiqueService.getStatByMonth());
+	}
+
+
+@GetMapping()
+	@Operation(summary = "Récupérer les stats de l'année", description = "Retourne les suivis d'agent")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement") })
+	public ResponseEntity<Map<String, Long>> getStatAnneeEnCOUrs() {
+		log.info("Stat de l'année en cours");
+		return ResponseEntity.status(HttpStatus.OK).body(this.statistiqueService.getStatAnneeEnCours());
+	}
+
+@GetMapping("/byMonth/{month}")
+	@Operation(summary = "Récupérer les stats de l'année", description = "Retourne les suivis d'agent")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement") })
+	public ResponseEntity<StatEtudeDto> getStatByMonth(@PathVariable String month) {
+		log.info("Stat du mois de " + month + " de l'année en cours");
+		return ResponseEntity.status(HttpStatus.OK).body(this.statistiqueService.getStatDecisionByMonth(month));
+	}
+_____________________
+
+/**
+	 * Retourne bilan camparatif des études entre deux périodes.
+	 * 
+	 * @param StatComparatifDto
+	 * 
+	 * @return Map<String, List<StatComparatifDto>>
+	 */
+	public Map<String, List<StatComparatifDto>> getBilanComparatif(StatComparatifDto statComparatifDto) {
+		Map<String, StatComparatifDto> map = new TreeMap<>(Comparable::compareTo);
+
+		List<Object[]> list = this.decisionRepository.getBilanComparatif(
+				statComparatifDto.getDateDebut().minusYears(1).atTime(LocalTime.MAX),
+				statComparatifDto.getDateFin().minusYears(1).atTime(LocalTime.MAX),
+				statComparatifDto.getDateDebut().atTime(LocalTime.MAX),
+				statComparatifDto.getDateFin().atTime(LocalTime.MAX));
+
+		for (Object[] obj : list) {
+			StatComparatifDto etatDto = map.getOrDefault(obj[0].toString().concat(obj[1].toString()),
+					new StatComparatifDto());
+			etatDto.setAnnee(obj[0].toString());
+			etatDto.setEtat(obj[1].toString());
+			etatDto.setGroup(0);
+			if (obj[3].toString().equals("1")) {
+				etatDto.setInitCpr(etatDto.getInitCpr() + Integer.parseInt(obj[4].toString()));
+			}
+			if (obj[3].toString().equals("4")) {
+				etatDto.setInitRh(etatDto.getInitRh() + Integer.parseInt(obj[4].toString()));
+			}
+			map.put(obj[0].toString().concat(obj[1].toString()), etatDto);
+
+			StatComparatifDto motifDto = map.getOrDefault(
+					obj[0].toString().concat(obj[1].toString()).concat(obj[2].toString()), new StatComparatifDto());
+			motifDto.setAnnee(obj[0].toString());
+			motifDto.setEtat(obj[1].toString().concat("-").concat(obj[2].toString()));
+
+			String group1 = obj[2].toString().startsWith("JUS") ? "JUS" : "AAAA";
+			StatComparatifDto decisionDto = map.getOrDefault(obj[0].toString().concat(obj[1].toString()).concat(group1),
+					new StatComparatifDto());
+			decisionDto.setAnnee(obj[0].toString());
+			decisionDto.setEtat(obj[1].toString().concat("-").concat(group1));
+
+			if (obj[3].toString().equals("1")) {
+				motifDto.setInitCpr(motifDto.getInitCpr() + Integer.parseInt(obj[4].toString()));
+				decisionDto.setInitCpr(decisionDto.getInitCpr() + motifDto.getInitCpr());
+			}
+			if (obj[3].toString().equals("4")) {
+				motifDto.setInitRh(motifDto.getInitRh() + Integer.parseInt(obj[4].toString()));
+				decisionDto.setInitRh(decisionDto.getInitRh() + motifDto.getInitRh());
+			}
+			if (Motif.NON_JUSTIFIE_MEDICALEMENT.getCode().equals(obj[2].toString())) {
+				motifDto.setGroup(1);
+			} else {
+				motifDto.setGroup(2);
+				decisionDto.setGroup(1);
+				map.put(obj[0].toString().concat(obj[1].toString()).concat(group1), decisionDto);
+			}
+			map.put(obj[0].toString().concat(obj[1].toString()).concat(obj[2].toString()), motifDto);
+		}
+
+		Map<String, List<StatComparatifDto>> result = new TreeMap<>(Comparable::compareTo);
+		result.putAll(map.values().stream().collect(Collectors.groupingBy(
+				stat -> stat.getEtat().concat("-").concat(String.valueOf(stat.getGroup())), Collectors.toList())));
+
+		return result;
+	}
+____________________________
+
+/**
+	 * Retourner les statistiques au cours de l'annee
+	 *
+	 * @return ResponseEntity<List<suviDto>>
+	 */
+	@PostMapping("/byPeriode")
+	@Operation(summary = "Récupérer les stats de l'année", description = "Retourne les suivis d'agent")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement") })
+	public ResponseEntity<Map<String, List<StatComparatifDto>>> getBilanComparatif(
+			@RequestBody StatComparatifDto statComparatifDto) {
+		log.info("Stat by région sur la prériode " + statComparatifDto.getDateDebut().toString() + " à "
+				+ statComparatifDto.getDateFin().toString());
+		return ResponseEntity.status(HttpStatus.OK).body(this.statistiqueService.getBilanComparatif(statComparatifDto));
+	}
+_______________________
+
+/**
+	 * Retourner les statistiques au cours de l'annee
+	 *
+	 * @return ResponseEntity<List<suviDto>>
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
+	@PostMapping(value = "/byRegion/download")
+	@Operation(summary = "Récupérer les stats de l'année", description = "Retourne les suivis d'agent")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement") })
+	public ResponseEntity<Resource> getDownloadStatEtablissementByPeriode(@RequestBody StatRegionDto statRegionDto)
+			throws IOException {
+		log.info("generate file stat by région " + statRegionDto.getLibelle() + " sur la prériode "
+				+ statRegionDto.getDateDebut().toString() + " à " + statRegionDto.getDateFin().toString());
+
+		Resource resource = new ByteArrayResource(
+				this.statistiqueService.generatedFileStatByRegionAndEtablissement(statRegionDto));
+		return ResponseEntity.status(HttpStatus.OK)
+				.header("Content-Disposition", "attachment; filename=\"Statistique par région.xlsx\"")
+				.contentLength(resource.contentLength())
+				.contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(resource);
+	}
+
+_____amélioré
+
+/**
+ * Génère et télécharge un fichier Excel contenant les statistiques des établissements 
+ * par région pour une période donnée.
+ *
+ * Cette API permet d'obtenir un rapport statistique sous forme de fichier Excel 
+ * en fonction des critères fournis dans l'objet {@link StatRegionDto}. 
+ *
+ * @param statRegionDto Objet contenant les informations de la région et la période concernée.
+ * @return ResponseEntity contenant le fichier Excel en tant que ressource téléchargeable.
+ * @throws IOException En cas d'erreur lors de la génération du fichier.
+ */
+@PostMapping(value = "/byRegion/download")
+@Operation(summary = "Télécharger les statistiques par région",
+           description = "Génère un fichier Excel contenant les suivis des agents par région pour une période donnée.")
+@ApiResponses(value = { 
+    @ApiResponse(responseCode = "200", description = "Fichier généré et disponible au téléchargement."),
+    @ApiResponse(responseCode = "400", description = "Requête invalide - Vérifiez les paramètres fournis."),
+    @ApiResponse(responseCode = "500", description = "Erreur interne du serveur - Une exception est levée lors du traitement.") 
+})
+public ResponseEntity<Resource> getDownloadStatEtablissementByPeriode(
+        @RequestBody StatRegionDto statRegionDto) throws IOException {
+    
+    log.info("Génération du fichier des statistiques pour la région {} sur la période du {} au {}", 
+             statRegionDto.getLibelle(), statRegionDto.getDateDebut(), statRegionDto.getDateFin());
+
+    // Génération du fichier en mémoire
+    Resource resource = new ByteArrayResource(
+            this.statistiqueService.generatedFileStatByRegionAndEtablissement(statRegionDto));
+
+    // Construction de la réponse HTTP avec en-têtes appropriés pour le téléchargement
+    return ResponseEntity.status(HttpStatus.OK)
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Statistiques_Region.xlsx\"")
+            .contentLength(resource.contentLength())
+            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .body(resource);
+}
+
+/**
+	 * 
+	 * @param searcheDto Objet contenant les critères de recherche
+	 * @param details Objet contenant les détails utilisateur de l'utilisateur actuellement authentifié
+	 * @return ResponseEntity<Page<EtudeDto>>
+	 */
+	@PostMapping("/search")
+	@Operation(summary = "Récupérer les suivis d'agent", description = "Retourne les suivis d'agent")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement")})
+	public ResponseEntity<Page<EtudeDto>> getEtudesPaginated(@RequestBody() SearcheDto searcheDto,
+															 @AuthenticationPrincipal UserDetails details) {
+		log.info("Get suivis agent");
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(this.etudeService.searchEtudesWithPagination(searcheDto, new ArrayList<>(details.getAuthorities())));
+	}
+_____________ Améliorée 
+
+/**
+ * Recherche et retourne une liste paginée des études correspondant aux critères spécifiés.
+ *
+ * @param searcheDto Objet contenant les critères de recherche (période, région, état, etc.).
+ * @param details Informations sur l'utilisateur actuellement authentifié, incluant ses rôles et permissions.
+ * @return ResponseEntity contenant une page de {@link EtudeDto} correspondant aux critères de recherche.
+ */
+@PostMapping("/search")
+@Operation(
+    summary = "Recherche des suivis d'agent",
+    description = "Retourne une liste paginée des suivis d'agent correspondant aux critères de recherche spécifiés."
+)
+@ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Succès - Retourne la liste paginée des suivis d'agent"),
+    @ApiResponse(responseCode = "400", description = "Requête invalide - Paramètres incorrects"),
+    @ApiResponse(responseCode = "401", description = "Non autorisé - L'utilisateur n'est pas authentifié"),
+    @ApiResponse(responseCode = "403", description = "Accès interdit - L'utilisateur ne dispose pas des permissions nécessaires"),
+    @ApiResponse(responseCode = "500", description = "Erreur interne du serveur - Une exception s'est produite lors du traitement")
+})
+public ResponseEntity<Page<EtudeDto>> getEtudesPaginated(
+        @RequestBody SearcheDto searcheDto,
+        @AuthenticationPrincipal UserDetails details) {
+    
+    log.info("Recherche des suivis d'agent avec critères : {}", searcheDto);
+    
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(this.etudeService.searchEtudesWithPagination(searcheDto, new ArrayList<>(details.getAuthorities())));
+}
+
+_____________to documente
+
+/**
+	 *
+	 * Retourner les détails d'étude d'un agent à partir de itEtude ou de immat
+	 * @param itEtude identifiant technique de l'étude
+	 * @param immat identifiant matricule d'un agent
+	 * @param details Objet contenant les informations sur l'utilisateur actuellement authentifié, incluant ses rôles et permissions.
+	 * @return ResponseEntity<EtudeDto>
+	 */
+	@GetMapping("/detail")
+	@Operation(summary = "Récupérer les details d'une étude", description = "Retourne le detail d'une étude")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error - Une exception est levée au cours du traitement")})
+	public ResponseEntity<EtudeDto> getDetailEtude(@RequestParam(name = "itEtude", required = false) Long itEtude,
+												   @RequestParam(name = "immat", required = false) String immat,
+												   @AuthenticationPrincipal UserDetails details) {
+		if (itEtude != null) {
+			log.info("Récupération des détails d'étude d'un agent ayant pour itEtude = {}", itEtude);
+			EtudeDto byIt = this.etudeService.findByIt(itEtude);
+			return ResponseEntity.status(HttpStatus.OK).body(byIt);
+		} else {
+			log.info("Récupération des détails d'étude d'un agent ayant pour immat = {}", immat);
+			EtudeDto byImmat = this.etudeService.findByImmat(new ArrayList<>(details.getAuthorities()), immat);
+			return ResponseEntity.status(HttpStatus.OK).body(byImmat);
+		}
+	}
+________ Améliorée 
+
+/**
+ * Récupère les détails d'une étude d'un agent en fonction de son identifiant technique (itEtude) ou de son matricule (immat).
+ * Si les deux paramètres sont fournis, itEtude est prioritaire.
+ *
+ * @param itEtude Identifiant technique de l'étude (optionnel).
+ * @param immat Matricule de l'agent pour récupérer l'étude (optionnel).
+ * @param details Objet contenant les informations de l'utilisateur actuellement authentifié, 
+ *               incluant ses rôles et permissions.
+ * @return ResponseEntity contenant un objet {@link EtudeDto} représentant les détails de l'étude.
+ *         Retourne un statut HTTP 200 si l'opération réussit.
+ * @throws IllegalArgumentException si les deux paramètres sont null.
+ * @throws RuntimeException en cas d'erreur interne lors du traitement de la requête.
+ */
+@GetMapping("/detail")
+@Operation(
+    summary = "Récupérer les détails d'une étude",
+    description = "Retourne les détails d'une étude en fonction de l'identifiant technique (itEtude) ou du matricule de l'agent (immat)."
+)
+@ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Détails de l'étude récupérés avec succès."),
+    @ApiResponse(responseCode = "400", description = "Requête invalide, aucun paramètre fourni."),
+    @ApiResponse(responseCode = "500", description = "Erreur interne du serveur lors du traitement de la demande.")
+})
+public ResponseEntity<EtudeDto> getDetailEtude(
+        @RequestParam(name = "itEtude", required = false) Long itEtude,
+        @RequestParam(name = "immat", required = false) String immat,
+        @AuthenticationPrincipal UserDetails details) {
+
+    if (itEtude != null) {
+        log.info("Récupération des détails de l'étude pour itEtude = {}", itEtude);
+        EtudeDto byIt = this.etudeService.findByIt(itEtude);
+        return ResponseEntity.ok(byIt);
+    } else if (immat != null) {
+        log.info("Récupération des détails de l'étude pour immat = {}", immat);
+        EtudeDto byImmat = this.etudeService.findByImmat(
+                new ArrayList<>(details.getAuthorities()), immat);
+        return ResponseEntity.ok(byImmat);
+    } else {
+        log.warn("Aucun paramètre fourni pour récupérer les détails d'une étude.");
+        throw new IllegalArgumentException("Au moins un des paramètres 'itEtude' ou 'immat' doit être fourni.");
+    }
+}
+
+_______________ Documentation technique angular
+
+Documentation Technique d'une Application Front-End Angular
+1. Introduction
+1.1 Objectif du document
+Décrire l'architecture, les composants et le fonctionnement de l'application Angular
+
+Servir de référence pour les développeurs et mainteneurs
+
+1.2 Portée de l'application
+Objectifs et fonctionnalités principales
+
+Public cible/utilisateurs finaux
+
+1.3 Conventions utilisées
+Normes de codage
+
+Convention de nommage (composants, services, etc.)
+
+2. Architecture Globale
+2.1 Structure du projet
+Organisation des dossiers (modules, composants, services, etc.)
+
+Diagramme de l'architecture globale
+
+2.2 Technologies utilisées
+Versions d'Angular et des principales dépendances
+
+Bibliothèques tierces (NgRx, Material, etc.)
+
+2.3 Flux de données
+Diagramme du flux de données
+
+Gestion d'état (Services, RxJS, NgRx, etc.)
+
+3. Modules et Fonctionnalités
+3.1 Modules principaux
+Description de chaque module (Feature Modules)
+
+Responsabilités de chaque module
+
+3.2 Composants clés
+Liste des composants principaux
+
+Responsabilités de chaque composant
+
+Relations entre composants (hiérarchie)
+
+3.3 Services
+Liste des services principaux
+
+Fonctionnalités offertes par chaque service
+
+Consommation d'API (endpoints utilisés)
+
+4. Configuration et Déploiement
+4.1 Prérequis
+Versions de Node.js, npm/yarn requises
+
+Variables d'environnement nécessaires
+
+4.2 Installation
+Étapes pour installer les dépendances
+
+Commandes de build (production/dev)
+
+4.3 Déploiement
+Procédure de déploiement
+
+Configuration serveur requise
+
+5. Bonnes Pratiques et Standards
+5.1 Guidelines de développement
+Structure des composants
+
+Gestion des subscriptions RxJS
+
+Gestion des erreurs
+
+5.2 Tests
+Stratégie de test (unitaires, intégration, e2e)
+
+Outils utilisés (Jasmine, Karma, Protractor, etc.)
+
+Couverture de test cible
+
+6. Sécurité
+6.1 Mesures implémentées
+Authentification/autorisation
+
+Protection XSS, CSRF
+
+Sécurisation des routes
+
+7. Performances
+7.1 Optimisations
+Stratégie de lazy loading
+
+Change detection strategy
+
+Optimisation du bundle
+
+7.2 Métriques
+Temps de chargement cible
+
+Score Lighthouse
+
+8. Annexes
+8.1 Glossaire
+Termes techniques spécifiques
+
+8.2 Références
+Documentation Angular
+
+Bibliothèques utilisées
+
+8.3 Historique des versions
+Journal des modifications importantes
+
+Conseils pour rédiger une bonne documentation:
+Inclure des diagrammes (architecture, flux de données)
+
+Maintenir la documentation à jour avec le code
+
+Utiliser des exemples de code quand nécessaire
+
+Documenter les décisions architecturales importantes
+
+Inclure les "pourquoi" pas juste les "comment"
+
+------- Vesion Gp
+
+Une documentation technique pour une application Front-End Angular doit contenir plusieurs sections essentielles pour assurer une bonne compréhension, une maintenance efficace et une collaboration fluide entre les développeurs.
+
+📌 Structure recommandée de la documentation technique Angular
+📖 1. Introduction
+Nom de l’application
+
+Description : Brève présentation du projet et de ses objectifs.
+
+Public cible : Qui va utiliser l’application (ex : clients, administrateurs, utilisateurs finaux) ?
+
+Version actuelle
+
+⚙️ 2. Architecture du projet
+Stack technologique : Angular, TypeScript, RxJS, SCSS, etc.
+
+Organisation des fichiers et modules : Explication de la structure des dossiers (src/app, src/assets, src/environments, etc.).
+
+Design Pattern utilisé : Modularisation, composant-based architecture, services injectables (DI).
+
+Flux de données : Explication du Data Binding, des Observables et de la communication entre composants.
+
+🚀 3. Installation et Configuration
+Prérequis : Node.js, Angular CLI, NPM/Yarn
+
+Installation : Commandes pour cloner et installer le projet
+
+bash
+Copy
+Edit
+git clone https://github.com/username/repo.git
+cd repo
+npm install
+Démarrage de l’application :
+
+bash
+Copy
+Edit
+ng serve
+Configuration des environnements (environment.ts, environment.prod.ts)
+
+🎨 4. UI/UX et Design
+Framework CSS utilisé : Bootstrap, Material Angular, Tailwind CSS…
+
+Principes de conception : Design System, Atomic Design, Responsive Design
+
+Gestion des thèmes
+
+🛠 5. Développement des Fonctionnalités
+Composants principaux (src/app/components)
+
+Services & API Calls (src/app/services)
+
+State Management : NgRx, BehaviorSubject, Services avec RxJS
+
+Routing & Navigation (app-routing.module.ts)
+
+🔗 6. Intégration avec le Backend
+Technologie backend utilisée : (Ex : Spring Boot, Node.js, Firebase)
+
+Endpoints consommés
+
+Gestion des erreurs HTTP (HttpInterceptor)
+
+🔐 7. Sécurité & Authentification
+Gestion des utilisateurs : JWT, OAuth, Firebase Auth
+
+Protection des routes (AuthGuard)
+
+Sanitization & Protection XSS
+
+📊 8. Tests et Qualité du Code
+Tests Unitaires : Jasmine/Karma
+
+Tests End-to-End (E2E) : Cypress, Protractor
+
+Linting & Formatage : ESLint, Prettier
+
+Analyse de code : SonarQube
+
+🏗 9. Déploiement et CI/CD
+Processus de build (ng build)
+
+Déploiement (Netlify, Vercel, Firebase Hosting, AWS S3)
+
+Pipeline CI/CD (GitHub Actions, GitLab CI, Jenkins)
+
+📌 10. Maintenance et Améliorations
+Roadmap des évolutions
+
+Problèmes connus et solutions
+
+Bonnes pratiques et guidelines
+
+🔹 Conclusion
+Ce document doit être clair, concis et bien structuré. Il peut aussi inclure des schémas et captures d'écran pour faciliter la compréhension. 
+
+3 Architecture 
+  3.1	Structure du projet
+   3.1.1 Frontend
+     3.1.1.1	Structure du module
+     3.1.1.2	Version des technologies 
+   3.1.2 Backend
+    3.1.2.1	Structure du module
+    3.1.2.2	Version des technologies
+  3.2	Flux de compilation
+4 Mise en œuvre
+  4.1 Frontend
+  4.2	Backend
+     4.2.1 Implémentation des services
+       4.2.1.1	Client
+	 a)Le service d’authentification
+	 b)Le service d’habilitation MSA
+	 c) Les services du RIT
+     4.2.1.2 Serveur
+       a) Le service d’information générale
+       b)	Les services métiers
+          -	Etude
+          -	Suivi
+          - 	Etc
+
+
+___________________________________________________
+
+
+Voici comment structurer la section 4.1 Frontend de votre documentation technique pour qu'elle soit pertinente, utile et conforme aux meilleures pratiques, en cohérence avec votre architecture décrite dans la section 3 :
+
+4. Mise en œuvre
+4.1 Frontend
+Cette section détaille l'implémentation des fonctionnalités frontend, en se focalisant sur :
+
+L’organisation du code selon les bonnes pratiques Angular.
+
+Les services clés et leur intégration avec le backend.
+
+Les optimisations et stratégies adoptées.
+
+4.1.1 Structure des Modules
+Modules Feature : Découpage par domaine fonctionnel (ex: AuthModule, RITModule, EtudeModule).
+
+Exemple :
+
+typescript
+Copy
+@NgModule({
+  imports: [SharedModule, HttpClientModule],
+  declarations: [LoginComponent, RegisterComponent],
+  exports: [AuthRoutingModule]
+})
+export class AuthModule {}
+SharedModule : Composants/directives/pipes réutilisables (ex: HeaderComponent, LoadingSpinner).
+
+CoreModule : Services globaux (ex: AuthService, LoggerService) chargé une seule fois (via providedIn: 'root').
+
+4.1.2 Services Frontend & Intégration Backend
+Chaque service est documenté avec :
+
+Rôle : Description concise.
+
+Endpoints consommés : URL et méthodes API.
+
+Gestion des erreurs : Stratégie (ex: intercepteurs HTTP).
+
+Service	Description	Endpoint Backend
+AuthService	Gère l’authentification (JWT, refresh token)	POST /api/auth/login
+MSAHabilitationService	Vérifie les permissions via MSA	GET /api/msa/habilitation/{role}
+RITService	Appels aux APIs du module RIT	GET /api/rit/transactions
+Exemple de code (AuthService) :
+
+typescript
+Copy
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  constructor(private http: HttpClient) {}
+  
+  login(credentials: {email: string, password: string}): Observable<User> {
+    return this.http.post<User>('/api/auth/login', credentials).pipe(
+      catchError(error => throwError(() => new Error('Échec de l’authentification')))
+  );
+  }
+}
+4.1.3 Stratégies Clés
+Lazy Loading : Chargement asynchrone des modules (ex: loadChildren: () => import('./rit/rit.module').then(m => m.RITModule)).
+
+State Management :
+
+NgRx : Si utilisé, décrire le store (actions/reducers/effects) pour les états complexes (ex: suivi des études).
+
+Services + RxJS : Pour une gestion légère (ex: BehaviorSubject pour le profil utilisateur).
+
+Performance :
+
+Change Detection OnPush pour les composants statiques.
+
+Utilisation de trackBy dans les *ngFor.
+
+4.1.4 Sécurité
+Intercepteurs HTTP : Ajout systématique des tokens JWT.
+
+Guardes de routes :
+
+AuthGuard : Restriction des accès non authentifiés.
+
+RoleGuard : Vérification des habilitations MSA.
+
+4.1.5 Tests
+Couverture minimale : 80% sur les services/composants critiques.
+
+Outils :
+
+Unitaires : Jasmine/Karma (ex: tests des Pipes).
+
+E2E : Cypress (scénarios d’authentification).
+
+Pourquoi cette structure ?
+
+Alignement avec l’architecture (section 3) : Répond aux points 3.1.1 (structure) et 3.2 (flux).
+
+Pratique : Les tableaux et exemples de code aident les développeurs à implémenter/modifier rapidement.
+
+Maintenabilité : Documente les choix techniques (ex: pourquoi NgRx ou pas).
+
+💡 Bonus : Ajoutez un diagramme d’interaction entre services (ex: séquence d’appels pour le login).
+
+Et si dans les service on a plusieurs méthode qui font appell au endpoint comment les documenter dans comme tu la fait?
+Voici comment documenter de manière claire et structurée les services contenant plusieurs méthodes appelant des endpoints, en suivant les meilleures pratiques de documentation technique :
+
+4.1.2 Services Frontend & Intégration Backend (Approche détaillée)
+Pour chaque service, utilisez cette structure :
+
+1. Service d'Authentification (AuthService)
+Rôle : Gère l'authentification, le renouvellement de token et la déconnexion.
+Technologies : HttpClient, RxJS, JWT.
+
+Méthode	Description	Endpoint	Paramètres	Réponse
+login(credentials)	Authentifie l'utilisateur	POST /api/auth/login	{email: string, password: string}	Observable<{token: string, user: User}>
+refreshToken()	Rafraîchit le JWT	POST /api/auth/refresh	{refreshToken: string}	Observable<{token: string}>
+logout()	Invalide la session	POST /api/auth/logout	null	Observable<void>
+Exemple de Code :
+
+typescript
+Copy
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  constructor(private http: HttpClient) {}
+
+  login(credentials: {email: string, password: string}): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>('/api/auth/login', credentials).pipe(
+      tap(response => this.storeToken(response.token)),
+      catchError(error => throwError(() => new Error('Login failed')))
+    );
+  }
+
+  private storeToken(token: string): void {
+    localStorage.setItem('jwt', token);
+  }
+}
+2. Service RIT (RITService)
+Rôle : Interagit avec les APIs du Registre des Transactions.
+
+Méthode	Description	Endpoint	Query Params	Réponse
+getTransactions()	Récupère les transactions	GET /api/rit/transactions	{page: number, limit: number}	Observable<Transaction[]>
+exportToPDF(id)	Génère un PDF pour une transaction	GET /api/rit/export/{id}	null	Observable<Blob>
+searchTransactions(query)	Recherche avancée	GET /api/rit/search	{query: string, dateRange: {...}}	Observable<Transaction[]>
+Exemple de Code :
+
+typescript
+Copy
+searchTransactions(query: string, dateRange?: {start: Date, end: Date}): Observable<Transaction[]> {
+  const params = new HttpParams()
+    .set('query', query)
+    .set('startDate', dateRange?.start.toISOString() || '')
+    .set('endDate', dateRange?.end.toISOString() || '');
+
+  return this.http.get<Transaction[]>('/api/rit/search', { params });
+}
+Bonnes Pratiques pour Documenter les Méthodes :
+Tableaux Synoptiques :
+
+Inclure colonnes : Méthode, Description, Endpoint, Paramètres (type), Réponse (type).
+
+Utiliser des types TypeScript (Observable<T>, void, interfaces custom).
+
+Exemples Concrets :
+
+Montrer l'utilisation typique avec HttpClient et RxJS.
+
+Documenter la gestion d'erreurs (catchError, throwError).
+
+Annotations Spéciales :
+
+typescript
+Copy
+/**
+ * @description Charge les transactions paginées depuis le backend
+ * @param page Numéro de page (défaut: 1)
+ * @param limit Nombre d'éléments par page (défaut: 20)
+ * @throws ApiError Si les paramètres sont invalides (code 400)
+ */
+getTransactions(page = 1, limit = 20): Observable<Transaction[]> {
+  // Implémentation...
+}
+Schémas Optionnels :
+
+Diagramme de séquence pour les appels complexes (ex: login → refresh token → accès aux données).
+
+Exemple de payload/response au format JSON.
+
+Alternative pour les Services Très Complexes
+Pour les services avec 10+ méthodes, créez une sous-section par groupe fonctionnel :
+
+4.1.2.1 Service MSA (MSAHabilitationService)
+Rôle : Gestion des permissions via Microservice d'Habilitation.
+
+Méthodes Utilisateur
+Méthode	Description	Endpoint
+getUserRoles()	Récupère les rôles	GET /api/msa/users/roles
+checkAccess()	Vérifie une permission	POST /api/msa/check
+Méthodes Administrateur
+Méthode	Description	Endpoint
+addRoleToUser()	Ajoute un rôle	PUT /api/msa/users/{id}/roles
+removeRoleFromUser()	Supprime un rôle	DELETE /api/msa/users/{id}/roles
+Cette approche permet :
+✅ Lisibilité : Les développeurs trouvent rapidement la méthode dont ils ont besoin.
+✅ Maintenabilité : Documentation alignée avec le code (pensez à générer une partie via Compodoc).
+✅ Exhaustivité : Couvre tous les cas d'usage (params, erreurs, types).
+
+__________________________________________
+
+
+1 Documents de référence
+2 Présentation générale
+   2.1	Introduction
+   2.2	Contexte et enjeu du projet
+   2.3	Contraintes et exigences
+
+
+3 Architecture 
+  3.1	Structure du projet
+   3.1.1 Frontend
+     3.1.1.1	Structure du module
+     3.1.1.2	Version des technologies 
+   3.1.2 Backend
+    3.1.2.1	Structure du module
+    3.1.2.2	Version des technologies
+  3.2	Flux de compilation
+4 Mise en œuvre
+  4.1 Frontend
+  4.2	Backend
+     4.2.1 Implémentation des services
+       4.2.1.1	Client
+	 a)Le service d’authentification
+	 b)Le service d’habilitation MSA
+	 c) Les services du RIT
+     4.2.1.2 Serveur
+       a) Le service d’information générale
+       b) Les services métiers
+          -	Authentification 
+	  -	Statistiques 
+          -	Etude
+          -	Suivi
+5 Annexe
+  5.1	Description des propriétés applicatives
+________________________________________________________________
+
+======+=>option 1 (Gp)
+Suggestions d'Amélioration pour la Section 4.1 (Frontend Angular) :
+1. Ajouter une Sous-Structure Claire
+4.1 Frontend devrait être décomposé en :
+
+4.1.1 Organisation des Modules/Composants
+
+Lazy loading, modules partagés (SharedModule), modules fonctionnels.
+
+Exemple :
+
+markdown
+Copy
+### 4.1.1 Modules
+- **AuthModule** : Routes `/login`, `/register`.  
+- **RITModule** : Chargé dynamiquement (`loadChildren`).  
+- **SharedModule** : Contient `HeaderComponent`, `SpinnerComponent`, pipes communs.
+4.1.2 Services et Intégration API (Déjà partiellement couvert, mais structurer comme ci-dessous)
+
+Par service, documenter :
+
+Endpoints (méthodes HTTP, URL).
+
+Intercepteurs (ex: ajout automatique des tokens).
+
+Gestion des erreurs (ex: redirection si 401).
+
+4.1.3 Stratégies de Performance
+
+Change Detection (OnPush vs Default).
+
+Optimisation du bundle (ex: ng build --prod).
+
+Utilisation de trackBy dans les boucles *ngFor.
+
+4.1.4 Sécurité
+
+Guards (ex: AuthGuard, RoleGuard).
+
+Protection XSS (sanitization avec DomSanitizer).
+
+4.1.5 Tests
+
+Couverture des tests unitaires (Jasmine/Karma) et E2E (Cypress).
+
+Exemple de test critique :
+
+typescript
+Copy
+it('should redirect to login if token expired', fakeAsync(() => {
+  spyOn(authService, 'isTokenValid').and.returnValue(false);
+  router.navigate(['/dashboard']);
+  tick();
+  expect(router.url).toBe('/login');
+}));
+2. Compléter les Éléments Manquants
+Section Actuelle	À Ajouter
+3.1.1.2 Versions	Liste précise des dépendances critiques (@angular/core, rxjs, ngrx, etc.) + contraintes de compatibilité.
+4.1 Frontend	Diagrammes : Flux de navigation entre composants, interaction services/components.
+5 Annexe	Glossaire : Explications des termes techniques (ex: "JWT", "Lazy Loading").
+Exemple de Structure Optimisée pour 4.1 :
+markdown
+Copy
+### 4.1 Frontend (Angular)
+#### 4.1.1 Architecture des Modules
+- **Modules Feature** : Liste + rôle (ex: `AuthModule`, `RITModule`).  
+- **Modules Techniques** : `CoreModule` (services globaux), `SharedModule`.  
+
+#### 4.1.2 Services Clés
+| Service               | Méthodes                          | Endpoint                 |  
+|-----------------------|-----------------------------------|--------------------------|  
+| `AuthService`         | `login()`, `refreshToken()`       | `POST /api/auth/login`   |  
+| `RITService`          | `getTransactions()`, `exportPDF()`| `GET /api/rit/data`      |  
+
+#### 4.1.3 Sécurité
+- **Intercepteur HTTP** : Ajout des headers JWT.  
+- **Guard** :  
+  ```typescript
+  @Injectable()
+  export class RoleGuard implements CanActivate {
+    constructor(private auth: AuthService) {}
+    canActivate(): boolean {
+      return this.auth.hasRole('admin');
+    }
+  }
+4.1.4 Performances
+Lazy Loading :
+
+typescript
+Copy
+{ path: 'rit', loadChildren: () => import('./rit/rit.module').then(m => m.RITModule) }
+Optimisations : Préchargement des modules critiques (preloadAllModules).
+
+Copy
+
+---
+
+### **Pourquoi Ces Ajouts ?**  
+1. **Alignement avec les Bonnes Pratiques Angular** :  
+   - Les équipes attendent des détails sur les modules et l'injection de dépendances.  
+2. **Maintenabilité** :  
+   - Documenter les intercepteurs/guards évite des erreurs de sécurité courantes.  
+3. **Onboarding** :  
+   - Un nouveau développeur comprend rapidement où implémenter une fonctionnalité (ex: ajouter un service vs un composant).  
+
+> 💡 **Bonus** : Ajoutez un lien vers la documentation générée automatiquement (ex: [Compodoc](https://compodoc.app/)) en **5. Annexe**.
+
+
+1. Dans la partie 3.1.1.1 (Architecture - Structure des modules)
+Objectif : Décrire le "quoi"
+
+Lister les modules existants et leur rôle global
+
+Schéma hiérarchique (ex: AppModule → CoreModule → FeatureModules)
+
+Exemple :
+
+markdown
+Copy
+### 3.1.1.1 Structure des modules Frontend
+- **AuthModule** : Gère tout le flux d'authentification  
+- **RITModule** : Contient les composants liés au Registre des Transactions  
+- **SharedModule** : Composants/réutilisables (Boutons, Loaders...)  
+2. Dans la partie 4.1 (Mise en œuvre Frontend)
+Objectif : Expliquer le "comment" et le "pourquoi"
+
+4.1.1 Organisation des Modules/Composants (sans répéter la structure) :
+
+Bonnes pratiques d'implémentation :
+
+markdown
+Copy
+### 4.1.1 Organisation des Modules  
+- **Lazy Loading** :  
+  ```typescript 
+  // Dans app-routing.module.ts  
+  { path: 'rit', loadChildren: () => import('./rit/rit.module').then(m => m.RITModule) }  
+Pourquoi SharedModule : Éviter les imports en double (ex: CommonModule, FormsModule)
+
+Stratégie de découpage : 1 module = 1 domaine fonctionnel (ex: AuthModule isolé pour faciliter les tests)
+
+Copy
+Cas particuliers :
+
+Module "Core" vs "Shared" : différences et règles d'usage
+
+Injection de services (providedIn: 'root' vs providers: [] dans un module)
+
+Exemple Concret de Complémentarité
+Section 3.1.1.1 (Architecture)	Section 4.1 (Mise en œuvre)
+"Le projet utilise AuthModule pour l'authentification"	"AuthModule est chargé dynamiquement via loadChildren pour réduire le bundle initial"
+"SharedModule contient des composants réutilisables"	"SharedModule importe uniquement des composants 'dumb' (sans logique métier) pour maintenir la testabilité"
+Points Clés à Ajouter dans 4.1 (sans redite)
+Décisions Techniques :
+
+Pourquoi avoir choisi le lazy loading ? (ex: performance sur mobile)
+
+Exemple de configuration de préchargement :
+
+typescript
+Copy
+@NgModule({  
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],  
+})  
+Anti-Patterns à Éviter :
+
+Exemple : "Ne pas déclarer de services dans SharedModule pour éviter des instances multiples"
+
+Migration/Évolutivité :
+
+Comment ajouter un nouveau module ? (ex: génération via ng generate module + ajout dans les routes)
+
+Conclusion
+3.1.1.1 → Descriptif statique (ce qui existe).
+
+4.1 → Dynamique/implémentation (comment ça marche, bonnes pratiques).
+
+Éviter la copie : Utiliser des références croisées ("Voir section 3.1.1.1 pour la liste complète des modules").
+
+______step by step
+
+4.1 Frontend (Angular) - Exemple Complet
+4.1.1 Organisation des Modules/Composants
+Objectif : Expliquer comment les modules sont structurés et pourquoi.
+
+### 4.1.1 Organisation des Modules  
+#### Lazy Loading des Feature Modules  
+- **Exemple** : Chargement dynamique du module `RITModule` pour réduire le bundle initial :  
+  ```typescript 
+  // app-routing.module.ts
+  { 
+    path: 'transactions', 
+    loadChildren: () => import('./rit/rit.module').then(m => m.RITModule) 
+  }
+
+Bonnes Pratiques :
+
+1 module = 1 domaine fonctionnel (ex: AuthModule isolé pour faciliter les tests).
+
+SharedModule : Uniquement pour les composants/directives réutilisables et sans état (ex: ButtonComponent, DatePipe).
+
+Stratégie d'Injection des Services
+providedIn: 'root' pour les services globaux (ex: AuthService).
+
+Éviter les providers: [] dans SharedModule pour prévenir les instances multiples.
+
+
+---
+
+#### **4.1.2 Services et Intégration API**  
+**Objectif** : Montrer comment les services consomment les APIs.  
+
+```markdown
+### 4.1.2 Services Clés  
+#### AuthService (Authentification)  
+- **Méthodes** :  
+  ```typescript
+  login(email: string, password: string): Observable<User> {
+    return this.http.post<User>('/api/auth/login', { email, password }).pipe(
+      catchError(err => throwError(() => new Error('Échec de la connexion')))
+  }
+
+Intercepteur HTTP : Ajout automatique du token JWT :
+
+intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  const authReq = req.clone({ 
+    headers: req.headers.set('Authorization', `Bearer ${this.auth.token}`)
+  });
+  return next.handle(authReq);
+}
+
+RITService (Registre des Transactions)
+getTransactions(): Observable<Transaction[]> {
+  return this.http.get<Transaction[]>('/api/rit/transactions').pipe(
+    catchError(err => {
+      this.notifier.showError('Erreur de chargement');
+      return EMPTY;  // Ne pas casser le flux Observable
+    })
+  );
+}
+
+
+---
+
+#### **4.1.3 Sécurité**  
+**Objectif** : Décrire les mécanismes de protection.  
+
+```markdown
+### 4.1.3 Sécurité  
+#### Guards  
+- **Exemple de `RoleGuard`** :  
+  ```typescript
+  canActivate(): boolean {
+    if (!this.auth.hasRole('admin')) {
+      this.router.navigate(['/forbidden']);
+      return false;
+    }
+    return true;
+  }
+
+_______Nouveau plan
+
+Voici un plan révisé et optimisé pour votre documentation technique, avec une structure claire et non redondante, en intégrant les meilleures pratiques Angular :
+
+Documentation Technique - Plan Révisé
+1. Documents de Référence
+Normes, guides de style, liens vers la documentation Angular
+
+2. Présentation Générale
+2.1 Introduction
+2.2 Contexte et Enjeux
+2.3 Contraintes Techniques
+Compatibilité navigateurs
+
+Exigences de performance
+
+3. Architecture
+3.1 Structure Globale
+3.1.1 Frontend
+3.1.1.1 Structure des Modules (description statique)
+
+Liste des modules (Core, Shared, Feature)
+
+Diagramme de dépendance
+
+3.1.1.2 Versions
+
+Angular et principales dépendances
+
+Contraintes de compatibilité
+
+3.1.2 Backend
+(Structure existante maintenue)
+
+3.2 Flux de Compilation
+Processus de build (dev/prod)
+
+Outils CI/CD
+
+4. Mise en Œuvre
+4.1 Frontend (Angular)
+4.1.1 Implémentation des Modules (complète 3.1.1.1 sans redondance)
+Stratégie de lazy loading
+
+Exemple concret :
+
+typescript
+Copy
+// Configuration typique
+{
+  path: 'admin',
+  loadChildren: () => import('./admin/admin.module')
+                   .then(m => m.AdminModule),
+  canLoad: [AuthGuard]
+}
+Bonnes pratiques :
+
+Injection de services (providedIn vs providers)
+
+Découpage des modules fonctionnels
+
+4.1.2 Services et Communication API
+Tableau synthétique des services :
+
+Service	Méthode	Endpoint	Sécurité
+AuthService	login()	POST /auth	JWT
+RITService	getItems()	GET /rit	MSA
+Exemple d'intercepteur :
+
+typescript
+Copy
+intercept(req: HttpRequest<any>, next: HttpHandler) {
+  const authReq = req.clone({
+    headers: req.headers.set('X-Auth-Token', this.auth.token)
+  });
+  return next.handle(authReq);
+}
+4.1.3 Gestion d'État
+Comparatif des solutions :
+
+Services + BehaviorSubject
+
+NgRx (si utilisé)
+
+Exemple de store :
+
+typescript
+Copy
+@Injectable()
+export class UserStore {
+  private _users = new BehaviorSubject<User[]>([]);
+  readonly users$ = this._users.asObservable();
+}
+4.1.4 Sécurité
+Implémentation des guards :
+
+typescript
+Copy
+canActivate(): boolean {
+  return this.auth.hasRole('admin') 
+    ? true
+    : this.router.navigate(['/access-denied']);
+}
+Protection XSS avec DomSanitizer
+
+4.1.5 Optimisation des Performances
+Stratégies :
+
+OnPush Change Detection
+
+trackBy dans ngFor
+
+Préchargement des modules
+
+Métriques :
+
+Taille du bundle
+
+Scores Lighthouse
+
+4.1.6 Stratégie de Tests
+Matrice de couverture :
+
+Type	Outil	Cible	Exemple
+Unitaire	Jasmine	80%	Composants critiques
+Intégration	TestBed	70%	Services
+E2E	Cypress	100%	Flux auth
+4.2 Backend
+(Structure existante maintenue)
+
+5. Annexes
+5.1 Glossaire Technique
+Termes spécifiques (JWT, MSA, etc.)
+
+5.2 Exemples Complets
+Flux d'authentification
+
+CRUD complet
+
+5.3 Historique des Versions
+Points Clés du Nouveau Plan :
+Évite les redondances :
+
+La section 3 décrit le "quoi", la section 4 explique le "comment"
+
+Ex : 3.1.1.1 liste les modules, 4.1.1 explique leur utilisation
+
+Pratique et concret :
+
+Intègre des exemples de code immédiatement exploitables
+
+Tableaux synthétiques pour les services/APIs
+
+Couvre tous les aspects critiques :
+
+Sécurité, performance, tests souvent négligés
+
+Inclut des métriques mesurables
+
+Adaptable :
+
+Chaque section peut être enrichie sans perturber la structure
+
+Permet d'ajouter des diagrammes (architecture, flux)
+
+💡 Conseil : Utilisez des outils comme Compodoc pour générer automatiquement une partie de cette documentation à partir des commentaires code.
+
+_____________________
+
+Components
+-agent
+-confirmation-dialog
+-gestionnaire
+-search
+-statut-etude
+-type-suivi
+
+pages
+-arrets
+-login
+-statistiques
+-suivi-agent
+
+services
+-agent.service.ts
+-authentification.service.ts
+-etude.service.ts
+-generic.service.ts
+-loading.service.ts
+-loggedin-guard.service.ts
+-parameter.service.ts
+-statistique.sevice.ts
+-storage.service.ts
+-suivi.service.ts
+
+helpers
+url-helpers.ts
+
+_____________________
+
+4.1 Frontend (Angular)
+4.1.1 Architecture des Composants
+Objectif : Décrire le rôle et l'organisation des composants.
+
+Composants Réutilisables (Shared)
+Composant	Rôle	Exemple d'Usage
+confirmation-dialog	Boîte de dialogue générique pour confirmations	Suppression d'un agent
+search	Barre de recherche unifiée	Filtrage des études/agents
+statut-etude	Affichage visuel du statut (badges/icônes)	Liste des études
+Pages (Feature Components)
+Page	Route	Services Utilisés
+login	/login	authentification.service, storage.service
+suivi-agent	/suivi-agent	agent.service, suivi.service
+statistiques	/stats	statistique.service, etude.service
+Exemple de Code :
+
+typescript
+Copy
+// suivi-agent.component.ts
+@Component({
+  selector: 'app-suivi-agent',
+  templateUrl: './suivi-agent.component.html',
+  providers: [AgentService, SuiviService] // Services spécifiques à la page
+})
+export class SuiviAgentComponent implements OnInit {
+  constructor(private agentService: AgentService) {}
+}
+4.1.2 Services et Logique Métier
+Objectif : Expliquer comment les services interagissent avec les composants/APIs.
+
+Services Principaux
+Service	Rôle	Méthodes Clés
+authentification.service	Gestion login/logout, stockage token	login(), logout(), isLoggedIn()
+agent.service	CRUD agents, affectation aux études	getAgents(), assignToEtude()
+etude.service	Récupération des études (filtrage, statuts)	fetchEtudes(), updateStatut()
+Exemple d'Intégration :
+
+typescript
+Copy
+// etude.service.ts
+@Injectable({ providedIn: 'root' })
+export class EtudeService {
+  private apiUrl = environment.apiUrl + '/etudes';
+
+  constructor(private http: HttpClient) {}
+
+  fetchEtudes(params?: { statut?: string }): Observable<Etude[]> {
+    return this.http.get<Etude[]>(this.apiUrl, { params });
+  }
+}
+Helpers
+url-helpers.ts :
+
+typescript
+Copy
+// Exemple de fonction helper
+export const buildQueryParams = (params: Record<string, string>): string => {
+  return new URLSearchParams(params).toString();
+};
+4.1.3 Gestion des États et Données
+Stratégies :
+
+Services + BehaviorSubject pour les états simples (ex: statut de connexion) :
+
+typescript
+Copy
+// storage.service.ts
+private _isLoggedIn = new BehaviorSubject<boolean>(false);
+isLoggedIn$ = this._isLoggedIn.asObservable();
+Optimisation des Chargements :
+
+Utilisation de loading.service pour les indicateurs globaux :
+
+html
+Copy
+<app-spinner *ngIf="loadingService.isLoading$ | async"></app-spinner>
+Run HTML
+4.1.4 Sécurité et Routing
+Guards
+loggedin-guard.service :
+
+typescript
+Copy
+canActivate(): boolean {
+  if (!this.auth.isLoggedIn()) {
+    this.router.navigate(['/login']);
+    return false;
+  }
+  return true;
+}
+Protection des Routes
+typescript
+Copy
+// app-routing.module.ts
+{
+  path: 'arrets',
+  component: ArretsComponent,
+  canActivate: [LoggedinGuard]
+}
+4.1.5 Bonnes Pratiques et Optimisations
+Performance
+Lazy Loading des Pages :
+
+typescript
+Copy
+{ path: 'statistiques', loadChildren: () => import('./pages/statistiques/statistiques.module').then(m => m.StatistiquesModule) }
+Change Detection :
+
+typescript
+Copy
+@Component({
+  changeDetection: ChangeDetectionStrategy.OnPush // Pour les composants statiques
+})
+Maintenabilité
+Services Génériques (generic.service) :
+
+Méthodes réutilisables pour les requêtes HTTP de base (GET, POST, etc.).
+
+Pourquoi Cette Structure ?
+Clarté :
+
+Séparation visuelle entre composants, services, et logique métier.
+
+Pratique :
+
+Tableaux récapitulatifs pour une consultation rapide.
+
+Exemples de code directement réutilisables.
+
+Évolutif :
+
+Ajout facile de nouveaux composants/services sans restructuration.
+
+💡 Bonus : Ajoutez un diagramme d'interaction entre les composants et services pour illustrer le flux de données (ex: MermaidJS).
+
+mermaid
+Copy
+graph TD
+  A[LoginComponent] -->|login()| B(authentification.service)
+  B -->|JWT| C[storage.service]
+  D[suivi-agent.component] -->|getAgents()| E[agent.service]
+  E -->|HTTP| F[Backend]
+
+
+
+ Pourquoi utiliser des composants ?
+✅ Réutilisabilité : Un composant peut être utilisé plusieurs fois dans l’application.
+✅ Modularité : L’application est divisée en plusieurs petites parties indépendantes.
+✅ Maintenabilité : Chaque composant est géré indépendamment, ce qui facilite les mises à jour.
+✅ Performance : Angular optimise les rendus des composants pour une meilleure fluidité.
+
+
+Les composants Angular sont les briques de base d'une application Angular. Ils servent à structurer, afficher et gérer l’interface utilisateur (UI) de l’application de manière modulaire et réutilisable.
+##################
+
+export class AuthentificationService {
+
+  constructor(private http: HttpClient) {
+  }
+
+  getCustomHeaders(): HttpHeaders {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json; charset=UTF-8')
+      .set('Access-Control-Allow-Credentials', 'true')
+      .set('Access-Control-Allow-Origin', '*');
+    return headers;
+  }
+
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(UrlHelpers.LOGIN, { username, password }, { headers: this.getCustomHeaders() });
+  }
+
+  logout(user: User): Observable<any> {
+    return this.http.post(UrlHelpers.LOGOUT, user, { headers: this.getCustomHeaders() });
+  }
+}
+
+export class SuiviService extends GenericService {
+  constructor(private http: HttpClient) {
+    super();
+  }
+
+  public findByImmat(immat: string): Observable<any> {
+    return this.http.get<Suivi>(UrlHelpers.API_SUIVI_DETAIL, { headers: this.getCustomHeaders(), params: new HttpParams().set("immat", immat) });
+  }
+
+  public findByIt(itSuivi: number): Observable<any> {
+    return this.http.get<Suivi>(UrlHelpers.API_SUIVI_DETAIL, { headers: this.getCustomHeaders(), params: new HttpParams().set("itSuivi", itSuivi) });
+  }
+
+  public searchByImmat(immat: string | undefined): Observable<any> {
+    if (immat)
+      return this.http.get<Suivi[]>(UrlHelpers.API_SUIVI, { headers: this.getCustomHeaders(), params: new HttpParams().set("immat", immat) });
+    return this.http.get<Suivi[]>(UrlHelpers.API_SUIVI, { headers: this.getCustomHeaders() });
+  }
+
+  public saveSuivi(suivi: Suivi) {
+    return this.http.post<Suivi>(UrlHelpers.API_SUIVI_SAVE, suivi, { headers: this.getCustomHeaders() });
+  }
+
+  public supprimerSuivi(itSuivi: number) {
+    return this.http.delete<Suivi>(UrlHelpers.API_SUIVI_ABANDONNER + itSuivi, { headers: this.getCustomHeaders() });
+  }
+}
+
+export class GenericService {
+
+  getCustomHeaders(): HttpHeaders {
+
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json; charset=UTF-8')
+      .set('Access-Control-Allow-Headers', 'Content-Type')
+      .set('Access-Control-Allow-Methods', 'GET,PUT,POST')
+      .set('Access-Control-Allow-Credentials', 'true')
+      .set('Access-Control-Allow-Origin', '*');
+    //.set('Authorization', `${user.type} ${user.token}`);
+    return headers;
+  }
+
+
+  handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    // Return an observable with a user-facing error message.
+    return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+}
+
+
+
+<ns1:Document xmlns:ns1="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
+</ns1:Document>
+
+
+export class LoadingService {
+
+    private loadingSubject = new BehaviorSubject<boolean>(false);
+
+    loading$: Observable<boolean> = this.loadingSubject.asObservable();
+
+    loadingOn() {
+        this.loadingSubject.next(true);
+    }
+
+    loadingOff() {
+        this.loadingSubject.next(false);
+    }
+}
+
+<button mat-button type="submit" class="cpr-bgcolor-primary ms-1" *ngIf="myForm.controls.invalid" (click)="save()">
+    <mat-icon>save</mat-icon> Enregister
+  </button>
+
+getDatas(element: string) {
+    return element ? element.replace('{', '').replace('}', '').replace(/\"/gi, '').replace(/\,/gi, "<br/>") : '';
+  }
+
+
+getDatas(element: string): string {
+  if (!element) return '';
+  
+  return element
+    .replace(/[{}"]/g, '')  // Removes { }, and "
+    .replace(/,/g, '<br/>'); // Replaces commas with <br/>
+}
+
+
+@XmlSchema(
+    namespace = "urn:iso:std:iso:20022:tech:xsd:pain.008.001.02",
+    elementFormDefault = XmlNsForm.QUALIFIED,
+    xmlns = {
+        @XmlNs(prefix="", namespaceURI="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02")
+    }
+) 
+
+_____________________
+
+export class StorageService {
+  constructor() { }
+
+  clean(): void {
+    sessionStorage.clear();
+  }
+
+  public saveUser(user: User): void {
+    sessionStorage.removeItem(USER_KEY);
+    sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+  }
+
+  public getUser(): User | null {
+    const user = sessionStorage.getItem(USER_KEY);
+    if (user) {
+      return JSON.parse(user);
+    }
+
+    return null;
+  }
+
+  public isLoggedIn(): boolean {
+    const user = sessionStorage.getItem(USER_KEY);
+    if (user) {
+      return true;
+    }
+
+    return false;
+  }
+
+  reloadPage(): void {
+    window.location.reload();
+  }
+}
+__________________________ section securité
+
+4.1.5 Sécurité et Authentification
+Cette section décrit les mécanismes de sécurité et d’authentification mis en œuvre dans la partie frontend de l’application, développée en Angular. Elle couvre l’identification des utilisateurs, la gestion des sessions, la sécurisation des échanges HTTP, ainsi que les bonnes pratiques appliquées pour garantir la confidentialité et l’intégrité des données.
+
+1. Mécanisme d’authentification
+L’application utilise un système d’authentification basé sur des identifiants classiques (nom d’utilisateur et mot de passe). Lorsqu’un utilisateur soumet ses informations via le formulaire de connexion, le service AuthentificationService envoie une requête POST vers le backend via l’endpoint d’authentification.
+
+En cas de réponse positive, un objet utilisateur est retourné et stocké localement côté client pour maintenir l’état de la session.
+
+2. Gestion de session utilisateur
+Le service StorageService est responsable de la gestion de session côté frontend :
+
+Enregistrement des données utilisateur dans le sessionStorage via la méthode saveUser().
+
+Lecture des données pour vérifier si un utilisateur est connecté avec getUser() et isLoggedIn().
+
+Nettoyage des données de session à la déconnexion à l’aide de la méthode clean().
+
+Actualisation de la page si nécessaire via reloadPage().
+
+Remarque : L’utilisation du sessionStorage limite la persistance de la session à la durée de la session navigateur, réduisant ainsi les risques d’accès prolongé non autorisé.
+
+3. Sécurisation des requêtes HTTP
+Toutes les requêtes HTTP vers le backend sont accompagnées d’en-têtes personnalisés définis dans la méthode getCustomHeaders() des services :
+
+Content-Type: application/json; charset=UTF-8
+
+Access-Control-Allow-Origin: *
+
+Access-Control-Allow-Credentials: true
+
+Ces en-têtes permettent de configurer le comportement CORS et d’assurer un échange sécurisé des données.
+
+4. Prévention des failles XSS et CSRF
+Angular fournit nativement une protection contre les attaques Cross-Site Scripting (XSS) en échappant automatiquement les expressions dans les templates HTML.
+
+Les requêtes HTTP sont gérées avec HttpClient, ce qui limite les attaques de type Cross-Site Request Forgery (CSRF).
+
+Le backend peut, si nécessaire, implémenter des mécanismes complémentaires de protection CSRF à l’aide de tokens envoyés dans les en-têtes HTTP.
+
+5. Sécurité des données stockées
+Les données utilisateur sont temporairement stockées dans le sessionStorage, ce qui limite leur exposition. Toutefois, aucune information sensible (mot de passe, token d’accès non chiffré, etc.) n’est stockée côté client.
+
+Des pistes d’amélioration peuvent inclure :
+
+Le chiffrement local des données avant stockage (optionnel selon les besoins).
+
+Le passage à HttpOnly cookies côté serveur pour renforcer la sécurité.
+
+6. Gestion des accès et habilitations
+Un mécanisme de gestion des habilitations peut être mis en place côté frontend via des guards Angular (AuthGuard, RoleGuard, etc.) afin de restreindre l’accès à certaines routes ou composants en fonction du rôle ou du profil de l’utilisateur.
+
+💡 Conclusion :
+L’ensemble des pratiques mises en place permet de garantir une navigation sécurisée pour l’utilisateur tout en assurant la confidentialité et l’intégrité des échanges avec le backend.
+
+________________
+
+StorageService
+Le service StorageService gère la persistance temporaire des données utilisateur dans le sessionStorage du navigateur. Il est utilisé principalement pour enregistrer, récupérer ou supprimer les informations liées à la session courante de l’utilisateur.
+
+Fonctionnalités :
+saveUser(user: User): void
+Enregistre les informations de l'utilisateur dans le sessionStorage. Si des données utilisateur sont déjà présentes, elles sont supprimées avant l'enregistrement du nouvel objet.
+
+getUser(): User | null
+Récupère les données de l'utilisateur stockées dans le sessionStorage et les désérialise. Retourne null si aucune information n'est présente.
+
+isLoggedIn(): boolean
+Vérifie si un utilisateur est connecté en consultant la présence des données dans le sessionStorage.
+
+clean(): void
+Vide entièrement le sessionStorage. Cette méthode est généralement appelée lors de la déconnexion.
+
+reloadPage(): void
+Rafraîchit la page actuelle du navigateur. Cette fonctionnalité peut être utilisée après des opérations critiques comme la déconnexion ou le changement de profil.
+
+Utilisation :
+Le StorageService est utilisé dans les composants et services liés à l’authentification et à la gestion de session pour assurer une gestion efficace de l'état utilisateur sans avoir recours à des appels serveur fréquents.
+
+_______________________________
+
+1=>Transferts de fichiers et de messages
+Indiquer une liste des échanges en précisant les destinataires et émetteurs, les volumétries estimées et les vecteurs utilisés (EAI, ESB, MQ), ainsi que les éventuelles particularités des fichiers et/ou messages à transférer
+
+2=>Expliquer proprement un schema qui montre l'architecture applicative avec interactions extérieurs 
+Utilisateur interagit avec l'app XMP, avant toute interaction l'authentification est necessaire, elle se fait via LDAP et l'autorisation via MSA pour les droits et roles.
+La récuperation des information personnel des Agents ou individu se fait via un service SOAP (service RIT)
+
+3=> Service transactionnel (desc: Indiquer les jours et heures d’ouverture du service transactionnel. Notre App est une app normale, pas d'horaire special d'ouverture de service)
+4=> Traitement par lot (detial: Indiquer les traitements par lots / batch prévus dans la solution logicielle. Il n'y a pas de traitement par lots / batch dans notre application)
+5=> Transferts de fichiers et de messages (detail: Indiquer une liste des échanges en précisant les destinataires et émetteurs, les volumétries estimées et les vecteurs utilisés (EAI, ESB, MQ), ainsi que les éventuelles particularités des fichiers et/ou messages à transférer. Nous utilisons uniquement dans notre app les protocole SOAP et HTTPS / REST)
+6. Base de données (detail: Indiquer une estimation de la volumétrie contenue dans la ou les bases de données. L’utilisation d’options particulières (type LONG/RAW/LOB/XML, partitionnement, …) est à indiquer.
+7. passage en secours (detail: Préciser les mécanismes du passage en secours de l’application.)
+
+_________ response
+
+. Transferts de fichiers et de messages
+L'application utilise des échanges de messages essentiellement via des protocoles HTTPS/REST et SOAP, sans recours à des bus d'intégration de type EAI, ESB, ou MQ.
+
+Émetteur : Application XMP
+
+Destinataire : Service d'authentification LDAP (pour l'identité) et MSA (pour l'autorisation)
+
+Vecteur : HTTPS / REST
+
+Volumétrie estimée : faible, typiquement quelques Ko par requête (dépend de la fréquence d'utilisation)
+
+Particularité : échanges en temps réel, format JSON
+
+Émetteur : Application XMP
+
+Destinataire : Service RIT (service SOAP pour la récupération des informations agents)
+
+Vecteur : SOAP / HTTPS
+
+Volumétrie estimée : faible à moyenne, variable selon les données récupérées (quelques Ko à dizaines de Ko)
+
+Particularité : format XML structuré, messages synchrones
+
+Aucun fichier n'est transféré en dehors de ces échanges de messages. Aucun traitement de masse ou de type batch n'est prévu dans l'architecture.
+
+2. Architecture applicative avec interactions extérieures
+Description textuelle :
+L'utilisateur interagit avec l'application XMP via une interface web ou mobile. Avant toute interaction, l'utilisateur doit être authentifié et autorisé :
+
+L’authentification se fait via une connexion sécurisée au serveur LDAP, qui vérifie l’identité de l’utilisateur.
+
+Une fois authentifié, l’autorisation (droits d’accès, rôles) est gérée via le service MSA.
+
+Lorsque l’utilisateur accède à une fonctionnalité nécessitant des informations personnelles d’un agent ou d’un individu, l’application XMP fait appel à un service externe SOAP appelé Service RIT, qui fournit ces données.
+
+Schéma d’architecture applicative :
+lua
+Copy
+Edit
+[Utilisateur]
+     |
+     v
+ [Interface XMP]
+     |
+     |---> [LDAP] (Authentification)
+     |
+     |---> [MSA] (Autorisation / Rôles)
+     |
+     |---> [Service RIT] (via SOAP) <-- Récupération des infos agents
+3. Service transactionnel
+Le service transactionnel est accessible 24h/24 et 7j/7, sans contraintes spécifiques d’horaires. L’application ne présente aucune restriction quant à l’utilisation de ses fonctionnalités selon l’heure ou le jour.
+
+4. Traitement par lot
+Aucun traitement par lots (batch) n’est prévu dans la solution logicielle. Toutes les interactions sont effectuées en temps réel à la demande de l'utilisateur ou de l'application.
+
+5. Transferts de fichiers et de messages (détail)
+L’application repose uniquement sur des échanges en ligne (temps réel) via les protocoles SOAP et HTTPS/REST. Aucun transfert de fichiers ou d’échange asynchrone (MQ, EAI, etc.) n’est mis en œuvre. Les messages échangés sont principalement de type :
+
+Requêtes REST/JSON : pour l’authentification, autorisation et autres interactions avec services internes.
+
+Messages SOAP/XML : pour la récupération des données agents via le Service RIT.
+
+6. Base de données
+La base de données utilisée dans l’application stocke les données métiers de manière structurée.
+
+Volumétrie estimée : 10 à 50 Go sur une base annuelle, évolutive selon l’utilisation.
+
+Types de données particuliers :
+
+Colonnes de type TEXT/LOB utilisées pour stocker certaines données longues (ex : descriptions, logs applicatifs).
+
+Utilisation du partitionnement possible sur les tables volumineuses pour améliorer les performances de lecture/écriture.
+
+Indexation sur les champs critiques (IDs, timestamps, statuts) pour optimiser les requêtes.
+
+7. Passage en secours
+L’application intègre des mécanismes de haute disponibilité pour assurer la continuité de service en cas de défaillance :
+
+Redondance des instances applicatives via un orchestrateur (ex : Kubernetes, OpenShift).
+
+Utilisation d’un load balancer pour la répartition du trafic et la détection automatique des pannes.
+
+Sauvegardes régulières de la base de données, avec restauration automatisée possible.
+
+Surveillance active (monitoring) et alerting pour permettre un redémarrage automatique ou une bascule manuelle vers une instance de secours.
+
+
+=>8 Messagerie
+Indiquer une estimation du nombre de courriels, de leurs volumétrie (avec ou sans pièce(s) jointe(s)) et de leur fréquence. Indiquer si le(s) courriel(s) est (sont) chiffré(s) et si la ou les pièces jointes sont chiffrées et/ou protégées par mot de passe.
+
+=>9 Stockage et archivage de fichiers
+Indiquer le(s) vecteur(s) utilisé(s) (archivage, stockage sur le SAN, stockage en local sur tel serveur, …), une estimation du nombre de fichiers et de leurs tailles en précisant la périodicité et la portée temporelle. Tout stockage en interne du serveur à la place du SAN doit obligatoirement être justifié.
+
+______________________
+
+8. Messagerie
+L’application ne génère pas de courriels de manière automatique ou intégrée dans son fonctionnement. Aucune messagerie électronique n’est utilisée dans les flux techniques ou métiers de l’application.
+
+🔐 Chiffrement / sécurité :
+Non applicable, car aucun envoi d'e-mails n'est réalisé, avec ou sans pièce jointe.
+
+Si, à l’avenir, une fonctionnalité de messagerie est ajoutée (ex : notification, alerte utilisateur), elle devra respecter les bonnes pratiques de sécurité :
+
+Chiffrement TLS/SSL pour le transport des messages
+
+Pièces jointes protégées par mot de passe si données sensibles
+
+Authentification forte sur le serveur SMTP
+
+9. Stockage et archivage de fichiers
+L'application n'utilise pas de mécanisme d’archivage de fichiers ni de stockage sur SAN. Aucune pièce jointe ou document utilisateur n'est généré ou stocké dans le cadre de l'utilisation normale.
+
+🗂️ Vecteur de stockage utilisé :
+
+Pas de stockage SAN
+
+Pas de stockage local de fichiers
+
+Les seules données persistées sont stockées dans la base de données relationnelle de l’application.
+
+📊 Estimation de volumétrie :
+
+Nombre de fichiers : Aucun fichier indépendant stocké
+
+Taille moyenne : Non applicable
+
+Périodicité : Non applicable
+
+Durée de conservation : Non applicable
+
+📝 Justification de l’absence de SAN / stockage local :
+L’architecture applicative repose uniquement sur une base de données structurée. Il n’y a donc aucun besoin fonctionnel ou technique de stocker des fichiers au niveau du serveur d’application ou via une solution SAN.
+________________Intro doc 
+
+Table des matières
+1.	Document de référence	3
+2.	Présentation générale	4
+2.1	Introduction	4
+2.2	Contexte et enjeux du projet	4
+2.3	Contraintes et exigences	4
+3.	Architecture applicative	5
+3.1	Schéma d’architecture applicative	6
+3.1.1	Schéma d’architecture applicative avec interactions extérieurs	6
+3.1.2	Schéma d’architecture applicative avec interaction intérieurs	7
+3.2	Principes directeurs pour les Framework	8
+3.2.1	Backend	8
+3.2.2	Frontend	8
+3.3	Implémentation des services	10
+3.3.1	Client	10
+3.3.2	Server	10
+3.3.3	Modèle physique de donnée	10
+3.3.4	Flux	11
+4.	Architecture technique	12
+4.1	Vue d’ensemble	12
+4.2	Serveurs	12
+4.2.1	Configuration logicielle	12
+4.2.2	Configuration matérielle	12
+4.3	Poste de travail	13
+5.	Exploitation	14
+5.1	Besoin d’exploitation	14
+5.2	Plage de fonctionnement	14
+5.2.1	Service transactionnel	14
+5.2.2	Traitement par lot	14
+5.3	Information de volumétrie	15
+5.3.1	Transferts de fichiers et de messages	15
+5.3.2	Stockage et archivage de fichiers	15
+5.3.3	Base de données	15
+5.3.4	Messagerie	15
+5.4	Passage en secours	16
+
+Etant donnée cette table de matière porpose une introduction du document (Ex: Ce document a pour objectif de décrire ....)
+
+
+_____ sol
+
+Ce document a pour objectif de décrire l’architecture logicielle de l’application XMP dans le cadre de son développement, de son intégration et de son exploitation. Il constitue une référence technique à destination des équipes de développement, d’intégration, d’exploitation, de sécurité ainsi que des parties prenantes du projet.
+
+Il présente les principes d’architecture applicative et technique, les choix de conception, les composants logiciels utilisés, les flux de données internes et externes, ainsi que les éléments liés à l’exploitation et à la volumétrie du système.
+
+
+___
+
+	Node v21.1.0
+	NPM v10.2.0
+	Angular v17.2.0
+	Angular material v17.2.2
+	Angular-charts v1.2.0
+
+
+Node.js v21.1.0 : Environnement d’exécution JavaScript utilisé pour le build, le développement et l’exécution des scripts front-end.
+
+NPM v10.2.0 : Gestionnaire de paquets permettant l’installation, la mise à jour et la gestion des dépendances JavaScript du projet.
+
+Angular v17.2.0 : Framework front-end basé sur TypeScript, utilisé pour le développement d’interfaces utilisateur dynamiques et modulaires.
+
+Angular Material v17.2.2 : Bibliothèque de composants UI respectant les standards Material Design, utilisée pour assurer une cohérence visuelle et une bonne ergonomie.
+
+Angular-Charts v1.2.0 : Bibliothèque de visualisation de données utilisée pour intégrer des graphiques interactifs (barres, lignes, secteurs) dans l’application.
